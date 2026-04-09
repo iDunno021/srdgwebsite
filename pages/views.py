@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 def IndexView(request):
-    return render(request, 'index.html')
+    return render(request, 'pages/index.html')
 
