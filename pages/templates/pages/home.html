@@ -1,0 +1,8 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'pages/styles/index.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>Total Members: {{totalMembers}}</h2>
+{% endblock %}

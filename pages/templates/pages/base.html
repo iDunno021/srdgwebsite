@@ -7,7 +7,32 @@
         {% endblock %}
     </head>
     <body>
+        <nav>
+            <div class="nav-brand">
+                <img src="{% static 'pages/images/SRDG-Logo.png' %}" alt="SRDG Logo" />
+                <span>SRDG</span>
+            </div>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'calendar' %}">Calendar</a>
+                <div class="dropdown">
+                <button>Activities ▾</button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-menu-inner">
+                        <a href="{% url 'initiatives' %}">Initiatives</a>
+                        <a href="{% url 'seminars' %}">Seminars</a>
+                    </div>
+                </div>
+                </div>
+                <a href="{% url 'blog' %}">Blog</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+            <a href="{% url 'signup' %}" class="btn-join">Join us</a>
+        </nav>
+    <div class="page-content">
         {% block content %}
         {% endblock %}
+    </div>
     </body>
 </html>

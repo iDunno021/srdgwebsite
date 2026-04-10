@@ -1,0 +1,20 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'pages/styles/signup.css' %}">
+{% endblock %}
+{% block content %}
+<div class="signup-page">
+    <div class="signup-card">
+    <div class="signup-header">
+        <h1>Join Us</h1>
+        <p>Become a member of SRDG</p>
+    </div>
+    <form class="signup-form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+</div>
+{% endblock %}

@@ -23,4 +23,13 @@ class Member(models.Model):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+    
+class Seminars(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
+    date = models.DateField
+
+class Initiatives(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
 
