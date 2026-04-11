@@ -1,0 +1,42 @@
+.blog-page {
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+}
+
+.blog-header {
+    margin-bottom: 3rem;
+}
+
+.blog-header h1 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin: 0 0 10px;
+}
+
+.blog-header .underline {
+    width: 32px;
+    height: 2px;
+    background: var(--color-orange);
+    margin-bottom: 1.25rem;
+}
+
+.blog-intro {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    max-width: 560px;
+}
+
+.blog-empty {
+    background: #fff;
+    border-radius: 10px;
+    border: 0.5px solid var(--color-border);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}

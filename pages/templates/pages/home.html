@@ -1,6 +1,7 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
+{% block title %}SRDG — Social Research &amp; Discourse Group{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'pages/styles/home.css' %}">
 {% endblock %}
@@ -28,14 +29,14 @@
             <span class="stat-label">Active Initiatives</span>
         </div>
         <div class="stat">
-            <span class="stat-number">8</span>
+            <span class="stat-number">{{ schools_count }}</span>
             <span class="stat-label">Schools</span>
         </div>
     </div>
 
     <div class="pillars-section">
         <div class="pillar">
-            <div class="pillar-accent red"></div>
+            <div class="pillar-accent orange"></div>
             <h2 class="pillar-title">What We Do</h2>
             <p class="pillar-text">We run initiatives, seminars, and events that bring together students passionate about humanities, policy, and civic discourse.</p>
         </div>
@@ -45,7 +46,7 @@
             <p class="pillar-text">A group of secondary school students from across Auckland united by a shared passion for intellectual discussion and meaningful action.</p>
         </div>
         <div class="pillar">
-            <div class="pillar-accent orange"></div>
+            <div class="pillar-accent slate"></div>
             <h2 class="pillar-title">Why We Do It</h2>
             <p class="pillar-text">We believe humanities is integral to society. It is our duty to leverage our privilege to give back — connecting academic thought with tangible impact.</p>
         </div>

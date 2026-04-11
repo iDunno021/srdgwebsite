@@ -1,0 +1,74 @@
+.success-page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--color-bg);
+}
+
+.success-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 0.5px solid var(--color-border);
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+.success-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e8f5ea;
+    color: #2d7a3a;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.success-card h1 {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin: 0 0 1rem;
+}
+
+.success-message {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0 0 0.75rem;
+}
+
+.success-next {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.65;
+    margin: 0 0 2rem;
+}
+
+.success-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-home {
+    background: var(--color-orange);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 6px;
+    transition: background 0.15s;
+}
+
+.btn-home:hover {
+    background: var(--color-orange-dark);
+}

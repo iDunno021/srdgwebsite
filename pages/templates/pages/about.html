@@ -1,7 +1,65 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% block title %}About | SRDG{% endblock %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/about.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>About Us</h1>
+<div class="about-page">
+
+    <div class="about-header">
+        <h1>About Us</h1>
+        <div class="underline"></div>
+        <p class="about-intro">
+            SRDG is a student group for secondary school students across Auckland united by a shared passion for humanities, policy, and civic discourse. We run seminars, initiatives, and collaborative events that bridge academic thought with tangible action.
+        </p>
+    </div>
+
+    <div class="committee-section">
+        <h2 class="committee-heading">General Committee</h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="member-img"></div>
+                <div class="member-info">
+                    <h3 class="member-name">Name</h3>
+                    <p class="member-role">Chair</p>
+                </div>
+            </div>
+            <div class="member-card">
+                <div class="member-img"></div>
+                <div class="member-info">
+                    <h3 class="member-name">Name</h3>
+                    <p class="member-role">Vice Chair</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="committee-section">
+        <h2 class="committee-heading">Administrative Committee</h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="member-img"></div>
+                <div class="member-info">
+                    <h3 class="member-name">Name</h3>
+                    <p class="member-role">Administrative Chair</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="committee-section">
+        <h2 class="committee-heading">Technical Committee</h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="member-img"></div>
+                <div class="member-info">
+                    <h3 class="member-name">Name</h3>
+                    <p class="member-role">Technical Chair</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

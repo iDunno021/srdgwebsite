@@ -1,0 +1,87 @@
+.about-page {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 5rem;
+}
+
+.about-header {
+    margin-bottom: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid var(--color-border);
+}
+
+.about-header h1 {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin: 0 0 10px;
+}
+
+.about-header .underline {
+    width: 32px;
+    height: 2px;
+    background: var(--color-orange);
+    margin-bottom: 1.5rem;
+}
+
+.about-intro {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    max-width: 640px;
+}
+
+.committee-section {
+    margin-bottom: 3.5rem;
+    text-align: center;
+}
+
+.committee-heading {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--color-blue);
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--color-border);
+    text-align: center;
+}
+
+.members-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    width: 160px;
+}
+
+.member-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #e8e4df;
+    border: 0.5px solid var(--color-border);
+}
+
+.member-name {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.member-role {
+    font-size: 12.5px;
+    color: #999;
+    margin: 2px 0 0;
+}

@@ -1,7 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}SRDG{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'pages/styles/base.css' %}">
         {% block head %}
         {% endblock %}
@@ -17,22 +23,53 @@
                 <a href="{% url 'about' %}">About</a>
                 <a href="{% url 'calendar' %}">Calendar</a>
                 <div class="dropdown">
-                <button>Activities ▾</button>
-                <div class="dropdown-menu">
-                    <div class="dropdown-menu-inner">
-                        <a href="{% url 'initiatives' %}">Initiatives</a>
-                        <a href="{% url 'seminars' %}">Seminars</a>
+                    <button>Activities ▾</button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-inner">
+                            <a href="{% url 'initiatives' %}">Initiatives</a>
+                            <a href="{% url 'seminars' %}">Seminars</a>
+                        </div>
                     </div>
-                </div>
                 </div>
                 <a href="{% url 'blog' %}">Blog</a>
                 <a href="{% url 'contact' %}">Contact</a>
             </div>
             <a href="{% url 'signup' %}" class="btn-join">Join us</a>
         </nav>
-    <div class="page-content">
-        {% block content %}
-        {% endblock %}
-    </div>
+        <div class="page-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer>
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <img src="{% static 'pages/images/SRDG-Logo.png' %}" alt="SRDG Logo" />
+                    <span>SRDG</span>
+                    <p>Social Research &amp; Discourse Group</p>
+                </div>
+                <div class="footer-links">
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'initiatives' %}">Initiatives</a>
+                    <a href="{% url 'seminars' %}">Seminars</a>
+                    <a href="{% url 'blog' %}">Blog</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </div>
+                <div class="footer-join">
+                    <a href="{% url 'signup' %}" class="btn-join-footer">Become a Member</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 SRDG. All rights reserved.</span>
+            </div>
+        </footer>
+        <script>
+            const path = window.location.pathname;
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const linkPath = new URL(link.href).pathname;
+                if (linkPath === path || (linkPath !== '/' && path.startsWith(linkPath))) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
     </body>
 </html>

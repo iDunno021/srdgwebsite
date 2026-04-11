@@ -1,6 +1,7 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
+{% block title %}{{ initiative.title }} | SRDG{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'pages/styles/initiative_base.css' %}">
 {% endblock %}
@@ -26,8 +27,8 @@
                         <h3 class="event-title">{{ event.title }}</h3>
                         <p class="event-description">{{ event.description }}</p>
                         <div class="event-meta">
-                            <span class="event-date">📅 {{ event.start_time }}</span>
-                            <span class="event-location">📍 {{ event.location }}</span>
+                            <span class="event-date">{{ event.start_time|date:"j F Y, g:i A" }}</span>
+                            <span class="event-location">{{ event.location }}</span>
                         </div>
                     </div>
                     <span class="badge badge-{{ event.get_status }}">{{ event.get_status }}</span>

@@ -1,0 +1,25 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}{{ seminar.title }} | SRDG{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/seminar_base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="seminar-page">
+
+    <div class="seminar-hero">
+        <div class="seminar-meta-top">
+            <span class="badge badge-{{ seminar.get_status }}">{{ seminar.get_status }}</span>
+            <span class="seminar-date">{{ seminar.start_time|date:"j F Y, g:i A" }}</span>
+        </div>
+        <h1 class="seminar-title">{{ seminar.title }}</h1>
+        <div class="seminar-underline"></div>
+        <p class="seminar-description">{{ seminar.description }}</p>
+    </div>
+
+    <a href="{% url 'seminars' %}" class="back-link">&larr; All Seminars</a>
+
+</div>
+{% endblock %}

@@ -1,7 +1,21 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% block title %}Calendar | SRDG{% endblock %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/calendar.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>Calendar</h1>
+<div class="calendar-page">
+    <div class="calendar-header">
+        <h1>Calendar</h1>
+        <div class="underline"></div>
+        <p class="calendar-intro">
+            Upcoming seminars, events, and initiatives — all in one place.
+        </p>
+    </div>
+    <div class="calendar-placeholder">
+        <p>Shared calendar coming soon.</p>
+        <span>In the meantime, check the <a href="{% url 'initiatives' %}">Initiatives</a> and <a href="{% url 'seminars' %}">Seminars</a> pages for upcoming events.</span>
+    </div>
+</div>
 {% endblock %}

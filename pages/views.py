@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from .models import Member, Initiative, Seminar
 from .forms import MemberForm
@@ -6,8 +6,13 @@ from django.views import generic
 
 def home(request):
     total_members = Member.objects.count()
-    total_initiatives = Initiative.objects.count()
-    return render(request, 'pages/home.html', {'total_members' : total_members, 'total_initiatives' : total_initiatives})
+    total_initiatives = Initiative.objects.filter(hidden=False).count()
+    schools_count = len([s for s in Member.SCHOOLS if s[0] != 'other'])
+    return render(request, 'pages/home.html', {
+        'total_members': total_members,
+        'total_initiatives': total_initiatives,
+        'schools_count': schools_count,
+    })
 
 def signup(request):
     if request.method == 'POST':
@@ -42,11 +47,12 @@ class SeminarView(generic.ListView):
     model = Seminar
     template_name = 'pages/seminars.html'
     context_object_name = 'seminars'
+    queryset = Seminar.objects.filter(hidden=False)
 
 def seminar_detail(request, slug):
     seminar = get_object_or_404(Seminar, slug=slug)
     custom = f'pages/seminars/{slug}.html'
-    default = 'pages/semiars/seminar_base.html'
+    default = 'pages/seminars/seminar_base.html'
 
     try:
         get_template(custom)
@@ -61,6 +67,7 @@ class InitiativeView(generic.ListView):
     model = Initiative
     template_name = 'pages/initiatives.html'
     context_object_name = 'initiatives'
+    queryset = Initiative.objects.filter(hidden=False)
 
 def initiative_detail(request, slug):
     initiative = get_object_or_404(Initiative, slug=slug)

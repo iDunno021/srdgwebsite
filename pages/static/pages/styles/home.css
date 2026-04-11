@@ -2,8 +2,10 @@
     width: 100%;
 }
 
+/* ── Hero ── */
+
 .hero {
-    background: #1a1a1a;
+    background: var(--color-dark);
     padding: 6rem 2rem;
     text-align: center;
     display: flex;
@@ -12,26 +14,28 @@
 }
 
 .hero-logo {
-    height: 80px;
-    width: 80px;
+    height: 72px;
+    width: 72px;
     object-fit: contain;
     margin-bottom: 1.5rem;
+    opacity: 0.9;
 }
 
 .hero-title {
-    font-size: 48px;
+    font-family: var(--font-serif);
+    font-size: 52px;
     font-weight: 400;
     color: #f0f0f0;
-    margin: 0 0 16px;
-    letter-spacing: 0.02em;
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
 }
 
 .hero-subtitle {
-    font-size: 18px;
-    color: #aaa;
-    margin: 0 0 2rem;
-    max-width: 520px;
-    line-height: 1.6;
+    font-size: 17px;
+    color: #999;
+    margin: 0 0 2.25rem;
+    max-width: 500px;
+    line-height: 1.65;
 }
 
 .hero-actions {
@@ -41,39 +45,44 @@
 }
 
 .btn-primary {
-    background: #c0341a;
+    background: var(--color-orange);
     color: #fff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     padding: 10px 24px;
     border-radius: 6px;
+    transition: background 0.15s;
 }
 
 .btn-primary:hover {
-    background: #a32b14;
+    background: var(--color-orange-dark);
 }
 
 .btn-secondary {
     background: transparent;
-    color: #f0f0f0;
+    color: #e0e0e0;
     text-decoration: none;
     font-size: 14px;
     padding: 10px 24px;
     border-radius: 6px;
-    border: 0.5px solid #555;
+    border: 0.5px solid #444;
+    transition: background 0.15s, border-color 0.15s;
 }
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.07);
+    border-color: #666;
 }
 
+/* ── Stats bar ── */
+
 .stats-bar {
-    background: #1a4a7a;
+    background: var(--color-blue);
     padding: 2.5rem 2rem;
     display: flex;
     justify-content: center;
-    gap: 4rem;
+    gap: 5rem;
     flex-wrap: wrap;
 }
 
@@ -83,78 +92,90 @@
 
 .stat-number {
     display: block;
-    font-size: 42px;
+    font-family: var(--font-serif);
+    font-size: 40px;
     font-weight: 400;
     color: #fff;
 }
 
 .stat-label {
     display: block;
-    font-size: 13px;
-    color: #b5d0ee;
-    margin-top: 4px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 6px;
 }
 
+/* ── Pillars ── */
+
 .pillars-section {
-    max-width: 900px;
+    max-width: 960px;
     width: 100%;
     margin: 0 auto;
     padding: 5rem 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
 .pillar-accent {
-    height: 3px;
-    width: 100%;
+    height: 2px;
+    width: 32px;
     margin-bottom: 1.5rem;
 }
 
-.pillar-accent.red { background: #c0341a; }
-.pillar-accent.blue { background: #1a4a7a; }
-.pillar-accent.orange { background: #b5520a; }
+.pillar-accent.orange { background: var(--color-orange); }
+.pillar-accent.blue   { background: var(--color-blue); }
+.pillar-accent.slate  { background: #7a8a9a; }
 
 .pillar-title {
-    font-size: 20px;
+    font-family: var(--font-serif);
+    font-size: 19px;
     font-weight: 400;
-    color: #1a1a1a;
+    color: var(--color-text);
     margin: 0 0 12px;
 }
 
 .pillar-text {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.7;
+    font-size: 14.5px;
+    color: var(--color-text-muted);
+    line-height: 1.75;
     margin: 0;
 }
 
+/* ── Ethos quote ── */
+
 .ethos-section {
     background: #fff;
-    border-top: 0.5px solid #ddd;
-    border-bottom: 0.5px solid #ddd;
+    border-top: 0.5px solid var(--color-border);
+    border-bottom: 0.5px solid var(--color-border);
     padding: 5rem 2rem;
     text-align: center;
 }
 
 .ethos-accent {
-    width: 40px;
-    height: 3px;
-    background: #c0341a;
+    width: 32px;
+    height: 2px;
+    background: var(--color-orange);
     margin: 0 auto 2rem;
 }
 
 .ethos-quote {
-    font-size: 20px;
-    color: #1a1a1a;
+    font-family: var(--font-serif);
+    font-size: 21px;
+    color: var(--color-text);
     line-height: 1.8;
     margin: 0 auto;
-    max-width: 720px;
+    max-width: 680px;
     font-style: italic;
+    font-weight: 400;
 }
 
+/* ── CTA ── */
+
 .cta-section {
-    max-width: 900px;
+    max-width: 960px;
     width: 100%;
     margin: 0 auto;
     padding: 5rem 2rem;
@@ -162,14 +183,16 @@
 }
 
 .cta-title {
+    font-family: var(--font-serif);
     font-size: 28px;
     font-weight: 400;
-    color: #1a1a1a;
+    color: var(--color-text);
     margin: 0 0 12px;
 }
 
 .cta-text {
     font-size: 15px;
-    color: #666;
+    color: var(--color-text-muted);
     margin: 0 0 2rem;
+    line-height: 1.6;
 }

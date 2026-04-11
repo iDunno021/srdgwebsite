@@ -1,0 +1,61 @@
+.calendar-page {
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+}
+
+.calendar-header {
+    margin-bottom: 3rem;
+}
+
+.calendar-header h1 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin: 0 0 10px;
+}
+
+.calendar-header .underline {
+    width: 32px;
+    height: 2px;
+    background: var(--color-orange);
+    margin-bottom: 1.25rem;
+}
+
+.calendar-intro {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+}
+
+.calendar-placeholder {
+    background: #fff;
+    border-radius: 10px;
+    border: 0.5px solid var(--color-border);
+    padding: 3.5rem 2rem;
+    text-align: center;
+}
+
+.calendar-placeholder p {
+    font-size: 15px;
+    color: #888;
+    margin: 0 0 8px;
+}
+
+.calendar-placeholder span {
+    font-size: 13.5px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+.calendar-placeholder a {
+    color: var(--color-blue);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.calendar-placeholder a:hover {
+    color: var(--color-orange);
+}

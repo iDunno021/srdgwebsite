@@ -1,7 +1,20 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% block title %}Blog | SRDG{% endblock %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/blog.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>Blog</h1>
+<div class="blog-page">
+    <div class="blog-header">
+        <h1>Blog</h1>
+        <div class="underline"></div>
+        <p class="blog-intro">
+            Essays, opinion pieces, and reflections written by our members — a space for developing our academic voice and exploring the issues that matter to us.
+        </p>
+    </div>
+    <div class="blog-empty">
+        <p>Posts coming soon.</p>
+    </div>
+</div>
 {% endblock %}

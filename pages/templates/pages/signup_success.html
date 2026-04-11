@@ -1,10 +1,23 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% block title %}Welcome | SRDG{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'pages/styles/signup_success.css'}">
+    <link rel="stylesheet" href="{% static 'pages/styles/signup_success.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>Thank You for Joining Us</h1>
-    <p>Please consider joing our discord server</p>
-    <a href="">Join</a>
+<div class="success-page">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h1>Welcome to SRDG</h1>
+        <p class="success-message">
+            Thank you for joining. You're now part of a community committed to discourse, action, and impact.
+        </p>
+        <p class="success-next">
+            Check your email for next steps, and consider joining our Discord server to connect with the group.
+        </p>
+        <div class="success-actions">
+            <a href="{% url 'home' %}" class="btn-home">Back to Home</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

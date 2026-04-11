@@ -241,3 +241,4 @@ celerybeat-schedule
 celerybeat.pid
 
 venv/
+CLAUDE.md
