@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
-from .models import Member, Initiative, Seminar
+from .models import Member, Initiative, Seminar, MemberRole
 from .forms import MemberForm
 from django.views import generic
 
@@ -35,7 +35,13 @@ def signup_success(request):
     return render(request, 'pages/signup_success.html')
 
 def about(request):
-    return render(request, 'pages/about.html')
+    roles = MemberRole.objects.select_related('member').all()
+    committees = {
+        'General Committee': [r for r in roles if r.committee == 'general'],
+        'Administrative Committee': [r for r in roles if r.committee == 'administrative'],
+        'Technical Committee': [r for r in roles if r.committee == 'technical'],
+    }
+    return render(request, 'pages/about.html', {'committees': committees})
 
 def contact(request):
     return render(request, 'pages/contact.html')

@@ -15,51 +15,26 @@
         </p>
     </div>
 
+    {% for committee_name, members in committees.items %}
+    {% if members %}
     <div class="committee-section">
-        <h2 class="committee-heading">General Committee</h2>
+        <h2 class="committee-heading">{{ committee_name }}</h2>
         <div class="members-grid">
+            {% for role in members %}
             <div class="member-card">
                 <div class="member-img"></div>
                 <div class="member-info">
-                    <h3 class="member-name">Name</h3>
-                    <p class="member-role">Chair</p>
+                    <h3 class="member-name">{{ role.member.first_name }} {{ role.member.last_name }}</h3>
+                    {% if role.title %}
+                    <p class="member-role">{{ role.title }}</p>
+                    {% endif %}
                 </div>
             </div>
-            <div class="member-card">
-                <div class="member-img"></div>
-                <div class="member-info">
-                    <h3 class="member-name">Name</h3>
-                    <p class="member-role">Vice Chair</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-
-    <div class="committee-section">
-        <h2 class="committee-heading">Administrative Committee</h2>
-        <div class="members-grid">
-            <div class="member-card">
-                <div class="member-img"></div>
-                <div class="member-info">
-                    <h3 class="member-name">Name</h3>
-                    <p class="member-role">Administrative Chair</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="committee-section">
-        <h2 class="committee-heading">Technical Committee</h2>
-        <div class="members-grid">
-            <div class="member-card">
-                <div class="member-img"></div>
-                <div class="member-info">
-                    <h3 class="member-name">Name</h3>
-                    <p class="member-role">Technical Chair</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endif %}
+    {% endfor %}
 
 </div>
 {% endblock %}

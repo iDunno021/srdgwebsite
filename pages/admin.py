@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Member, Initiative, Seminar, Event
+from .models import Member, Initiative, Seminar, Event, MemberRole
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
@@ -18,6 +18,11 @@ class SeminarAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ['title', 'start_time', 'end_time', 'location', 'initiative']
+
+@admin.register(MemberRole)
+class MemberRoleAdmin(admin.ModelAdmin):
+    list_display = ['member', 'committee', 'title']
+    list_filter = ['committee']
 
 @admin.register(Initiative)
 class InitiativeAdmin(admin.ModelAdmin):

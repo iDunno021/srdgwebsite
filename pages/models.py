@@ -11,6 +11,7 @@ class Member(models.Model):
         ('KC', 'King\'s College'),
         ('GDC', 'Glendowie College'),
         ('selwyn', 'Selwyn College'),
+        ('DIO', 'Diocesan School For Girls'),
         ('other', 'Other')
     ]
 
@@ -84,4 +85,17 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+    
+class MemberRole(models.Model):
+    COMMITTEES = [
+        ('general', 'General Committee'),
+        ('administrative', 'Administrative Committee'),
+        ('technical', 'Technical Committee'),
+    ]
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='roles')
+    committee = models.CharField(max_length=20, choices=COMMITTEES)
+    title = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return f"{self.member} — {self.get_committee_display()}"
 
