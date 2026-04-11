@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Member(models.Model):
     SCHOOLS = [
@@ -9,7 +10,8 @@ class Member(models.Model):
         ('EGG', 'Epsom Girl\'s College'),
         ('KC', 'King\'s College'),
         ('GDC', 'Glendowie College'),
-        ('Selwyn', 'Selwyn College'),
+        ('selwyn', 'Selwyn College'),
+        ('other', 'Other')
     ]
 
     first_name = models.CharField(max_length=100)
@@ -24,12 +26,62 @@ class Member(models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name
     
-class Seminars(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
-    date = models.DateField
+class Seminar(models.Model):
+    STATUS = [
+        ('active', 'Active'),
+        ('upcoming', 'Upcoming'),
+        ('completed', 'Completed'),
+    ]
 
-class Initiatives(models.Model):
-    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000)
+    start_time = models.DateTimeField(default=timezone.now)
+    end_time = models.DateTimeField(default=timezone.now)
+    hidden = models.BooleanField(default=False)
+
+    def get_status(self):
+        now = timezone.now()
+        if now < self.start_time:
+            return 'upcoming'
+        elif now >= self.start_time and now <= self.end_time:
+            return 'active'
+        return 'completed'
+
+    def __str__(self):
+        return self.title
+
+class Initiative(models.Model):
+    slug = models.SlugField(unique=True)
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
+    hidden = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+    
+class Event(models.Model):
+    STATUS = [
+        ('active', 'Active'),
+        ('upcoming', 'Upcoming'),
+        ('completed', 'Completed'),
+    ]
+
+    title = models.CharField(max_length=100)
+    start_time = models.DateTimeField(default=timezone.now)
+    end_time = models.DateTimeField(default=timezone.now)
+    location = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
+    initiative = models.ForeignKey(Initiative, on_delete=models.CASCADE, related_name='events')
+
+    def get_status(self):
+        now = timezone.now()
+        if now < self.start_time:
+            return 'upcoming'
+        elif now >= self.start_time and now <= self.end_time:
+            return 'active'
+        return 'completed'
+
+    def __str__(self):
+        return self.title
 

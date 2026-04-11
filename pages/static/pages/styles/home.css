@@ -1,0 +1,175 @@
+.home-page {
+    width: 100%;
+}
+
+.hero {
+    background: #1a1a1a;
+    padding: 6rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-logo {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 400;
+    color: #f0f0f0;
+    margin: 0 0 16px;
+    letter-spacing: 0.02em;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #aaa;
+    margin: 0 0 2rem;
+    max-width: 520px;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: #c0341a;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 6px;
+}
+
+.btn-primary:hover {
+    background: #a32b14;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #f0f0f0;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: 6px;
+    border: 0.5px solid #555;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.stats-bar {
+    background: #1a4a7a;
+    padding: 2.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 42px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.stat-label {
+    display: block;
+    font-size: 13px;
+    color: #b5d0ee;
+    margin-top: 4px;
+}
+
+.pillars-section {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.pillar-accent {
+    height: 3px;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.pillar-accent.red { background: #c0341a; }
+.pillar-accent.blue { background: #1a4a7a; }
+.pillar-accent.orange { background: #b5520a; }
+
+.pillar-title {
+    font-size: 20px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+}
+
+.pillar-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.ethos-section {
+    background: #fff;
+    border-top: 0.5px solid #ddd;
+    border-bottom: 0.5px solid #ddd;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.ethos-accent {
+    width: 40px;
+    height: 3px;
+    background: #c0341a;
+    margin: 0 auto 2rem;
+}
+
+.ethos-quote {
+    font-size: 20px;
+    color: #1a1a1a;
+    line-height: 1.8;
+    margin: 0 auto;
+    max-width: 720px;
+    font-style: italic;
+}
+
+.cta-section {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.cta-title {
+    font-size: 28px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+}
+
+.cta-text {
+    font-size: 15px;
+    color: #666;
+    margin: 0 0 2rem;
+}

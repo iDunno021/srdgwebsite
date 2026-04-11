@@ -1,7 +1,27 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/seminars.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>Seminars</h1>
+<div class="seminars-page">
+    <div class="seminars-header">
+        <h1>Seminars</h1>
+        <div class="underline"></div>
+    </div>
+    <div class="seminars-list">
+        {% for seminar in seminars %}
+        <div class="seminar-card {{ seminar.get_status }}">
+            <div class="seminar-info">
+                <a class="title" href="{% url 'seminar_detail' seminar.slug %}">{{ seminar.title }}</a>
+                <p class="description">{{ seminar.description }}</p>
+                <div class="seminar-meta">
+                    <span class="seminar-date">📅 {{ seminar.start_time }}</span>
+                </div>
+            </div>
+            <span class="badge badge-{{ seminar.get_status }}">{{ seminar.get_status }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

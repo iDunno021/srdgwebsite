@@ -1,8 +1,68 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+
 {% block head %}
-    <link rel="stylesheet" href="{% static 'pages/styles/index.css' %}">
+<link rel="stylesheet" href="{% static 'pages/styles/home.css' %}">
 {% endblock %}
+
 {% block content %}
-    <h2>Total Members: {{totalMembers}}</h2>
+<div class="home-page">
+
+    <div class="hero">
+        <img src="{% static 'pages/images/SRDG-Logo.png' %}" alt="SRDG Logo" class="hero-logo" />
+        <h1 class="hero-title">SRDG</h1>
+        <p class="hero-subtitle">Bridging academic thought with tangible action.</p>
+        <div class="hero-actions">
+            <a href="{% url 'signup' %}" class="btn-primary">Join Us</a>
+            <a href="{% url 'about' %}" class="btn-secondary">Learn More</a>
+        </div>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat">
+            <span class="stat-number">{{ total_members }}</span>
+            <span class="stat-label">Members</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">{{ total_initiatives }}</span>
+            <span class="stat-label">Active Initiatives</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">8</span>
+            <span class="stat-label">Schools</span>
+        </div>
+    </div>
+
+    <div class="pillars-section">
+        <div class="pillar">
+            <div class="pillar-accent red"></div>
+            <h2 class="pillar-title">What We Do</h2>
+            <p class="pillar-text">We run initiatives, seminars, and events that bring together students passionate about humanities, policy, and civic discourse.</p>
+        </div>
+        <div class="pillar">
+            <div class="pillar-accent blue"></div>
+            <h2 class="pillar-title">Who We Are</h2>
+            <p class="pillar-text">A group of secondary school students from across Auckland united by a shared passion for intellectual discussion and meaningful action.</p>
+        </div>
+        <div class="pillar">
+            <div class="pillar-accent orange"></div>
+            <h2 class="pillar-title">Why We Do It</h2>
+            <p class="pillar-text">We believe humanities is integral to society. It is our duty to leverage our privilege to give back — connecting academic thought with tangible impact.</p>
+        </div>
+    </div>
+
+    <div class="ethos-section">
+        <div class="ethos-accent"></div>
+        <blockquote class="ethos-quote">
+            "The group exists as the bridge connecting academic thought with more tangible applications of our opinions and discussions."
+        </blockquote>
+    </div>
+
+    <div class="cta-section">
+        <h2 class="cta-title">Ready to get involved?</h2>
+        <p class="cta-text">Join a community of students committed to discourse, action, and impact.</p>
+        <a href="{% url 'signup' %}" class="btn-primary">Become a Member</a>
+    </div>
+
+</div>
 {% endblock %}

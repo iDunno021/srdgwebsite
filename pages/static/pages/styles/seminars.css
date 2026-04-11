@@ -1,0 +1,117 @@
+.seminars-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.seminars-header {
+    margin-bottom: 2.5rem;
+}
+
+.seminars-header h1 {
+    font-size: 32px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+}
+
+.seminars-header .underline {
+    width: 40px;
+    height: 3px;
+    background: #b5520a;
+}
+
+.seminars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.seminar-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 0.5px solid #f0d9c0;
+    border-left: 4px solid #b5520a;
+    padding: 1.5rem 1.75rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.seminar-card .title {
+    color: #1a1a1a;
+}
+
+.seminar-card.active {
+    border-color: #c0ddc4;
+    border-left-color: #2d7a3a;
+}
+
+.seminar-card.upcoming {
+    border-color: #f0d9c0;
+    border-left-color: #b5520a;
+}
+
+.seminar-card.completed {
+    border-color: #c8d8ea;
+    border-left-color: #1a4a7a;
+}
+
+.seminar-info {
+    flex: 1;
+}
+
+.seminar-card .title {
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.seminar-card .title:hover {
+    opacity: 0.75;
+}
+
+.seminar-card .description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.badge-active {
+    color: #2d7a3a;
+    background: #e4f4e6;
+}
+
+.badge-upcoming {
+    color: #b5520a;
+    background: #fef0e6;
+}
+
+.badge-completed {
+    color: #1a4a7a;
+    background: #e6f0fb;
+}
+
+.seminar-meta {
+    display: flex;
+    gap: 16px;
+}
+
+.seminar-date{
+    font-size: 13px;
+    color: #666;
+}

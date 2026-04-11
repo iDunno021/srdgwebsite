@@ -2,6 +2,16 @@
     --color-whitebg: #F6F4F1;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
 nav {
     display: flex;
     align-items: center;

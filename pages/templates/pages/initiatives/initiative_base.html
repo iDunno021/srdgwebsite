@@ -1,0 +1,45 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/initiative_base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="initiative-page">
+
+    <div class="initiative-hero">
+        <h1 class="initiative-title">{{ initiative.title }}</h1>
+        <div class="initiative-underline"></div>
+        <p class="initiative-description">{{ initiative.description }}</p>
+    </div>
+
+    {% block initiative_content %}{% endblock %}
+
+    <div class="initiative-events">
+        <h2 class="events-heading">Events</h2>
+        <div class="events-list">
+            {% if initiative.events.all %}
+                {% for event in initiative.events.all %}
+                <div class="event-card {{ event.get_status }}">
+                    <div class="event-body">
+                        <h3 class="event-title">{{ event.title }}</h3>
+                        <p class="event-description">{{ event.description }}</p>
+                        <div class="event-meta">
+                            <span class="event-date">📅 {{ event.start_time }}</span>
+                            <span class="event-location">📍 {{ event.location }}</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-{{ event.get_status }}">{{ event.get_status }}</span>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="events-empty">
+                    <p>No events currently scheduled.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

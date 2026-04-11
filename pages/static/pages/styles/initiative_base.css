@@ -1,0 +1,149 @@
+.initiative-page {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.initiative-hero {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 0.5px solid #ddd;
+}
+
+.initiative-title {
+    font-size: 36px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+}
+
+.initiative-underline {
+    width: 40px;
+    height: 3px;
+    background: #c0341a;
+    margin-bottom: 16px;
+}
+
+.initiative-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 680px;
+}
+
+.initiative-events {
+    margin-top: 2rem;
+}
+
+.events-heading {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 1.5rem;
+}
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.event-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 0.5px solid #ddd;
+    border-left: 4px solid #1a4a7a;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.event-card.upcoming {
+    border-color: #f0d9c0;
+    border-left-color: #b5520a;
+}
+
+.event-card.active {
+    border-color: #c0ddc4;
+    border-left-color: #2d7a3a;
+}
+
+.event-card.completed {
+    border-color: #c8d8ea;
+    border-left-color: #1a4a7a;
+}
+
+.event-body {
+    flex: 1;
+}
+
+.event-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 6px;
+}
+
+.event-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.event-meta {
+    display: flex;
+    gap: 16px;
+}
+
+.event-date,
+.event-location {
+    font-size: 13px;
+    color: #666;
+}
+
+.badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.badge-upcoming {
+    color: #b5520a;
+    background: #fef0e6;
+}
+
+.badge-active {
+    color: #2d7a3a;
+    background: #e4f4e6;
+}
+
+.badge-completed {
+    color: #1a4a7a;
+    background: #e6f0fb;
+}
+
+.events-empty {
+    background: #fff;
+    border-radius: 10px;
+    border: 0.5px solid #ddd;
+    padding: 1.5rem 1.75rem;
+    color: #888;
+    font-size: 14px;
+}
+
+.events-empty {
+    background: #fff;
+    border-radius: 10px;
+    border: 0.5px solid #ddd;
+    padding: 2rem;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+}

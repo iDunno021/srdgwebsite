@@ -1,0 +1,58 @@
+.initiatives-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.initiatives-header {
+    margin-bottom: 2.5rem;
+}
+
+.initiatives-header h1 {
+    font-size: 32px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+}
+
+.initiatives-header .underline {
+    width: 40px;
+    height: 3px;
+    background: #c0341a;
+}
+
+.initiatives-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.initiative-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 0.5px solid #c8d8ea;
+    border-left: 4px solid #1a4a7a;
+    padding: 1.5rem 1.75rem;
+    width: 100%;
+}
+
+.initiative-card .title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a4a7a;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.initiative-card .title:hover {
+    color: #c0341a;
+}
+
+.initiative-card .description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}

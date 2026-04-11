@@ -1,7 +1,21 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/initiatives.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>Initiatives</h1>
+<div class="initiatives-page">
+    <div class="initiatives-header">
+        <h1>Initiatives</h1>
+        <div class="underline"></div>
+    </div>
+    <div class="initiatives-list">
+        {% for initiative in initiatives %}
+        <div class="initiative-card">
+            <a class="title" href="{% url 'initiative_detail' initiative.slug %}">{{ initiative.title }}</a>
+            <p class="description">{{ initiative.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

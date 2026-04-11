@@ -88,3 +88,28 @@
 .signup-form button:hover {
     background: #a32b14;
 }
+
+#other-school-input {
+    display: none;
+    margin-top: 8px;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    font-size: 13px;
+}
+
+.errorlist li {
+    color: #c0341a;
+    margin-top: 4px;
+}
+
+.signup-form input.error,
+.signup-form select.error {
+    border: 1px solid #c0341a;
+}

@@ -6,15 +6,59 @@
 {% block content %}
 <div class="signup-page">
     <div class="signup-card">
-    <div class="signup-header">
-        <h1>Join Us</h1>
-        <p>Become a member of SRDG</p>
+        <div class="signup-header">
+            <h1>Join Us</h1>
+            <p>Become a member of SRDG</p>
+        </div>
+        <form class="signup-form" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input 
+                type="text" 
+                id="other-school-input" 
+                name="other_school" 
+                placeholder="Enter your school name"
+            >
+            <button type="submit">Sign Up</button>
+        </form>
     </div>
-    <form class="signup-form" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
 </div>
-</div>
+<script>
+    const schoolSelect = document.getElementById('id_school');
+    const otherInput = document.getElementById('other-school-input');
+
+    schoolSelect.parentElement.appendChild(otherInput);
+
+    function showOther() {
+        if (schoolSelect.value === 'other') {
+            otherInput.style.display = 'block';
+            setTimeout(() => {
+                otherInput.style.maxHeight = '50px';
+                otherInput.style.opacity = '1';
+            }, 10);
+        } else {
+            otherInput.style.maxHeight = '0';
+            otherInput.style.opacity = '0';
+            setTimeout(() => {
+                otherInput.style.display = 'none';
+            }, 300);
+        }
+    }
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (schoolSelect.value === 'other' && !otherInput.value.trim()) {
+            e.preventDefault();
+            otherInput.classList.add('error');
+            otherInput.placeholder = 'Please enter your school name.';
+        }
+    });
+
+    otherInput.addEventListener('input', function() {
+        otherInput.classList.remove('error');
+        otherInput.placeholder = 'Enter your school name';
+    });
+
+    showOther();
+
+    schoolSelect.addEventListener('change', showOther);
+</script>
 {% endblock %}
