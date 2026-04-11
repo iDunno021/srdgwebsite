@@ -56,7 +56,7 @@ class SeminarView(generic.ListView):
     queryset = Seminar.objects.filter(hidden=False)
 
 def seminar_detail(request, slug):
-    seminar = get_object_or_404(Seminar, slug=slug)
+    seminar = get_object_or_404(Seminar, slug=slug, hidden=False)
     custom = f'pages/seminars/{slug}.html'
     default = 'pages/seminars/seminar_base.html'
 
@@ -76,7 +76,7 @@ class InitiativeView(generic.ListView):
     queryset = Initiative.objects.filter(hidden=False)
 
 def initiative_detail(request, slug):
-    initiative = get_object_or_404(Initiative, slug=slug)
+    initiative = get_object_or_404(Initiative, slug=slug, hidden=False)
     custom = f'pages/initiatives/{slug}.html'
     default = 'pages/initiatives/initiative_base.html'
 
