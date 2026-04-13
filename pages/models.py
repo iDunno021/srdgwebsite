@@ -15,7 +15,7 @@ class Member(models.Model):
         ('other', 'Other')
     ]
 
-    YEAR_CHOICES[
+    YEAR_CHOICES=[
         (9 , '9'),
         (10, '10'),
         (11, '11'),
