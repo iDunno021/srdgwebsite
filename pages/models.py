@@ -15,13 +15,23 @@ class Member(models.Model):
         ('other', 'Other')
     ]
 
+    YEAR_CHOICES=[
+        (9 , '9'),
+        (10, '10'),
+        (11, '11'),
+        (12, '12'),
+        (13, '13'),
+    ]
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     school = models.CharField(
         max_length=100,
         choices=SCHOOLS
     )
-    year_level = models.IntegerField()
+    year_level = models.IntegerField(
+        choices=YEAR_CHOICES
+    )
     email = models.EmailField(unique=True)
 
     def __str__(self):
