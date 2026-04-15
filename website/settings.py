@@ -130,3 +130,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
 # Required for Supabase transaction pooler on Vercel (serverless)
 DISABLE_SERVER_SIDE_CURSORS = True
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'pages' / 'static',
+]
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
