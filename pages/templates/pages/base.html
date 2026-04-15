@@ -1,78 +1,142 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}SRDG{% endblock %}</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png" href="{% static 'pages/images/SRDG-Logo.png' %}">
-        <link rel="stylesheet" href="{% static 'pages/styles/base.css' %}">
-        {% block head %}
-        {% endblock %}
-    </head>
-    <body>
-        <nav>
-            <a href="{% url 'home' %}">
-                <div class="nav-brand">
-                    <img src="{% static 'pages/images/SRDG-Logo.png' %}" alt="SRDG Logo" />
-                    <span>SRDG</span>
-                </div>
-            </a>
-            <div class="nav-links">
-                <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'about' %}">About</a>
-                <a href="{% url 'calendar' %}">Calendar</a>
-                <div class="dropdown">
-                    <button>Activities ▾</button>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-menu-inner">
-                            <a href="{% url 'initiatives' %}">Initiatives</a>
-                            <a href="{% url 'seminars' %}">Seminars</a>
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{% block title %}SRDG{% endblock %}</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+            <link rel="icon" type="image/png" href="{% static 'pages/images/SRDG-Logo.png' %}">
+            <link rel="stylesheet" href="{% static 'pages/styles/base.css' %}">
+            {% block head %}
+            {% endblock %}
+        </head>
+        <body>
+            <nav>
+                <a href="{% url 'home' %}">
+                    <div class="nav-brand">
+                        <img src="{% static 'pages/images/SRDG-Logo.png' %}" alt="SRDG Logo" />
+                        <span>SRDG</span>
+                    </div>
+                </a>
+    
+                <!-- Hamburger button (mobile only) -->
+                <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+    
+                <div class="nav-links" id="navLinks">
+                    <a href="{% url 'home' %}">Home</a>
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'calendar' %}">Calendar</a>
+                    <div class="dropdown">
+                        <button>Activities ▾</button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-inner">
+                                <a href="{% url 'initiatives' %}">Initiatives</a>
+                                <a href="{% url 'seminars' %}">Seminars</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <a href="{% url 'blog' %}">Blog</a>
-                <a href="{% url 'contact' %}">Contact</a>
-            </div>
-            <a href="{% url 'signup' %}" class="btn-join">Join us</a>
-        </nav>
-        <div class="page-content">
-            {% block content %}
-            {% endblock %}
-        </div>
-        <footer>
-            <div class="footer-inner">
-                <div class="footer-brand">
-                    <img src="{% static 'pages/images/SRDG-Logo.png' %}" alt="SRDG Logo" />
-                    <span>SRDG</span>
-                    <p>Social Research &amp; Discourse Group</p>
-                </div>
-                <div class="footer-links">
-                    <a href="{% url 'about' %}">About</a>
-                    <a href="{% url 'initiatives' %}">Initiatives</a>
-                    <a href="{% url 'seminars' %}">Seminars</a>
                     <a href="{% url 'blog' %}">Blog</a>
                     <a href="{% url 'contact' %}">Contact</a>
+                    <!-- Join us link inside mobile menu -->
+                    <a href="{% url 'signup' %}" class="btn-join btn-join-mobile">Join us</a>
                 </div>
-                <div class="footer-join">
-                    <a href="{% url 'signup' %}" class="btn-join-footer">Become a Member</a>
+    
+                <a href="{% url 'signup' %}" class="btn-join btn-join-desktop">Join us</a>
+            </nav>
+    
+            <!-- Overlay for closing mobile menu -->
+            <div class="nav-overlay" id="navOverlay"></div>
+    
+            <div class="page-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <footer>
+                <div class="footer-inner">
+                    <div class="footer-brand">
+                        <img src="{% static 'pages/images/SRDG-Logo.png' %}" alt="SRDG Logo" />
+                        <span>SRDG</span>
+                        <p>Social Research &amp; Discourse Group</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="{% url 'about' %}">About</a>
+                        <a href="{% url 'initiatives' %}">Initiatives</a>
+                        <a href="{% url 'seminars' %}">Seminars</a>
+                        <a href="{% url 'blog' %}">Blog</a>
+                        <a href="{% url 'contact' %}">Contact</a>
+                    </div>
+                    <div class="footer-join">
+                        <a href="{% url 'signup' %}" class="btn-join-footer">Become a Member</a>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <span>&copy; 2025 SRDG. All rights reserved.</span>
-            </div>
-        </footer>
-        <script>
-            const path = window.location.pathname;
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                const linkPath = new URL(link.href).pathname;
-                if (linkPath === path || (linkPath !== '/' && path.startsWith(linkPath))) {
-                    link.classList.add('active');
+                <div class="footer-bottom">
+                    <span>&copy; 2025 SRDG. All rights reserved.</span>
+                </div>
+            </footer>
+            <script>
+                // Active nav link highlighting
+                const path = window.location.pathname;
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    const linkPath = new URL(link.href).pathname;
+                    if (linkPath === path || (linkPath !== '/' && path.startsWith(linkPath))) {
+                        link.classList.add('active');
+                    }
+                });
+    
+                // Hamburger menu toggle
+                const hamburger = document.getElementById('navHamburger');
+                const navLinks = document.getElementById('navLinks');
+                const overlay = document.getElementById('navOverlay');
+    
+                function openMenu() {
+                    navLinks.classList.add('open');
+                    overlay.classList.add('visible');
+                    hamburger.classList.add('active');
+                    hamburger.setAttribute('aria-expanded', 'true');
+                    document.body.style.overflow = 'hidden';
                 }
-            });
-        </script>
-    </body>
-</html>
+    
+                function closeMenu() {
+                    navLinks.classList.remove('open');
+                    overlay.classList.remove('visible');
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                }
+    
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.contains('open') ? closeMenu() : openMenu();
+                });
+    
+                overlay.addEventListener('click', closeMenu);
+    
+                // Close menu on nav link click
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+    
+                // Dropdown touch support on mobile
+                document.querySelectorAll('.dropdown button').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const menu = btn.nextElementSibling;
+                        const isOpen = menu.style.display === 'block';
+                        // Close all dropdowns first
+                        document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
+                        if (!isOpen) menu.style.display = 'block';
+                        e.stopPropagation();
+                    });
+                });
+    
+                document.addEventListener('click', () => {
+                    document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
+                });
+            </script>
+        </body>
+    </html>
