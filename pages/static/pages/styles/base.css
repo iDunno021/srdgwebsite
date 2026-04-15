@@ -89,6 +89,8 @@ nav {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* ── Dropdown ── */
+
 .dropdown {
     position: relative;
 }
@@ -146,6 +148,8 @@ nav {
     display: block;
 }
 
+/* ── Join button ── */
+
 .btn-join {
     background: var(--color-orange);
     color: #fff;
@@ -159,6 +163,74 @@ nav {
 
 .btn-join:hover {
     background: var(--color-orange-dark);
+}
+
+/* Mobile join button (inside nav-links drawer) — hidden on desktop */
+.btn-join-mobile {
+    display: none;
+}
+
+/* Desktop join button — shown on desktop */
+.btn-join-desktop {
+    display: inline-block;
+}
+
+/* ── Hamburger button ── */
+
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    z-index: 210;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #b0b0b0;
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s, background 0.15s;
+    transform-origin: center;
+}
+
+.nav-hamburger:hover span {
+    background: #f0f0f0;
+}
+
+/* Animate hamburger → X */
+.nav-hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.nav-hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.nav-hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile overlay ── */
+
+.nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 190;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.nav-overlay.visible {
+    display: block;
+    opacity: 1;
 }
 
 /* ── Page wrapper ── */
@@ -262,4 +334,131 @@ footer {
 .footer-bottom span {
     color: #444;
     font-size: 12px;
+}
+
+/* ── Mobile styles ── */
+
+@media (max-width: 768px) {
+    nav {
+        padding: 0 1.25rem;
+    }
+
+    /* Show hamburger, hide desktop join button */
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .btn-join-desktop {
+        display: none;
+    }
+
+    /* Mobile drawer */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: min(280px, 80vw);
+        background: #1e1e1e;
+        border-left: 0.5px solid #2e2e2e;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: calc(var(--nav-height) + 1rem) 1rem 2rem;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 200;
+    }
+
+    .nav-links.open {
+        transform: translateX(0);
+    }
+
+    .nav-links a {
+        font-size: 15px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        color: #c0c0c0;
+    }
+
+    .nav-links a.active {
+        color: #f0f0f0;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Show join button inside drawer */
+    .btn-join-mobile {
+        display: block;
+        margin-top: 1rem;
+        text-align: center;
+        padding: 12px 14px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    /* Dropdown becomes inline in mobile drawer */
+    .dropdown {
+        position: static;
+    }
+
+    .dropdown button {
+        width: 100%;
+        text-align: left;
+        font-size: 15px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        color: #c0c0c0;
+    }
+
+    .dropdown-menu {
+        position: static;
+        padding-top: 0;
+        display: none;
+    }
+
+    .dropdown-menu-inner {
+        background: rgba(255,255,255,0.04);
+        border: 0.5px solid #333;
+        border-radius: 8px;
+        margin: 4px 0 4px 12px;
+        padding: 4px;
+    }
+
+    .dropdown-menu a {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    /* Disable hover-based dropdown on mobile */
+    .dropdown:hover .dropdown-menu {
+        display: none;
+    }
+
+    /* Footer adjustments */
+    footer {
+        padding: 2rem 1.25rem 0;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .footer-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+    }
+
+    .footer-join {
+        width: 100%;
+    }
+
+    .btn-join-footer {
+        width: 100%;
+        text-align: center;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
 }
