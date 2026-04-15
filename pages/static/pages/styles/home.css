@@ -196,3 +196,13 @@
     margin: 0 0 2rem;
     line-height: 1.6;
 }
+
+/* ── Mobile ── */
+
+@media (max-width: 768px) {
+    .pillars-section {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.25rem;
+        gap: 2rem;
+    }
+}
