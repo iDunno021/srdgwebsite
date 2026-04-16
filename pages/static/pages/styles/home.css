@@ -162,14 +162,15 @@
 }
 
 .ethos-quote {
-    font-family: var(--font-serif);
-    font-size: 21px;
+    font-family: var(--font-sans);
+    font-size: 20px;
     color: var(--color-text);
-    line-height: 1.8;
+    line-height: 1.85;
     margin: 0 auto;
     max-width: 680px;
     font-style: italic;
     font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 /* ── CTA ── */
