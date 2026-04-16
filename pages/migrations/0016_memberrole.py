@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='MemberRole',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('committee', models.CharField(choices=[('general', 'General Committee'), ('administrative', 'Administrative Committee'), ('technical', 'Technical Committee')], max_length=20)),
+                ('committee', models.CharField(choices=[('general', 'Board of Directors'), ('administrative', 'Administrative Committee'), ('technical', 'Technical Committee')], max_length=20)),
                 ('title', models.CharField(blank=True, max_length=100)),
                 ('member', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='roles', to='pages.member')),
             ],

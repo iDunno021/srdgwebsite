@@ -98,9 +98,11 @@ class Event(models.Model):
     
 class MemberRole(models.Model):
     COMMITTEES = [
-        ('general', 'General Committee'),
+        ('general', 'Board of Directors'),
         ('administrative', 'Administrative Committee'),
         ('technical', 'Technical Committee'),
+        ('outreach', 'Outreach Department'),
+        ('finance', 'Finance Department'),
     ]
     member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='roles')
     committee = models.CharField(max_length=20, choices=COMMITTEES)
