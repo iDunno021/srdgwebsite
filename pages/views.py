@@ -37,9 +37,11 @@ def signup_success(request):
 def about(request):
     roles = MemberRole.objects.select_related('member').all()
     committees = {
-        'General Committee': [r for r in roles if r.committee == 'general'],
+        'Board of Directors': [r for r in roles if r.committee == 'general'],
         'Administrative Committee': [r for r in roles if r.committee == 'administrative'],
         'Technical Committee': [r for r in roles if r.committee == 'technical'],
+        'Outreach Department': [r for r in roles if r.committee == 'outreach'],
+        'Finance Department': [r for r in roles if r.committee == 'finance'],
     }
     return render(request, 'pages/about.html', {'committees': committees})
 
