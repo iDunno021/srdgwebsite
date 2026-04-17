@@ -14,8 +14,14 @@
         {% for seminar in seminars %}
         <div class="seminar-card {{ seminar.get_status }}">
             <div class="seminar-info">
-                <a class="title" href="{% url 'seminar_detail' seminar.slug %}">{{ seminar.title }}</a>
-                <p class="description">{{ seminar.description }}</p>
+                {% if seminar.is_calendar_event %}
+                    <a class="title" href="{{ seminar.detail_url }}" target="_blank" rel="noopener">{{ seminar.title }}</a>
+                {% else %}
+                    <a class="title" href="{{ seminar.detail_url }}">{{ seminar.title }}</a>
+                {% endif %}
+                {% if seminar.description %}
+                <p class="description">{{ seminar.description|striptags|truncatechars:80 }}</p>
+                {% endif %}
                 <div class="seminar-meta">
                     <span class="seminar-date">{{ seminar.start_time|date:"j F Y, g:i A" }}</span>
                 </div>
