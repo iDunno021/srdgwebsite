@@ -1,6 +1,8 @@
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
-from .models import Member, Initiative, Seminar, MemberRole
+
+from .models import Member, Initiative, Event, Seminar, MemberRole
 from .forms import MemberForm
 from django.views import generic
 
@@ -49,7 +51,28 @@ def contact(request):
     return render(request, 'pages/contact.html')
 
 def calendar(request):
-    return render(request, 'pages/calendar.html')
+    status_colors = {'upcoming': '#C8391A', 'active': '#2e7d32', 'completed': '#1a4a7a'}
+
+    events = [
+        {
+            'title': e.title,
+            'start': e.start_time.isoformat(),
+            'end': e.end_time.isoformat(),
+            'color': status_colors[e.get_status],
+        }
+        for e in Event.objects.all()
+    ]
+    seminars = [
+        {
+            'title': s.title,
+            'start': s.start_time.isoformat(),
+            'end': s.end_time.isoformat(),
+            'url': f'/seminars/{s.slug}/',
+            'color': status_colors[s.get_status],
+        }
+        for s in Seminar.objects.filter(hidden=False)
+    ]
+    return render(request, 'pages/calendar.html', {'calendar_events': json.dumps(events + seminars)})
 
 class SeminarView(generic.ListView):
     model = Seminar
@@ -61,15 +84,12 @@ def seminar_detail(request, slug):
     seminar = get_object_or_404(Seminar, slug=slug, hidden=False)
     custom = f'pages/seminars/{slug}.html'
     default = 'pages/seminars/seminar_base.html'
-
     try:
         get_template(custom)
         template = custom
     except:
         template = default
-
-    return render(request, template, {'seminar' : seminar})
-
+    return render(request, template, {'seminar': seminar})
 
 class InitiativeView(generic.ListView):
     model = Initiative
@@ -81,14 +101,12 @@ def initiative_detail(request, slug):
     initiative = get_object_or_404(Initiative, slug=slug, hidden=False)
     custom = f'pages/initiatives/{slug}.html'
     default = 'pages/initiatives/initiative_base.html'
-
     try:
         get_template(custom)
         template = custom
     except:
         template = default
-
-    return render(request, template, {'initiative' : initiative})
+    return render(request, template, {'initiative': initiative})
 
 def blog(request):
     return render(request, 'pages/blog.html')

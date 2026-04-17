@@ -3,6 +3,7 @@
 {% block title %}Calendar | SRDG{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'pages/styles/calendar.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6/index.global.min.css">
 {% endblock %}
 {% block content %}
 <div class="calendar-page">
@@ -13,9 +14,35 @@
             Upcoming seminars, events, and initiatives — all in one place.
         </p>
     </div>
-    <div class="calendar-placeholder">
-        <p>Shared calendar coming soon.</p>
-        <span>In the meantime, check the <a href="{% url 'initiatives' %}">Initiatives</a> and <a href="{% url 'seminars' %}">Seminars</a> pages for upcoming events.</span>
-    </div>
+    <div id="calendar"></div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6/index.global.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function fmtTime(date) {
+            if (!date) return '';
+            return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        }
+
+        var cal = new FullCalendar.Calendar(document.getElementById('calendar'), {
+            initialView: 'dayGridMonth',
+            events: {{ calendar_events|safe }},
+            eventContent: function (info) {
+                var start = fmtTime(info.event.start);
+                var end = info.event.end ? fmtTime(info.event.end) : '';
+                var time = end ? start + ' – ' + end : start;
+                return {
+                    html: '<div class="fc-event-card"><span class="fc-event-card-time">' + time + '</span><span class="fc-event-card-title">' + info.event.title + '</span></div>'
+                };
+            },
+            eventClick: function (info) {
+                if (info.event.url) {
+                    info.jsEvent.preventDefault();
+                    window.location.href = info.event.url;
+                }
+            },
+        });
+        cal.render();
+    });
+</script>
 {% endblock %}
