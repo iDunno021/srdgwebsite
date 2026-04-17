@@ -30,32 +30,26 @@
     line-height: 1.75;
 }
 
-.calendar-placeholder {
+.calendar-embed-wrapper {
     background: #fff;
     border-radius: 10px;
     border: 0.5px solid var(--color-border);
-    padding: 3.5rem 2rem;
-    text-align: center;
+    overflow: hidden;
 }
 
-.calendar-placeholder p {
-    font-size: 15px;
-    color: #888;
-    margin: 0 0 8px;
+.calendar-embed {
+    display: block;
+    width: 100%;
+    height: 680px;
+    border: none;
 }
 
-.calendar-placeholder span {
-    font-size: 13.5px;
-    color: #aaa;
-    line-height: 1.6;
-}
+@media (max-width: 768px) {
+    .calendar-page {
+        padding: 2.5rem 1.25rem;
+    }
 
-.calendar-placeholder a {
-    color: var(--color-blue);
-    text-decoration: none;
-    transition: color 0.15s;
-}
-
-.calendar-placeholder a:hover {
-    color: var(--color-orange);
+    .calendar-embed {
+        height: 500px;
+    }
 }
