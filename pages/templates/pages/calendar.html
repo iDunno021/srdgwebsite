@@ -13,9 +13,14 @@
             Upcoming seminars, events, and initiatives — all in one place.
         </p>
     </div>
-    <div class="calendar-placeholder">
-        <p>Shared calendar coming soon.</p>
-        <span>In the meantime, check the <a href="{% url 'initiatives' %}">Initiatives</a> and <a href="{% url 'seminars' %}">Seminars</a> pages for upcoming events.</span>
+    <div class="calendar-embed-wrapper">
+        <iframe
+            src="https://calendar.google.com/calendar/embed?src=socialresearchanddiscourse%40gmail.com&ctz=Pacific%2FAuckland&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=1&mode=MONTH"
+            class="calendar-embed"
+            frameborder="0"
+            scrolling="no"
+            title="SRDG Calendar">
+        </iframe>
     </div>
 </div>
 {% endblock %}
