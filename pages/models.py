@@ -13,6 +13,7 @@ class Member(models.Model):
         ('GDC', 'Glendowie College'),
         ('selwyn', 'Selwyn College'),
         ('DIO', 'Diocesan School For Girls'),
+        ('RGT', 'Rangitoto College'),
         ('other', 'Other')
     ]
 
