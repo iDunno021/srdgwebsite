@@ -1,0 +1,64 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} | SRDG{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/blog_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="blog-post-page">
+
+    <div class="blog-post-hero">
+        <span class="blog-post-author">{{ post.author }}</span>
+        <h1 class="blog-post-title">{{ post.title }}</h1>
+        <div class="blog-post-underline"></div>
+        <span class="blog-post-date">{{ post.published_at|date:"j F Y" }}</span>
+    </div>
+
+    {% if post.cover_image %}
+    <div class="blog-post-cover">
+        <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+    </div>
+    {% endif %}
+
+    <div class="blog-post-body">
+        {{ post.body|linebreaks }}
+    </div>
+
+    {% if post.images.all %}
+    <div class="blog-post-gallery">
+        <h3 class="blog-post-section-title">Images</h3>
+        <div class="blog-post-gallery-grid">
+            {% for img in post.images.all %}
+            <figure class="blog-post-gallery-item">
+                <img src="{{ img.image.url }}" alt="{{ img.caption }}">
+                {% if img.caption %}
+                <figcaption>{{ img.caption }}</figcaption>
+                {% endif %}
+            </figure>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if post.attachments.all %}
+    <div class="blog-post-attachments">
+        <h3 class="blog-post-section-title">Attachments</h3>
+        <ul class="blog-post-attachment-list">
+            {% for attachment in post.attachments.all %}
+            <li>
+                <a href="{{ attachment.file.url }}" target="_blank" class="blog-post-attachment-link">
+                    <span class="attachment-icon">&#128196;</span>
+                    {{ attachment.name|default:attachment.file.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <a href="{% url 'blog' %}" class="back-link">&larr; All Posts</a>
+
+</div>
+{% endblock %}

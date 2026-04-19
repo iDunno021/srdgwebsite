@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+import uuid
 
 class Member(models.Model):
     SCHOOLS = [
@@ -109,3 +110,50 @@ class MemberRole(models.Model):
 
     def __str__(self):
         return f"{self.member} — {self.get_committee_display()}"
+    
+def blog_cover_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f'blog/covers/{uuid.uuid4().hex}.{ext}'
+
+def blog_image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f'blog/images/{uuid.uuid4().hex}.{ext}'
+
+def blog_attachment_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f'blog/attachments/{uuid.uuid4().hex}.{ext}'
+
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100, default="anonymous")
+    body = models.TextField()
+    cover_image = models.ImageField(upload_to=blog_cover_path, blank=True, null=True)
+    published_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    hidden = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+
+class BlogAttachment(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='attachments')
+    file = models.FileField(upload_to=blog_attachment_path)
+    name = models.CharField(max_length=200, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name or self.file.name
+
+
+class BlogImage(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to=blog_image_path)
+    caption = models.CharField(max_length=300, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.caption or f"Image for {self.post.title}"
+

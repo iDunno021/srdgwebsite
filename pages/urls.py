@@ -12,5 +12,6 @@ urlpatterns = [
     path('calendar/', views.calendar, name='calendar'),
     path('initiatives/', views.InitiativeView.as_view(), name='initiatives'),
     path('initiatives/<slug:slug>/', views.initiative_detail, name='initiative_detail'),
-    path('blog/', views.blog, name='blog'),
+    path('blog/', views.BlogView.as_view(), name='blog'),
+    path('blog/<int:id>/', views.blog_detail, name='blog_detail'),
 ]

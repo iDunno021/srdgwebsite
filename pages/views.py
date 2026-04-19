@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 
-from .models import Member, Initiative, Event, Seminar, MemberRole
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost
 from .forms import MemberForm
 from django.views import generic
 
@@ -108,5 +108,12 @@ def initiative_detail(request, slug):
         template = default
     return render(request, template, {'initiative': initiative})
 
-def blog(request):
-    return render(request, 'pages/blog.html')
+class BlogView(generic.ListView):
+    model = BlogPost
+    template_name = 'pages/blog.html'
+    context_object_name = 'posts'
+    queryset = BlogPost.objects.filter(hidden=False).order_by('-published_at')
+
+def blog_detail(request, id):
+    post = get_object_or_404(BlogPost, id=id, hidden=False)
+    return render(request, 'pages/blog_detail.html', {'post': post})

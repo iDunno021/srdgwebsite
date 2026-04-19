@@ -32,6 +32,8 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'pages',
 ]
 
@@ -135,7 +138,20 @@ STATICFILES_DIRS = [
 ]
 
 STORAGES = {
+    "default": {
+        "BACKEND": "website.storage.SupabaseStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+AWS_ACCESS_KEY_ID = os.getenv('SUPABASE_S3_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = os.getenv('SUPABASE_S3_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('SUPABASE_S3_BUCKET')
+AWS_S3_REGION_NAME = os.getenv('SUPABASE_S3_REGION')
+AWS_S3_ENDPOINT_URL = os.getenv('SUPABASE_S3_ENDPOINT')
+AWS_S3_FILE_OVERWRITE = False
+AWS_QUERYSTRING_AUTH = False
+
+MEDIA_URL = f"{os.getenv('SUPABASE_S3_ENDPOINT')}/{os.getenv('SUPABASE_S3_BUCKET')}/"
