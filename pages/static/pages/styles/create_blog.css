@@ -1,0 +1,138 @@
+.create-blog-page {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+}
+
+.create-blog-header {
+    margin-bottom: 2.5rem;
+}
+
+.create-blog-header h1 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin: 0 0 10px;
+}
+
+.create-blog-header .underline {
+    width: 32px;
+    height: 2px;
+    background: var(--color-orange);
+}
+
+.create-blog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    font-size: 14.5px;
+    font-family: inherit;
+    color: var(--color-text);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+    outline: none;
+}
+
+.form-group input[type="file"] {
+    padding: 0.5rem 0.85rem;
+    cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-orange);
+}
+
+.form-group textarea {
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.add-file-btn {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--color-orange);
+    cursor: pointer;
+}
+
+.add-file-btn:hover {
+    opacity: 0.75;
+}
+
+.multi-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.file-item {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    padding: 4px 8px;
+    background: #f7f7f7;
+    border-radius: 4px;
+}
+
+.field-error {
+    font-size: 12.5px;
+    color: #c0392b;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 0.5rem;
+}
+
+.cancel-link {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+}
+
+.cancel-link:hover {
+    color: var(--color-text);
+}
+
+.form-actions button {
+    padding: 0.5rem 1.4rem;
+    background: var(--color-orange);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-actions button:hover {
+    opacity: 0.85;
+}

@@ -9,12 +9,36 @@
     margin-bottom: 3rem;
 }
 
-.blog-header h1 {
+.blog-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+
+.post-button {
+    display: inline-block;
+    padding: 0.45rem 1.1rem;
+    background: var(--color-orange);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.post-button:hover {
+    opacity: 0.85;
+}
+
+.blog-header-top h1 {
     font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 400;
     color: var(--color-text);
-    margin: 0 0 10px;
+    margin: 0;
 }
 
 .blog-header .underline {

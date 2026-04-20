@@ -5,6 +5,7 @@ from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, Bl
 class MemberAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'school', 'year_level', 'email']
     search_fields = ['first_name', 'last_name', 'email']
+    list_filter = ['school', 'year_level']
 
 class EventInline(admin.TabularInline):
     model = Event

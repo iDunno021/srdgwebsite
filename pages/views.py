@@ -2,8 +2,8 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost
-from .forms import MemberForm
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
+from .forms import MemberForm, BlogPostForm
 from django.views import generic
 
 def home(request):
@@ -117,3 +117,17 @@ class BlogView(generic.ListView):
 def blog_detail(request, id):
     post = get_object_or_404(BlogPost, id=id, hidden=False)
     return render(request, 'pages/blog_detail.html', {'post': post})
+
+def create_blog(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            for image in request.FILES.getlist('images'):
+                BlogImage.objects.create(post=post, image=image)
+            for attachment in request.FILES.getlist('attachments'):
+                BlogAttachment.objects.create(post=post, file=attachment, name=attachment.name)
+            return redirect('blog')
+    else:
+        form = BlogPostForm()
+    return render(request, 'pages/create_blog.html', {'form': form})

@@ -1,0 +1,77 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %}New Post | SRDG{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/create_blog.css' %}">
+{% endblock %}
+{% block content %}
+<div class="create-blog-page">
+    <div class="create-blog-header">
+        <h1>New Post</h1>
+        <div class="underline"></div>
+    </div>
+    <form class="create-blog-form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <span class="field-error">{{ field.errors|join:", " }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <label>Files</label>
+            <div class="multi-file-list" id="image-list"></div>
+            <div class="multi-file-list" id="attachment-list"></div>
+            <label class="add-file-btn" for="file-input">+ Add file</label>
+            <input type="file" id="file-input" multiple hidden>
+            <input type="file" id="image-input" name="images" multiple hidden>
+            <input type="file" id="attachment-input" name="attachments" multiple hidden>
+        </div>
+
+        <div class="form-actions">
+            <a class="cancel-link" href="{% url 'blog' %}">Cancel</a>
+            <button type="submit">Publish</button>
+        </div>
+    </form>
+</div>
+<script>
+const fileInput = document.getElementById('file-input');
+const imageInput = document.getElementById('image-input');
+const attachmentInput = document.getElementById('attachment-input');
+const imageList = document.getElementById('image-list');
+const attachmentList = document.getElementById('attachment-list');
+
+const imageDT = new DataTransfer();
+const attachmentDT = new DataTransfer();
+
+fileInput.addEventListener('change', () => {
+    Array.from(fileInput.files).forEach(file => {
+        if (file.type.startsWith('image/')) {
+            imageDT.items.add(file);
+        } else {
+            attachmentDT.items.add(file);
+        }
+    });
+    imageInput.files = imageDT.files;
+    attachmentInput.files = attachmentDT.files;
+    renderList(imageList, imageDT.files, 'image');
+    renderList(attachmentList, attachmentDT.files, 'attachment');
+    fileInput.value = '';
+});
+
+function renderList(list, files, type) {
+    list.innerHTML = '';
+    Array.from(files).forEach((file, i) => {
+        const item = document.createElement('div');
+        item.className = 'file-item';
+        const label = type === 'image' ? '🖼 ' : '📎 ';
+        item.textContent = label + file.name;
+        list.appendChild(item);
+    });
+}
+</script>
+{% endblock %}

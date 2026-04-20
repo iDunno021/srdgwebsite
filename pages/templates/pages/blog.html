@@ -7,7 +7,10 @@
 {% block content %}
 <div class="blog-page">
     <div class="blog-header">
-        <h1>Blog</h1>
+        <div class="blog-header-top">
+            <h1>Blog</h1>
+            <a class="post-button" href="{% url 'create_blog' %}">Create Blog</a>
+        </div>
         <div class="underline"></div>
         <p class="blog-intro">
             Essays, opinion pieces, and reflections written by our members — a space for developing our academic voice and exploring the issues that matter to us.

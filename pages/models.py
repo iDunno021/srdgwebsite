@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from django.utils.text import slugify
 import uuid
 
 class Member(models.Model):
@@ -116,16 +117,15 @@ def blog_cover_path(instance, filename):
     return f'blog/covers/{uuid.uuid4().hex}.{ext}'
 
 def blog_image_path(instance, filename):
-    ext = filename.split('.')[-1]
-    return f'blog/images/{uuid.uuid4().hex}.{ext}'
+    return f'blog/images/{instance.post.slug}/{filename}'
 
 def blog_attachment_path(instance, filename):
-    ext = filename.split('.')[-1]
-    return f'blog/attachments/{uuid.uuid4().hex}.{ext}'
+    return f'blog/attachments/{instance.post.slug}/{filename}'
 
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=220, unique=True, blank=True)
     author = models.CharField(max_length=100, default="anonymous")
     body = models.TextField()
     cover_image = models.ImageField(upload_to=blog_cover_path, blank=True, null=True)
@@ -133,6 +133,17 @@ class BlogPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     hidden = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(self.title)
+            slug = base
+            n = 1
+            while BlogPost.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f'{base}-{n}'
+                n += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
