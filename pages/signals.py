@@ -4,18 +4,18 @@ from .models import BlogPost, BlogImage, BlogAttachment
 
 
 @receiver(post_delete, sender=BlogPost)
-def delete_cover_image(_sender, instance, **_kwargs):
+def delete_cover_image(sender, instance, **kwargs):
     if instance.cover_image:
         instance.cover_image.delete(save=False)
 
 
 @receiver(post_delete, sender=BlogImage)
-def delete_blog_image(_sender, instance, **_kwargs):
+def delete_blog_image(sender, instance, **kwargs):
     if instance.image:
         instance.image.delete(save=False)
 
 
 @receiver(post_delete, sender=BlogAttachment)
-def delete_blog_attachment(_sender, instance, **_kwargs):
+def delete_blog_attachment(sender, instance, **kwargs):
     if instance.file:
         instance.file.delete(save=False)
