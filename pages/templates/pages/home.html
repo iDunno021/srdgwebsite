@@ -25,7 +25,7 @@
         </div>
         <div class="stat">
             <span class="stat-number">{{ total_initiatives }}</span>
-            <span class="stat-label">Active Initiatives</span>
+            <span class="stat-label">{% if total_initiatives == 1 %}Active Initiative{% else %}Active Initiatives{% endif %}</span>
         </div>
         <div class="stat">
             <span class="stat-number">{{ schools_count }}</span>
