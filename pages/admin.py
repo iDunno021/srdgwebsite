@@ -41,7 +41,7 @@ class BlogAttachmentInline(admin.TabularInline):
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'published_at', 'hidden']
-    list_filter = ['hidden']
+    list_display = ['title', 'author', 'published_at', 'approved']
+    list_filter = ['approved']
     search_fields = ['title', 'author']
     inlines = [BlogImageInline, BlogAttachmentInline]

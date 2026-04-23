@@ -112,7 +112,7 @@ class BlogView(generic.ListView):
     model = BlogPost
     template_name = 'pages/blog.html'
     context_object_name = 'posts'
-    queryset = BlogPost.objects.filter(hidden=False).order_by('-published_at')
+    queryset = BlogPost.objects.filter(approved=True).order_by('-published_at')
 
 def blog_detail(request, id):
     post = get_object_or_404(BlogPost, id=id, hidden=False)
