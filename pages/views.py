@@ -115,7 +115,7 @@ class BlogView(generic.ListView):
     queryset = BlogPost.objects.filter(approved=True).order_by('-published_at')
 
 def blog_detail(request, id):
-    post = get_object_or_404(BlogPost, id=id, hidden=False)
+    post = get_object_or_404(BlogPost, id=id, approved=True)
     return render(request, 'pages/blog_detail.html', {'post': post})
 
 def create_blog(request):
