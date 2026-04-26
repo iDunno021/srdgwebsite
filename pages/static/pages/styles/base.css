@@ -51,8 +51,8 @@ nav {
 }
 
 .nav-brand img {
-    height: 32px;
-    width: 32px;
+    height: 42px;
+    width: 42px;
     object-fit: contain;
 }
 
@@ -263,8 +263,8 @@ footer {
 }
 
 .footer-brand img {
-    height: 28px;
-    width: 28px;
+    height: 38px;
+    width: 38px;
     object-fit: contain;
     margin-bottom: 6px;
     display: block;
