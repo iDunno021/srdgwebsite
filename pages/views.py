@@ -1,7 +1,9 @@
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
-from .models import Member, Initiative, Seminar, MemberRole
-from .forms import MemberForm
+
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
+from .forms import MemberForm, BlogPostForm
 from django.views import generic
 
 def home(request):
@@ -49,7 +51,28 @@ def contact(request):
     return render(request, 'pages/contact.html')
 
 def calendar(request):
-    return render(request, 'pages/calendar.html')
+    status_colors = {'upcoming': '#C8391A', 'active': '#2e7d32', 'completed': '#1a4a7a'}
+
+    events = [
+        {
+            'title': e.title,
+            'start': e.start_time.isoformat(),
+            'end': e.end_time.isoformat(),
+            'color': status_colors[e.get_status],
+        }
+        for e in Event.objects.all()
+    ]
+    seminars = [
+        {
+            'title': s.title,
+            'start': s.start_time.isoformat(),
+            'end': s.end_time.isoformat(),
+            'url': f'/seminars/{s.slug}/',
+            'color': status_colors[s.get_status],
+        }
+        for s in Seminar.objects.filter(hidden=False)
+    ]
+    return render(request, 'pages/calendar.html', {'calendar_events': json.dumps(events + seminars)})
 
 class SeminarView(generic.ListView):
     model = Seminar
@@ -61,15 +84,12 @@ def seminar_detail(request, slug):
     seminar = get_object_or_404(Seminar, slug=slug, hidden=False)
     custom = f'pages/seminars/{slug}.html'
     default = 'pages/seminars/seminar_base.html'
-
     try:
         get_template(custom)
         template = custom
     except:
         template = default
-
-    return render(request, template, {'seminar' : seminar})
-
+    return render(request, template, {'seminar': seminar})
 
 class InitiativeView(generic.ListView):
     model = Initiative
@@ -81,14 +101,33 @@ def initiative_detail(request, slug):
     initiative = get_object_or_404(Initiative, slug=slug, hidden=False)
     custom = f'pages/initiatives/{slug}.html'
     default = 'pages/initiatives/initiative_base.html'
-
     try:
         get_template(custom)
         template = custom
     except:
         template = default
+    return render(request, template, {'initiative': initiative})
 
-    return render(request, template, {'initiative' : initiative})
+class BlogView(generic.ListView):
+    model = BlogPost
+    template_name = 'pages/blog.html'
+    context_object_name = 'posts'
+    queryset = BlogPost.objects.filter(approved=True).order_by('-published_at')
 
-def blog(request):
-    return render(request, 'pages/blog.html')
+def blog_detail(request, id):
+    post = get_object_or_404(BlogPost, id=id, approved=True)
+    return render(request, 'pages/blog_detail.html', {'post': post})
+
+def create_blog(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            for image in request.FILES.getlist('images'):
+                BlogImage.objects.create(post=post, image=image)
+            for attachment in request.FILES.getlist('attachments'):
+                BlogAttachment.objects.create(post=post, file=attachment, name=attachment.name)
+            return redirect('blog')
+    else:
+        form = BlogPostForm()
+    return render(request, 'pages/create_blog.html', {'form': form})

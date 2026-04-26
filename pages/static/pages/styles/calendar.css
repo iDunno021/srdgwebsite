@@ -30,32 +30,121 @@
     line-height: 1.75;
 }
 
-.calendar-placeholder {
+/* ── FullCalendar overrides ── */
+
+#calendar {
     background: #fff;
     border-radius: 10px;
     border: 0.5px solid var(--color-border);
-    padding: 3.5rem 2rem;
-    text-align: center;
+    padding: 1.5rem;
 }
 
-.calendar-placeholder p {
-    font-size: 15px;
-    color: #888;
-    margin: 0 0 8px;
+.fc {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-text);
 }
 
-.calendar-placeholder span {
-    font-size: 13.5px;
-    color: #aaa;
-    line-height: 1.6;
+/* Toolbar */
+.fc-toolbar-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 400;
 }
 
-.calendar-placeholder a {
-    color: var(--color-blue);
+.fc-button {
+    background: transparent !important;
+    border: 0.5px solid var(--color-border) !important;
+    color: var(--color-text) !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+    padding: 5px 10px !important;
+    font-size: 13px !important;
+    font-family: var(--font-sans) !important;
+    transition: background 0.15s !important;
+}
+
+.fc-button:hover {
+    background: var(--color-bg) !important;
+}
+
+.fc-button-active,
+.fc-button:focus {
+    background: var(--color-bg) !important;
+    outline: none !important;
+}
+
+/* Day headers */
+.fc-col-header-cell {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    padding: 8px 0;
+    border: none;
+}
+
+.fc-col-header-cell a {
+    color: var(--color-text-muted) !important;
     text-decoration: none;
-    transition: color 0.15s;
 }
 
-.calendar-placeholder a:hover {
+/* Day cells */
+.fc-daygrid-day {
+    background: transparent;
+}
+
+.fc-daygrid-day-number {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    text-decoration: none !important;
+    padding: 6px 8px;
+}
+
+.fc-day-today {
+    background: rgba(200, 57, 26, 0.05) !important;
+}
+
+.fc-day-today .fc-daygrid-day-number {
     color: var(--color-orange);
+    font-weight: 600;
+}
+
+/* Events */
+.fc-event {
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 2px 5px !important;
+    cursor: pointer;
+}
+
+.fc-event-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.3;
+}
+
+.fc-event-card-time {
+    font-size: 10px;
+    opacity: 0.85;
+}
+
+.fc-event-card-title {
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Grid borders */
+.fc-scrollgrid {
+    border: none !important;
+}
+
+.fc-scrollgrid td,
+.fc-scrollgrid th {
+    border-color: var(--color-border) !important;
 }
