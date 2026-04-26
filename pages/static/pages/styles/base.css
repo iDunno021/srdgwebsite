@@ -1,13 +1,13 @@
 :root {
     --color-bg: #F6F4F1;
-    --color-orange: #C8391A;
-    --color-orange-dark: #A82E14;
-    --color-blue: #1a4a7a;
+    --color-orange: #A72222;
+    --color-orange-dark: #8C1C1C;
+    --color-blue: #233D68;
     --color-dark: #1a1a1a;
     --color-text: #1a1a1a;
     --color-text-muted: #555;
     --color-border: #e0dbd5;
-    --color-error: #c0341a;
+    --color-error: #A72222;
     --nav-height: 64px;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-serif: 'Playfair Display', Georgia, serif;
