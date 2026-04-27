@@ -20,7 +20,7 @@
 .calendar-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-orange);
+    background: var(--color-yellow);
     margin-bottom: 1.25rem;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .fc-day-today .fc-daygrid-day-number {
-    color: var(--color-orange);
+    color: var(--color-yellow);
     font-weight: 600;
 }
 

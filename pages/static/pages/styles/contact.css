@@ -20,7 +20,7 @@
 .contact-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-orange);
+    background: var(--color-yellow);
     margin-bottom: 1.25rem;
 }
 
@@ -70,5 +70,5 @@
 }
 
 .contact-email:hover {
-    color: var(--color-orange);
+    color: var(--color-yellow);
 }

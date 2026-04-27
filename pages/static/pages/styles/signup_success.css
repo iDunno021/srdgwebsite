@@ -59,7 +59,7 @@
 }
 
 .btn-home {
-    background: var(--color-orange);
+    background: var(--color-yellow);
     color: #fff;
     text-decoration: none;
     font-size: 14px;
@@ -70,5 +70,5 @@
 }
 
 .btn-home:hover {
-    background: var(--color-orange-dark);
+    background: var(--color-red);
 }

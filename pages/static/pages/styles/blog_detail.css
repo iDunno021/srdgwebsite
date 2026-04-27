@@ -15,7 +15,7 @@
     display: block;
     font-size: 11.5px;
     font-weight: 500;
-    color: var(--color-orange);
+    color: var(--color-yellow);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin-bottom: 0.75rem;
@@ -33,7 +33,7 @@
 .blog-post-underline {
     width: 32px;
     height: 2px;
-    background: var(--color-orange);
+    background: var(--color-yellow);
     margin-bottom: 14px;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .blog-post-attachment-link:hover {
-    border-color: var(--color-orange);
+    border-color: var(--color-yellow);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 

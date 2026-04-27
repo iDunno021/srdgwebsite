@@ -22,7 +22,7 @@
 .initiative-underline {
     width: 32px;
     height: 2px;
-    background: var(--color-orange);
+    background: var(--color-yellow);
     margin-bottom: 18px;
 }
 
@@ -70,7 +70,7 @@
 
 .event-card.upcoming {
     border-color: #e8e0d8;
-    border-left-color: var(--color-orange);
+    border-left-color: var(--color-yellow);
 }
 
 .event-card.active {
@@ -125,7 +125,7 @@
 }
 
 .badge-upcoming {
-    color: var(--color-orange-dark);
+    color: var(--color-red);
     background: #fdf0e2;
 }
 

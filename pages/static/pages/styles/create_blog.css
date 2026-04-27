@@ -20,7 +20,7 @@
 .create-blog-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-orange);
+    background: var(--color-yellow);
 }
 
 .create-blog-form {
@@ -65,7 +65,7 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: var(--color-orange);
+    border-color: var(--color-yellow);
 }
 
 .form-group textarea {
@@ -77,7 +77,7 @@
     display: inline-block;
     margin-top: 6px;
     font-size: 13px;
-    color: var(--color-orange);
+    color: var(--color-yellow);
     cursor: pointer;
 }
 
@@ -124,7 +124,7 @@
 
 .form-actions button {
     padding: 0.5rem 1.4rem;
-    background: var(--color-orange);
+    background: var(--color-yellow);
     color: #fff;
     font-size: 14px;
     font-weight: 500;

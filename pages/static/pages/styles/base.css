@@ -1,9 +1,9 @@
 :root {
     --color-bg: #F6F4F1;
-    --color-orange: #A72222;
-    --color-orange-dark: #8C1C1C;
+    --color-yellow: #EAAC42;
+    --color-red: #A72222;
     --color-blue: #5A94A6;
-    --color-dark: #1a1a1a;
+    --color-dark: #233D68;
     --color-text: #1a1a1a;
     --color-text-muted: #555;
     --color-border: #e0dbd5;
@@ -151,7 +151,7 @@ nav {
 /* ── Join button ── */
 
 .btn-join {
-    background: var(--color-orange);
+    background: var(--color-yellow);
     color: #fff;
     text-decoration: none;
     font-size: 13.5px;
@@ -162,7 +162,7 @@ nav {
 }
 
 .btn-join:hover {
-    background: var(--color-orange-dark);
+    background: var(--color-red);
 }
 
 /* Mobile join button (inside nav-links drawer) — hidden on desktop */
@@ -309,7 +309,7 @@ footer {
 }
 
 .btn-join-footer {
-    background: var(--color-orange);
+    background: var(--color-yellow);
     color: #fff;
     text-decoration: none;
     font-size: 13px;
@@ -321,7 +321,7 @@ footer {
 }
 
 .btn-join-footer:hover {
-    background: var(--color-orange-dark);
+    background: var(--color-red);
 }
 
 .footer-bottom {
