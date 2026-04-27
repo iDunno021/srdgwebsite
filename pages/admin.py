@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
 

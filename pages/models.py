@@ -40,8 +40,10 @@ class Member(models.Model):
 class Initiative(models.Model):
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
+    description = models.TextField()
+    summary = models.CharField(max_length=150, blank=True)
     hidden = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return self.title
@@ -49,7 +51,7 @@ class Initiative(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
+    description = models.TextField()
     location = models.CharField(max_length=100)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
@@ -75,7 +77,7 @@ class Event(models.Model):
 class Seminar(models.Model):
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
+    description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     hidden = models.BooleanField(default=False)

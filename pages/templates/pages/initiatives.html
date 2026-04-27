@@ -14,7 +14,7 @@
         {% for initiative in initiatives %}
         <div class="initiative-card">
             <a class="title" href="{% url 'initiative_detail' initiative.slug %}">{{ initiative.title }}</a>
-            <p class="description">{{ initiative.description }}</p>
+            <p class="description">{% if initiative.summary %}{{ initiative.summary }}{% else %}{{ initiative.description|truncatechars:150 }}{% endif %}</p>
         </div>
         {% endfor %}
     </div>
