@@ -20,7 +20,7 @@
 .initiatives-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-yellow);
+    background: var(--color-red);
 }
 
 .initiatives-list {
@@ -55,7 +55,7 @@
 }
 
 .initiative-card .title:hover {
-    color: var(--color-yellow);
+    color: var(--color-red);
 }
 
 .initiative-card .description {

@@ -18,7 +18,7 @@
 }
 
 .signup-header {
-    border-left: 3px solid var(--color-yellow);
+    border-left: 3px solid var(--color-red);
     padding-left: 14px;
     margin-bottom: 2rem;
 }
@@ -81,7 +81,7 @@
     margin-top: 8px;
     width: 100%;
     padding: 11px;
-    background: var(--color-yellow);
+    background: var(--color-red);
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -93,7 +93,7 @@
 }
 
 .signup-form button:hover {
-    background: var(--color-red);
+    background: var(--color-yellow);
 }
 
 #other-school-input {

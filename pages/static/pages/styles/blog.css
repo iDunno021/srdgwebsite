@@ -20,7 +20,7 @@
 .post-button {
     display: inline-block;
     padding: 0.45rem 1.1rem;
-    background: var(--color-yellow);
+    background: var(--color-red);
     color: #fff;
     font-size: 14px;
     font-weight: 500;
@@ -44,7 +44,7 @@
 .blog-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-yellow);
+    background: var(--color-red);
     margin-bottom: 1.25rem;
 }
 
@@ -71,7 +71,7 @@
     background: #fff;
     border-radius: 10px;
     border: 0.5px solid var(--color-border);
-    border-left: 3px solid var(--color-yellow);
+    border-left: 3px solid var(--color-red);
     text-decoration: none;
     color: inherit;
     overflow: hidden;
@@ -105,7 +105,7 @@
 .blog-card-author {
     font-size: 11.5px;
     font-weight: 500;
-    color: var(--color-yellow);
+    color: var(--color-red);
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }

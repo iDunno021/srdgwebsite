@@ -20,7 +20,7 @@
 .seminars-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-yellow);
+    background: var(--color-red);
 }
 
 .seminars-list {
@@ -33,7 +33,7 @@
     background: #fff;
     border-radius: 10px;
     border: 0.5px solid #e8e0d8;
-    border-left: 3px solid var(--color-yellow);
+    border-left: 3px solid var(--color-red);
     padding: 1.5rem 1.75rem;
     width: 100%;
     display: flex;
@@ -53,7 +53,7 @@
 
 .seminar-card.upcoming {
     border-color: #e8e0d8;
-    border-left-color: var(--color-yellow);
+    border-left-color: var(--color-red);
 }
 
 .seminar-card.completed {
@@ -103,7 +103,7 @@
 }
 
 .badge-upcoming {
-    color: var(--color-red);
+    color: var(--color-yellow);
     background: #fdf0e2;
 }
 

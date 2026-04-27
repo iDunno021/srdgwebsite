@@ -46,7 +46,7 @@
 }
 
 .btn-primary {
-    background: var(--color-yellow);
+    background: var(--color-red);
     color: #fff;
     text-decoration: none;
     font-size: 14px;
@@ -57,7 +57,7 @@
 }
 
 .btn-primary:hover {
-    background: var(--color-red);
+    background: var(--color-yellow);
 }
 
 .btn-secondary {
@@ -126,7 +126,7 @@
     margin-bottom: 1.5rem;
 }
 
-.pillar-accent.orange { background: var(--color-yellow); }
+.pillar-accent.orange { background: var(--color-red); }
 .pillar-accent.blue   { background: var(--color-blue); }
 .pillar-accent.slate  { background: #7a8a9a; }
 
@@ -158,7 +158,7 @@
 .ethos-accent {
     width: 32px;
     height: 2px;
-    background: var(--color-yellow);
+    background: var(--color-red);
     margin: 0 auto 2rem;
 }
 
