@@ -22,7 +22,11 @@
         <div class="members-grid">
             {% for role in members %}
             <div class="member-card">
-                <div class="member-img"></div>
+                {% if role.member.photo %}
+                    <img class="member-img" src="{{role.member.photo.url}}" alt="{{role.member.first_name}} {{role.member.last_name}}">
+                {% else %}
+                    <div class="member-img"></div>
+                {% endif %}
                 <div class="member-info">
                     <h3 class="member-name">{{ role.member.first_name }} {{ role.member.last_name }}</h3>
                     {% if role.title %}

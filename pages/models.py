@@ -32,6 +32,14 @@ class Member(models.Model):
     school = models.CharField(max_length=100, choices=SCHOOLS)
     year_level = models.IntegerField(choices=YEAR_CHOICES)
     email = models.EmailField(unique=True)
+    photo = models.ImageField(upload_to = "member_photos/", blank=True, null = True)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old = Member.objects.filter(pk=self.pk).first()
+            if old.photo and old.photo != self.photo:
+                old.photo.delete(save=False)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.first_name + " " + self.last_name

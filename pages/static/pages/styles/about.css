@@ -71,6 +71,7 @@
     border-radius: 50%;
     background: #e8e4df;
     border: 0.5px solid var(--color-border);
+    object-fit: cover;
 }
 
 .member-name {
