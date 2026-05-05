@@ -32,7 +32,15 @@ class Member(models.Model):
     school = models.CharField(max_length=100, choices=SCHOOLS)
     year_level = models.IntegerField(choices=YEAR_CHOICES)
     email = models.EmailField(unique=True)
+    photo = models.ImageField(upload_to = "member_photos/", blank=True, null = True)
     discord_username = models.CharField(max_length=100, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old = Member.objects.filter(pk=self.pk).first()
+            if old.photo and old.photo != self.photo:
+                old.photo.delete(save=False)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
@@ -41,8 +49,10 @@ class Member(models.Model):
 class Initiative(models.Model):
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
+    description = models.TextField()
+    summary = models.CharField(max_length=150, blank=True)
     hidden = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return self.title
@@ -50,7 +60,7 @@ class Initiative(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
+    description = models.TextField()
     location = models.CharField(max_length=100)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
@@ -76,7 +86,7 @@ class Event(models.Model):
 class Seminar(models.Model):
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
+    description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     hidden = models.BooleanField(default=False)

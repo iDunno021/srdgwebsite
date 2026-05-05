@@ -22,7 +22,7 @@
 .about-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-orange);
+    background: var(--color-red);
     margin-bottom: 1.5rem;
 }
 
@@ -71,6 +71,7 @@
     border-radius: 50%;
     background: #e8e4df;
     border: 0.5px solid var(--color-border);
+    object-fit: cover;
 }
 
 .member-name {
