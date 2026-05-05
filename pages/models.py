@@ -33,6 +33,7 @@ class Member(models.Model):
     year_level = models.IntegerField(choices=YEAR_CHOICES)
     email = models.EmailField(unique=True)
     photo = models.ImageField(upload_to = "member_photos/", blank=True, null = True)
+    discord_username = models.CharField(max_length=100, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk:

@@ -5,6 +5,8 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = ['first_name', 'last_name', 'school', 'year_level', 'email']
+    
+    
 
 class BlogPostForm(forms.ModelForm):
     class Meta:
