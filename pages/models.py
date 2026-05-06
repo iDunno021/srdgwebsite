@@ -10,12 +10,18 @@ class Member(models.Model):
         ('STC', 'St Cuthbert\'s College'),
         ('STK', 'St Kent\'s College'),
         ('BAR', 'Baradene College'),
-        ('EGG', 'Epsom Girl\'s College'),
+        ('EGGS', 'Epsom Girl\'s Grammar School'),
         ('KC', 'King\'s College'),
         ('GDC', 'Glendowie College'),
         ('selwyn', 'Selwyn College'),
         ('DIO', 'Diocesan School For Girls'),
         ('RGT', 'Rangitoto College'),
+        ('DIL', 'Dilworth School'),
+        ('ACGP', 'ACG Parnell College'),
+        ('ACGS', 'ACG Sunderland'),
+        ('WBC', 'Westlake Boys\' College'),
+        ('WGC', 'Westlake Girls\' College'),
+        ('MAC', 'Maclean\'s College'),
         ('other', 'Other')
     ]
 
