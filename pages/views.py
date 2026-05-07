@@ -40,6 +40,9 @@ def about(request):
     roles = sorted(MemberRole.objects.select_related('member').all(), key=lambda r: (r.member.first_name.lower() != 'amber' or r.member.last_name.lower() != 'cai'))
     committees = {
         'Board of Directors': [r for r in roles if r.committee == 'general'],
+        'EduUnlocked Committee': [r for r in roles if r.committee == 'eduunlocked'],
+        'NextGen Change Committee': [r for r in roles if r.committee == 'nextgen'],
+        'Young Artists Committee': [r for r in roles if r.committee == 'young_artists'],
         'Administrative Committee': [r for r in roles if r.committee == 'administrative'],
         'Technical Committee': [r for r in roles if r.committee == 'technical'],
         'Outreach Department': [r for r in roles if r.committee == 'outreach'],
