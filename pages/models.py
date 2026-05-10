@@ -174,14 +174,14 @@ class BlogPost(models.Model):
 
 class EventRSVP(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='rsvps')
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='rsvps')
+    email = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('event', 'member')
+        unique_together = ('event', 'email')
 
     def __str__(self):
-        return f"{self.member} — {self.event.title}"
+        return f"{self.email} — {self.event.title}"
 
 
 class BlogAttachment(models.Model):

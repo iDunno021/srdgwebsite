@@ -12,9 +12,11 @@
         <div class="underline"></div>
     </div>
 
-    {% for message in messages %}
-    <div class="ita-{{ message.tags }}">{{ message }}</div>
-    {% endfor %}
+    {% if success %}
+    <div class="ita-success">You're registered! We'll see you there.</div>
+    {% elif duplicate %}
+    <div class="ita-duplicate">You've already registered for this event with that email.</div>
+    {% endif %}
 
     <div class="event-card {{ event.get_status }}">
         <div class="event-meta">
@@ -36,7 +38,7 @@
         {% endif %}
     </div>
 
-    {% if event.get_status != 'completed' %}
+    {% if not success and event.get_status != 'completed' %}
     <div class="ita-form">
         <p class="ita-instructions">Fill in your email to confirm attendance.</p>
         <form method="post" action="{% url 'event_rsvp' event.id %}">
