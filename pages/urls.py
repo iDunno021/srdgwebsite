@@ -13,6 +13,7 @@ urlpatterns = [
     path('initiatives/', views.InitiativeView.as_view(), name='initiatives'),
     path('initiatives/<slug:slug>/', views.initiative_detail, name='initiative_detail'),
     path('events/', views.events, name='events'),
+    path('events/<int:event_id>/attend/', views.event_attend, name='event_attend'),
     path('events/<int:event_id>/rsvp/', views.event_rsvp, name='event_rsvp'),
     path('blog/', views.BlogView.as_view(), name='blog'),
     path('blog/<int:id>/', views.blog_detail, name='blog_detail'),

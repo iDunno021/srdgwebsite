@@ -56,12 +56,15 @@ def contact(request):
 
 def events(request):
     all_events = Event.objects.select_related('initiative').order_by('start_time')
-    registered_id = request.GET.get('registered')
-    duplicate_id = request.GET.get('duplicate')
-    return render(request, 'pages/events.html', {
-        'events': all_events,
-        'registered_id': int(registered_id) if registered_id and registered_id.isdigit() else None,
-        'duplicate_id': int(duplicate_id) if duplicate_id and duplicate_id.isdigit() else None,
+    return render(request, 'pages/events.html', {'events': all_events})
+
+def event_attend(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    return render(request, 'pages/event_attend.html', {
+        'event': event,
+        'success': request.GET.get('success'),
+        'duplicate': request.GET.get('duplicate'),
+        'form': EventRSVPForm(),
     })
 
 def event_rsvp(request, event_id):
@@ -74,8 +77,8 @@ def event_rsvp(request, event_id):
             try:
                 rsvp.save()
             except IntegrityError:
-                return redirect(f'/events/?duplicate={event_id}#event-{event_id}')
-            return redirect(f'/events/?registered={event_id}#event-{event_id}')
+                return redirect(f'/events/{event_id}/attend/?duplicate=1')
+            return redirect(f'/events/{event_id}/attend/?success=1')
     return redirect('events')
 
 def calendar(request):

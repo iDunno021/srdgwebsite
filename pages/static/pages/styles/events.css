@@ -101,6 +101,15 @@
     color: #888;
 }
 
+.event-time {
+    font-size: 12.5px;
+    color: #888;
+}
+
+.event-time::before {
+    content: '· ';
+}
+
 .event-location {
     font-size: 12.5px;
     color: #888;
