@@ -67,10 +67,11 @@ class Initiative(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    location = models.CharField(max_length=100)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-    initiative = models.ForeignKey(Initiative, on_delete=models.CASCADE, related_name='events')
+    location = models.CharField(max_length=100, blank=True)
+    start_time = models.DateTimeField(null=True, blank=True)
+    end_time = models.DateTimeField(null=True, blank=True)
+    initiative = models.ForeignKey(Initiative, on_delete=models.SET_NULL, related_name='events', null=True, blank=True)
+    tbc = models.BooleanField(default=False, verbose_name='TBC')
 
     def clean(self):
         if self.start_time and self.end_time and self.end_time <= self.start_time:
@@ -78,6 +79,8 @@ class Event(models.Model):
 
     @property
     def get_status(self):
+        if not self.start_time or not self.end_time:
+            return 'upcoming'
         now = timezone.now()
         if self.end_time < now:
             return 'completed'
@@ -167,6 +170,20 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class EventRSVP(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='rsvps')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('event', 'email')
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} — {self.event.title}"
 
 
 class BlogAttachment(models.Model):

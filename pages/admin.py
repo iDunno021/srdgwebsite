@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import admin
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, EventRSVP
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
@@ -19,7 +19,14 @@ class SeminarAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'start_time', 'end_time', 'location', 'initiative']
+    list_display = ['title', 'start_time', 'end_time', 'location', 'tbc', 'initiative']
+    list_filter = ['tbc']
+
+@admin.register(EventRSVP)
+class EventRSVPAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'email', 'event', 'created_at']
+    list_filter = ['event']
+    search_fields = ['first_name', 'last_name', 'email']
 
 @admin.register(MemberRole)
 class MemberRoleAdmin(admin.ModelAdmin):

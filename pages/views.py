@@ -2,8 +2,9 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
-from .forms import MemberForm, BlogPostForm
+from django.db import IntegrityError
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, EventRSVP
+from .forms import MemberForm, BlogPostForm, EventRSVPForm
 from django.views import generic
 
 def home(request):
@@ -53,6 +54,30 @@ def about(request):
 def contact(request):
     return render(request, 'pages/contact.html')
 
+def events(request):
+    all_events = Event.objects.select_related('initiative').order_by('start_time')
+    registered_id = request.GET.get('registered')
+    duplicate_id = request.GET.get('duplicate')
+    return render(request, 'pages/events.html', {
+        'events': all_events,
+        'registered_id': int(registered_id) if registered_id and registered_id.isdigit() else None,
+        'duplicate_id': int(duplicate_id) if duplicate_id and duplicate_id.isdigit() else None,
+    })
+
+def event_rsvp(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if request.method == 'POST':
+        form = EventRSVPForm(request.POST)
+        if form.is_valid():
+            rsvp = form.save(commit=False)
+            rsvp.event = event
+            try:
+                rsvp.save()
+            except IntegrityError:
+                return redirect(f'/events/?duplicate={event_id}#event-{event_id}')
+            return redirect(f'/events/?registered={event_id}#event-{event_id}')
+    return redirect('events')
+
 def calendar(request):
     status_colors = {'upcoming': '#C8391A', 'active': '#2e7d32', 'completed': '#1a4a7a'}
 
@@ -63,7 +88,7 @@ def calendar(request):
             'end': e.end_time.isoformat(),
             'color': status_colors[e.get_status],
         }
-        for e in Event.objects.all()
+        for e in Event.objects.filter(start_time__isnull=False, end_time__isnull=False)
     ]
     seminars = [
         {

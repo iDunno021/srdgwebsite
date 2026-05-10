@@ -1,0 +1,71 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %}Events | SRDG{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/events.css' %}">
+{% endblock %}
+{% block content %}
+<div class="events-page">
+    <div class="events-header">
+        <h1>Events</h1>
+        <div class="underline"></div>
+    </div>
+    <div class="events-list">
+        {% for event in events %}
+        <div class="event-card {{ event.get_status }}" id="event-{{ event.id }}">
+            <div class="event-main">
+                <div class="event-info">
+                    <span class="event-title">{{ event.title }}</span>
+                    <p class="event-description">{{ event.description }}</p>
+                    <div class="event-meta">
+                        <span class="event-date">
+                            {% if event.tbc %}TBC{% elif event.start_time %}{{ event.start_time|date:"j F Y, g:i A" }}{% else %}TBC{% endif %}
+                        </span>
+                        {% if event.location %}
+                        <span class="event-location">{{ event.location }}</span>
+                        {% endif %}
+                        {% if event.initiative %}
+                        <span class="event-initiative">{{ event.initiative.title }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="event-right">
+                    <span class="badge badge-{{ event.get_status }}">{{ event.get_status }}</span>
+                    {% if event.get_status != 'completed' %}
+                    <button class="btn-ita" onclick="toggleForm('ita-{{ event.id }}', this)">I'll Attend</button>
+                    {% endif %}
+                </div>
+            </div>
+            {% if registered_id == event.id %}
+            <div class="ita-success">You're registered for this event!</div>
+            {% elif duplicate_id == event.id %}
+            <div class="ita-duplicate">You've already registered for this event with that email.</div>
+            {% endif %}
+            {% if event.get_status != 'completed' %}
+            <div class="ita-form" id="ita-{{ event.id }}" style="display:none;">
+                <form method="post" action="{% url 'event_rsvp' event.id %}">
+                    {% csrf_token %}
+                    <div class="ita-row">
+                        <input type="text" name="first_name" placeholder="First name" required>
+                        <input type="text" name="last_name" placeholder="Last name" required>
+                    </div>
+                    <input type="email" name="email" placeholder="Email address" required>
+                    <button type="submit" class="btn-submit">Confirm attendance</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p class="events-empty">No events scheduled yet.</p>
+        {% endfor %}
+    </div>
+</div>
+<script>
+function toggleForm(id, btn) {
+    const form = document.getElementById(id);
+    const open = form.style.display !== 'none';
+    form.style.display = open ? 'none' : 'block';
+    btn.textContent = open ? "I'll Attend" : 'Cancel';
+}
+</script>
+{% endblock %}

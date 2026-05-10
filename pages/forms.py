@@ -1,5 +1,5 @@
 from django import forms
-from .models import Member, BlogPost
+from .models import Member, BlogPost, EventRSVP
 
 class MemberForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,9 @@ class BlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
         fields = ['title', 'author', 'cover_image', 'body']
+
+
+class EventRSVPForm(forms.ModelForm):
+    class Meta:
+        model = EventRSVP
+        fields = ['first_name', 'last_name', 'email']
