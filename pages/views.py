@@ -1,6 +1,7 @@
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
+from django.contrib import messages
 from django.db import IntegrityError
 from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, EventRSVP
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
@@ -61,8 +62,6 @@ def event_attend(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     return render(request, 'pages/event_attend.html', {
         'event': event,
-        'success': request.GET.get('success'),
-        'duplicate': request.GET.get('duplicate'),
         'form': EventRSVPForm(),
     })
 
@@ -72,12 +71,21 @@ def event_rsvp(request, event_id):
         form = EventRSVPForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            rsvp = EventRSVP(event=event, email=email)
-            try:
-                rsvp.save()
-            except IntegrityError:
-                return redirect(f'/events/{event_id}/attend/?duplicate=1')
-            return redirect(f'/events/{event_id}/attend/?success=1')
+            member = Member.objects.filter(email=email).first()
+            if member:
+                rsvp = form.save(commit=False)
+                rsvp.event = event
+                rsvp.member = member
+                try:
+                    rsvp.save()
+                except IntegrityError:
+                    messages.error(request, "You've already registered for this event with that email.")
+                    return redirect('event_attend', event_id=event_id)
+                messages.success(request, "You're registered! We'll see you there.")
+                return redirect('event_attend', event_id=event_id)
+            else:
+                messages.error(request, "Please sign up as a member first.")
+                return redirect('event_attend', event_id=event_id)
     return redirect('events')
 
 def calendar(request):
