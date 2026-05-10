@@ -16,7 +16,7 @@
         </div>
         <h1 class="seminar-title">{{ seminar.title }}</h1>
         <div class="seminar-underline"></div>
-        <p class="seminar-description">{{ seminar.description }}</p>
+        <div class="seminar-description">{{ seminar.description|linebreaks }}</div>
     </div>
 
     <a href="{% url 'seminars' %}" class="back-link">&larr; All Seminars</a>
