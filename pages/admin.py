@@ -24,9 +24,9 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(EventRSVP)
 class EventRSVPAdmin(admin.ModelAdmin):
-    list_display = ['email', 'member', 'event', 'created_at']
+    list_display = ['first_name', 'last_name', 'email', 'event', 'created_at']
     list_filter = ['event']
-    search_fields = ['email', 'member__first_name', 'member__last_name']
+    search_fields = ['first_name', 'last_name', 'email']
 
 @admin.register(MemberRole)
 class MemberRoleAdmin(admin.ModelAdmin):

@@ -38,9 +38,13 @@
 
     {% if event.get_status != 'completed' %}
     <div class="ita-form">
-        <p class="ita-instructions">Fill in your email to confirm attendance.</p>
+        <p class="ita-instructions">Fill in your details to confirm attendance.</p>
         <form method="post" action="{% url 'event_rsvp' event.id %}">
             {% csrf_token %}
+            <div class="ita-row">
+                <input type="text" name="first_name" placeholder="First name" required>
+                <input type="text" name="last_name" placeholder="Last name" required>
+            </div>
             <input type="email" name="email" placeholder="Email address" required>
             <button type="submit" class="btn-submit">Confirm attendance</button>
         </form>

@@ -24,11 +24,9 @@ class BlogPostForm(forms.ModelForm):
 
 
 class EventRSVPForm(forms.ModelForm):
-    email = forms.EmailField()
-
     class Meta:
         model = EventRSVP
-        fields = []
+        fields = ['first_name', 'last_name', 'email']
 
     def clean_email(self):
         return self.cleaned_data['email'].lower()

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, EventRSVP
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
 from django.views import generic
 
@@ -70,12 +70,13 @@ def event_rsvp(request, event_id):
     if request.method == 'POST':
         form = EventRSVPForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
-            if EventRSVP.objects.filter(event=event, email=email).exists():
+            rsvp = form.save(commit=False)
+            rsvp.event = event
+            try:
+                rsvp.save()
+            except IntegrityError:
                 messages.error(request, "You've already registered for this event with that email.")
                 return redirect('event_attend', event_id=event_id)
-            member = Member.objects.filter(email=email).first()
-            EventRSVP.objects.create(event=event, email=email, member=member)
             messages.success(request, "You're registered! We'll see you there.")
             return redirect('event_attend', event_id=event_id)
     return redirect('events')
