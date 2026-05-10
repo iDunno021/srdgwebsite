@@ -19,7 +19,7 @@
                     <p class="event-description">{{ event.description }}</p>
                     <div class="event-meta">
                         {% if event.start_time %}
-                        <span class="event-date">{{ event.start_time|date:"j F Y" }}{% if event.tbc %} · TBC{% endif %}</span>
+                        <span class="event-date">{{ event.start_time|date:"j F Y" }}{% if event.start_tbc %} · TBC{% endif %}</span>
                         <span class="event-time">{{ event.start_time|date:"g:i A" }}</span>
                         {% else %}
                         <span class="event-date">TBC</span>
