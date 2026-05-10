@@ -71,8 +71,7 @@ class Event(models.Model):
     start_time = models.DateTimeField(null=True, blank=True)
     end_time = models.DateTimeField(null=True, blank=True)
     initiative = models.ForeignKey(Initiative, on_delete=models.SET_NULL, related_name='events', null=True, blank=True)
-    start_tbc = models.BooleanField(default=False, verbose_name='Start time TBC')
-    end_tbc = models.BooleanField(default=False, verbose_name='End time TBC')
+    tbc = models.BooleanField(default=False, verbose_name='TBC')
 
     def clean(self):
         if self.start_time and self.end_time and self.end_time <= self.start_time:

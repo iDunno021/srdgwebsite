@@ -19,13 +19,8 @@ class SeminarAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'start_time', 'start_tbc', 'end_time', 'end_tbc', 'location', 'initiative']
-    list_filter = ['start_tbc', 'end_tbc']
-    fieldsets = [
-        (None, {'fields': ['title', 'description', 'location', 'initiative']}),
-        ('Start time', {'fields': [('start_time', 'start_tbc')]}),
-        ('End time', {'fields': [('end_time', 'end_tbc')]}),
-    ]
+    list_display = ['title', 'start_time', 'end_time', 'location', 'tbc', 'initiative']
+    list_filter = ['tbc']
 
 @admin.register(EventRSVP)
 class EventRSVPAdmin(admin.ModelAdmin):
