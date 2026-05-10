@@ -69,9 +69,13 @@ def event_rsvp(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     if request.method == 'POST':
         form = EventRSVPForm(request.POST)
+        email = form.cleaned_data['email']
+        member = Member.objects.filter(email=email).first()
         if form.is_valid():
             rsvp = form.save(commit=False)
             rsvp.event = event
+            if member:
+                rsvp.member = member
             try:
                 rsvp.save()
             except IntegrityError:
