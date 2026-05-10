@@ -29,3 +29,6 @@ class EventRSVPForm(forms.ModelForm):
     class Meta:
         model = EventRSVP
         fields = []
+
+    def clean_email(self):
+        return self.cleaned_data['email'].lower()
