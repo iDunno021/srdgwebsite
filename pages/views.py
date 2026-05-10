@@ -71,21 +71,13 @@ def event_rsvp(request, event_id):
         form = EventRSVPForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
+            if EventRSVP.objects.filter(event=event, email=email).exists():
+                messages.error(request, "You've already registered for this event with that email.")
+                return redirect('event_attend', event_id=event_id)
             member = Member.objects.filter(email=email).first()
-            if member:
-                rsvp = form.save(commit=False)
-                rsvp.event = event
-                rsvp.member = member
-                try:
-                    rsvp.save()
-                except IntegrityError:
-                    messages.error(request, "You've already registered for this event with that email.")
-                    return redirect('event_attend', event_id=event_id)
-                messages.success(request, "You're registered! We'll see you there.")
-                return redirect('event_attend', event_id=event_id)
-            else:
-                messages.error(request, "Please sign up as a member first.")
-                return redirect('event_attend', event_id=event_id)
+            EventRSVP.objects.create(event=event, email=email, member=member)
+            messages.success(request, "You're registered! We'll see you there.")
+            return redirect('event_attend', event_id=event_id)
     return redirect('events')
 
 def calendar(request):
