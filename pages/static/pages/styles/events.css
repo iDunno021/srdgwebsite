@@ -230,22 +230,3 @@
 .btn-submit:hover {
     opacity: 0.85;
 }
-
-.ita-success {
-    margin-top: 1rem;
-    padding: 10px 14px;
-    background: #e4f4e6;
-    color: #2d7a3a;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.ita-duplicate {
-    margin-top: 1rem;
-    padding: 10px 14px;
-    background: #fdf0e2;
-    color: #a06010;
-    border-radius: 6px;
-    font-size: 13px;
-}
