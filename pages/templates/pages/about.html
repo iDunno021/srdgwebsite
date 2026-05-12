@@ -23,12 +23,12 @@
             {% for role in members %}
             <div class="member-card">
                 {% if role.member.photo %}
-                    <img class="member-img" src="{{role.member.photo.url}}" alt="{{role.member.first_name}} {{role.member.last_name}}">
+                    <img class="member-img" src="{{role.member.photo.url}}" alt="{{role.member.first_name|capfirst}} {{role.member.last_name|capfirst}}">
                 {% else %}
                     <div class="member-img"></div>
                 {% endif %}
                 <div class="member-info">
-                    <h3 class="member-name">{{ role.member.first_name }} {{ role.member.last_name }}</h3>
+                    <h3 class="member-name">{{ role.member.first_name|capfirst }} {{ role.member.last_name|capfirst }}</h3>
                     {% if role.title %}
                     <p class="member-role">{{ role.title }}</p>
                     {% endif %}
