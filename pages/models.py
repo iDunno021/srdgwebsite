@@ -22,6 +22,7 @@ class Member(models.Model):
         ('WBC', 'Westlake Boys\' College'),
         ('WGC', 'Westlake Girls\' College'),
         ('MAC', 'Maclean\'s College'),
+        ('SDCC', 'St Dominic\'s Catholic College'),
         ('other', 'Other')
     ]
 
