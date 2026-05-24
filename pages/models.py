@@ -59,7 +59,7 @@ class Initiative(models.Model):
     description = models.TextField()
     summary = models.CharField(max_length=150, blank=True)
     hidden = models.BooleanField(default=False)
-    director = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='initiatives', null=True, blank=True, default=None)
+    director = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='initiatives')
     
 
     def __str__(self):
