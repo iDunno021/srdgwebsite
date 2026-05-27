@@ -15,16 +15,15 @@
 
     <nav class="t-nav">
         <div class="t-nav-inner">
-            <a href="/tutoring/" class="t-nav-brand">
-                <span class="t-brand-srdg">SRDG</span>
+            <div class="t-nav-brand">
+                <a href="{% url 'home' %}" class="t-brand-srdg">SRDG</a>
                 <span class="t-brand-sep">/</span>
-                <span class="t-brand-tutoring">Tutoring</span>
-            </a>
+                <a href="/tutoring/" class="t-brand-tutoring">Tutoring</a>
+            </div>
             <div class="t-nav-links" id="tNavLinks">
                 <a href="#how-it-works">How it works</a>
                 <a href="#students">For Students</a>
                 <a href="#tutors">For Tutors</a>
-                <a href="#subjects">Subjects</a>
             </div>
             <div class="t-nav-right">
                 <a href="#students" class="t-nav-cta">Get Started</a>
