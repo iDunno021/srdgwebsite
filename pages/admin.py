@@ -21,23 +21,31 @@ class SeminarAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ['title', 'start_time', 'end_time', 'location', 'tbc', 'initiative']
     list_filter = ['tbc']
+    list_select_related = ['initiative']
+    search_fields = ['title']
+    autocomplete_fields = ['initiative']
 
 @admin.register(EventRSVP)
 class EventRSVPAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'email', 'event', 'created_at']
     list_filter = ['event']
     search_fields = ['first_name', 'last_name', 'email']
+    autocomplete_fields = ['event', 'member']
 
 @admin.register(MemberRole)
 class MemberRoleAdmin(admin.ModelAdmin):
     list_display = ['member', 'committee', 'title']
     list_filter = ['committee']
+    list_select_related = ['member']
+    autocomplete_fields = ['member']
 
 @admin.register(Initiative)
 class InitiativeAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'hidden']
     prepopulated_fields = {'slug': ('title',)}
+    search_fields = ['title']
     inlines = [EventInline]
+    autocomplete_fields = ['director']
 
 class BlogImageInline(admin.TabularInline):
     model = BlogImage
