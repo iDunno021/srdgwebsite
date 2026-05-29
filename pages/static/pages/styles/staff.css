@@ -6,8 +6,7 @@
 }
 
 .about-header {
-    margin-bottom: 4rem;
-    padding-bottom: 2.5rem;
+    margin-bottom: 1rem;
     border-bottom: 0.5px solid var(--color-border);
 }
 
@@ -31,6 +30,36 @@
     color: var(--color-text-muted);
     line-height: 1.8;
     max-width: 640px;
+}
+
+.section-select {
+    display: flex;
+    gap: 0;
+    margin-bottom: 3rem;
+    border: 0.5px solid var(--color-border);
+    border-radius: 6px;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.section-btn {
+    padding: 0.5rem 1.5rem;
+    font-size: 14px;
+    font-family: var(--font-sans, inherit);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: background 0.15s, color 0.15s;
+}
+
+.section-btn.active {
+    background: var(--color-red);
+    color: #fff;
+}
+
+.section-btn:not(.active):hover {
+    background: var(--color-border);
 }
 
 .committee-section {

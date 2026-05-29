@@ -37,7 +37,7 @@ def signup(request):
 def signup_success(request):
     return render(request, 'pages/signup_success.html')
 
-def about(request):
+def staff(request):
     roles = sorted(MemberRole.objects.select_related('member').all(), key=lambda r: (r.member.first_name.lower() != 'amber' or r.member.last_name.lower() != 'cai'))
     committees = {
         'Board of Directors': [r for r in roles if r.committee == 'general'],
@@ -49,7 +49,7 @@ def about(request):
         'Outreach Department': [r for r in roles if r.committee == 'outreach'],
         'Finance Department': [r for r in roles if r.committee == 'finance'],
     }
-    return render(request, 'pages/about.html', {'committees': committees})
+    return render(request, 'pages/staff.html', {'committees': committees})
 
 def contact(request):
     return render(request, 'pages/contact.html')

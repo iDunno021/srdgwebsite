@@ -2,22 +2,28 @@
 {% load static %}
 {% block title %}About | SRDG{% endblock %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'pages/styles/about.css' %}">
+<link rel="stylesheet" href="{% static 'pages/styles/staff.css' %}">
 {% endblock %}
 {% block content %}
 <div class="about-page">
 
     <div class="about-header">
-        <h1>About Us</h1>
+        <h1>Our Team</h1>
         <div class="underline"></div>
-        <p class="about-intro">
-            SRDG is a student group for secondary school students across Auckland united by a shared passion for humanities, policy, and civic discourse. We run seminars, initiatives, and collaborative events that bridge academic thought with tangible action.
-        </p>
+    </div>
+
+    <div class="section-select">
+        <button class="section-btn active" data-target="action">Action</button>
+        <button class="section-btn" data-target="support">Support</button>
     </div>
 
     {% for committee_name, members in committees.items %}
     {% if members %}
-    <div class="committee-section">
+    {% if committee_name == 'EduUnlocked Initiative' or committee_name == 'NextGen Change Initiative' or committee_name == 'Young Artists Initiative' %}
+    <div class="committee-section" data-group="action">
+    {% else %}
+    <div class="committee-section" data-group="support">
+    {% endif %}
         <h2 class="committee-heading">{{ committee_name }}</h2>
         <div class="members-grid">
             {% for role in members %}
@@ -41,4 +47,16 @@
     {% endfor %}
 
 </div>
+<script>
+    const btns = document.querySelectorAll('.section-btn');
+    const sections = document.querySelectorAll('.committee-section');
+
+    function showGroup(group) {
+        sections.forEach(s => s.style.display = s.dataset.group === group ? '' : 'none');
+        btns.forEach(b => b.classList.toggle('active', b.dataset.target === group));
+    }
+
+    btns.forEach(btn => btn.addEventListener('click', () => showGroup(btn.dataset.target)));
+    showGroup('action');
+</script>
 {% endblock %}
