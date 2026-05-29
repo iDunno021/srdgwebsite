@@ -122,9 +122,9 @@ class Seminar(models.Model):
 class MemberRole(models.Model):
     COMMITTEES = [
         ('general', 'Board of Directors'),
-        ('eduunlocked', 'EduUnlocked Initiative'),
-        ('nextgen', 'NextGen Change Initiative'),
-        ('young_artists', 'Young Artists Initiative'),
+        ('ea', 'Eductional Advancement'),
+        ('ype', 'Youth Political Engagement'),
+        ('yac', 'Young Artists Collective'),
         ('administrative', 'Administrative Committee'),
         ('technical', 'Technical Committee'),
         ('outreach', 'Outreach Department'),
