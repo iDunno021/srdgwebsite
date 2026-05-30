@@ -42,7 +42,7 @@ def staff(request):
     committees = {
         'Board of Directors': [r for r in roles if r.committee == 'general'],
         'Education Advancement': [r for r in roles if r.committee == 'ea'],
-        'Youth Political Engagement': [r for r in roles if r.committee == 'ype'],
+        'Politics of Tomorrow': [r for r in roles if r.committee == 'ype'],
         'Young Artists Collective': [r for r in roles if r.committee == 'yac'],
         'Administrative Committee': [r for r in roles if r.committee == 'administrative'],
         'Technical Committee': [r for r in roles if r.committee == 'technical'],
