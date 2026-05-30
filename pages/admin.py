@@ -35,8 +35,10 @@ class EventRSVPAdmin(admin.ModelAdmin):
 @admin.register(MemberRole)
 class MemberRoleAdmin(admin.ModelAdmin):
     list_display = ['member', 'committee', 'title']
+    list_editable = ['committee', 'title']
     list_filter = ['committee']
     list_select_related = ['member']
+    search_fields = ['member__first_name', 'member__last_name']
     autocomplete_fields = ['member']
 
 @admin.register(Initiative)
