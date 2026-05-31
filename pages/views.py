@@ -94,6 +94,7 @@ def calendar(request):
             'start': e.start_time.isoformat(),
             'end': e.end_time.isoformat(),
             'color': status_colors[e.get_status],
+            'url': f'/events/{e.id}/attend/',
         }
         for e in Event.objects.filter(start_time__isnull=False, end_time__isnull=False)
     ]
