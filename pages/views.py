@@ -6,6 +6,8 @@ from django.db import IntegrityError
 from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
 from django.views import generic
+import resend
+from django.conf import settings
 
 def home(request):
     total_members = Member.objects.count()
@@ -167,3 +169,40 @@ def create_blog(request):
     else:
         form = BlogPostForm()
     return render(request, 'pages/create_blog.html', {'form': form})
+
+def event_rsvp(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if request.method == 'POST':
+        form = EventRSVPForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            member = Member.objects.filter(email=email).first()
+            rsvp = form.save(commit=False)
+            rsvp.event = event
+            if member:
+                rsvp.member = member
+            try:
+                rsvp.save()
+            except IntegrityError:
+                messages.error(request, "You've already registered for this event with that email")
+                return redirect('event_attend', event_id=event_id)
+            try:
+                resend.api_key = settings.RESEND_API_KEY
+                resend.Emails.send({
+                    "from": "noreply@srdg.co.nz",
+                    "to": email,
+                    "subject": "You've registered for the Youth Political Debate!",
+                    "html": """
+                        <h2> You're in! </h2>
+                        <p>Thanks for registering for the <strong>Youth Political Debate</strong>.</p>
+                        <p>We'll see you there!</p>
+                    """
+                })
+            except Exception as e:
+                print(f"Email failed: {e}")
+            messages.success(request, "You're registered! We'll see you there.")
+            return redirect('event_attend', event_id=event_id)
+    return redirect('events')
+
+    
+        
