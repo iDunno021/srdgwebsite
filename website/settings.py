@@ -157,3 +157,7 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False
 
 MEDIA_URL = f"{os.getenv('SUPABASE_S3_ENDPOINT')}/{os.getenv('SUPABASE_S3_BUCKET')}/"
+
+
+import os
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY") 
