@@ -336,6 +336,19 @@ footer {
     font-size: 12px;
 }
 
+.footer-privacy {
+    display: inline-block;
+    margin-left: 1rem;
+    color: #666;
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.footer-privacy:hover {
+    color: #222;
+}
+
 /* ── Mobile styles ── */
 
 @media (max-width: 768px) {
