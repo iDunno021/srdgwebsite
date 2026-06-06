@@ -22,7 +22,6 @@ class BlogPostForm(forms.ModelForm):
         model = BlogPost
         fields = ['title', 'author', 'cover_image', 'body']
 
-
 class EventRSVPForm(forms.ModelForm):
     class Meta:
         model = EventRSVP
