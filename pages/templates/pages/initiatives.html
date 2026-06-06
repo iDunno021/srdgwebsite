@@ -2,21 +2,90 @@
 {% load static %}
 {% block title %}Initiatives | SRDG{% endblock %}
 {% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'pages/styles/initiatives.css' %}">
 {% endblock %}
 {% block content %}
 <div class="initiatives-page">
-    <div class="initiatives-header">
-        <h1>Initiatives</h1>
-        <div class="underline"></div>
-    </div>
-    <div class="initiatives-list">
-        {% for initiative in initiatives %}
-        <div class="initiative-card">
-            <a class="title" href="{% url 'initiative_detail' initiative.slug %}">{{ initiative.title }}</a>
-            <p class="description">{% if initiative.summary %}{{ initiative.summary }}{% else %}{{ initiative.description|truncatechars:150 }}{% endif %}</p>
+
+  <section class="init-page-head">
+    <div class="container">
+      <div class="init-eyebrow">Our Work</div>
+      <h1 class="init-reveal">Initiatives</h1>
+      <p class="init-lead init-reveal">Long-running, student-led projects that carry an idea from a seminar room all the way to community impact. Each one is open to members from any of our schools.</p>
+      <div class="init-meta init-reveal">
+        <div class="init-meta-item">
+          <b>{{ initiatives|length }}</b>
+          <span>active initiative{{ initiatives|length|pluralize }}</span>
         </div>
-        {% endfor %}
+        <div class="init-meta-item">
+          <b>17</b>
+          <span>schools involved</span>
+        </div>
+        <div class="init-meta-item">
+          <b>100%</b>
+          <span>student-led</span>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <section class="inits">
+    <div class="container">
+      {% for initiative in initiatives %}
+      <article class="init-row init-row--{{ forloop.counter }} init-reveal">
+        <div class="init-copy">
+          <span class="init-index">{{ forloop.counter|stringformat:"02d" }}</span>
+          <div class="init-head-row">
+            <span class="init-cat">
+              {% if forloop.counter == 1 %}Arts &amp; Culture
+              {% elif forloop.counter == 2 %}Civic &amp; Political
+              {% elif forloop.counter == 3 %}Education &amp; Equity
+              {% else %}Initiative{% endif %}
+            </span>
+            <span class="init-status"><span class="init-status-dot"></span>Active</span>
+          </div>
+          <h2>{{ initiative.title }}</h2>
+          {% if initiative.summary %}
+          <p class="init-mission">{{ initiative.summary }}</p>
+          {% endif %}
+          <p class="init-body">{{ initiative.description|truncatewords:40 }}</p>
+          <a href="{% url 'initiative_detail' initiative.slug %}" class="init-cta">
+            Explore initiative
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="init-visual">
+          <div class="init-visual-placeholder">
+            <span class="init-visual-num">{{ forloop.counter|stringformat:"02d" }}</span>
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <p style="padding: 60px 0; color: var(--color-text-muted);">No initiatives yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="init-join">
+    <div class="container">
+      <div class="init-join-card init-reveal">
+        <div class="init-eyebrow">Get involved</div>
+        <h2>Have an idea for an initiative?</h2>
+        <p>Our initiatives are started and run by students. If you see a gap, we'll help you build it.</p>
+        <a href="{% url 'signup' %}" class="init-join-btn">Become a member</a>
+      </div>
+    </div>
+  </section>
+
 </div>
+<script>
+  const io = new IntersectionObserver(
+    es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }),
+    { threshold: .12, rootMargin: '0px 0px -6% 0px' }
+  );
+  document.querySelectorAll('.init-reveal').forEach(el => io.observe(el));
+</script>
 {% endblock %}
