@@ -1,0 +1,101 @@
+.home-page{
+    width: 100%;
+    background-color: #f5f0eb ;
+}
+
+.hero {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 50px;
+}
+
+.hero-content {
+    padding: 0px 40px 0px 40px;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hero-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hero-intro .description {
+    width: 60%
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.hero-buttons .join {
+    background-color: #8b1a1a;
+    color: #ffffff;
+    border: none;
+}
+
+.hero-buttons .work {
+    background-color: transparent;
+    color: #1a1a2e;
+}
+
+.hero-buttons button{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.hero-tagline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4caf50;
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+    flex-shrink: 0;
+}
+
+.hero-media {
+    flex: 1;
+}
+.stats-bar {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    background-color: #ffff;
+}
+
+.stat:not(:last-child) {
+  border-right: 1px solid #ccc;
+}
+
+.stat {
+    flex: 1;
+    padding: 20px 0px;
+}
+
+.stat-text {
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    padding-bottom: 15px;
+}
+
+.stat-label {
+    font-size: 15px;
+}
