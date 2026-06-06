@@ -58,6 +58,7 @@ class Initiative(models.Model):
     description = models.TextField()
     summary = models.CharField(max_length=150, blank=True)
     hidden = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0)
     
 
     def __str__(self):

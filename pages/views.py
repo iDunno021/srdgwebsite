@@ -126,7 +126,7 @@ class InitiativeView(generic.ListView):
     model = Initiative
     template_name = 'pages/initiatives.html'
     context_object_name = 'initiatives'
-    queryset = Initiative.objects.filter(hidden=False)
+    queryset = Initiative.objects.filter(hidden=False).order_by('order', 'pk')
 
 def initiative_detail(request, slug):
     initiative = get_object_or_404(Initiative, slug=slug, hidden=False)
