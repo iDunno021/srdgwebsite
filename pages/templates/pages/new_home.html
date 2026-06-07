@@ -18,15 +18,19 @@
             </div>
             <div class="hero-buttons">
                 <button class="join">Join the Group</button>
-                <button class="work">See our work &rarr;</button>
+                <button class="work-btn">See our work &rarr;</button>
             </div>
             <div class="hero-tagline">
-                <span class="dot"></span>
+                <span class="green-dot"></span>
                 <p>Student-run across {{ schools_count }} Auckland schools — applications open now.</p>
             </div>
         </div>
         <div class="hero-media">
-
+            <img src="{% static "pages/images/holidays-28.jpg" %}" alt="" class="hero-image">
+            <div class="hero-stat-card">
+                <p class="stat-card-number">{{ total_members }}</p>
+                <p class="stat-card-label">members and <br>counting</p>
+            </div>
         </div>
     </div>
     <div class="stats-bar">
@@ -54,6 +58,21 @@
                 <span class="stat-label">Seminars and events held</span>
             </div>
         </div>
-    <div class="work"></div>
+    </div>
+    <div class="work">
+        <div class="work-content">
+            <p class="work-label">OUR WORK</p>
+            <h2 class="work-heading">SOMETHING ABOUT WORK</h2>
+            <p class="work-description">PLACEHOLDER</p>
+            <div class="work-items">
+                {% for initiative in initiatives %}
+                    <div class="work-card">
+                        <img src="" alt="">
+                        <p class="work-label">{{ initiative.title }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

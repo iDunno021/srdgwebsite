@@ -14,11 +14,13 @@ def home(request):
     total_initiatives = Initiative.objects.filter(hidden=False).count()
     schools_count = len([s for s in Member.SCHOOLS if s[0] != 'other'])
     total_activites = Seminar.objects.filter(hidden=False).count() + Event.objects.count()
+    initiatives = Initiative.objects.filter(hidden=False)
     return render(request, 'pages/new_home.html', {
         'total_members': total_members,
         'total_initiatives': total_initiatives,
         'schools_count': schools_count,
         'total_activities': total_activites,
+        'initiatives': initiatives,
     })
 
 def signup(request):
