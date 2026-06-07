@@ -16,7 +16,7 @@
             <div class="event-main">
                 <div class="event-info">
                     <span class="event-title">{{ event.title }}</span>
-                    <p class="event-description">{{ event.description }}</p>
+                    <p class="event-description" style="white-space: pre-line;">{{ event.description }}</p>
                     <div class="event-meta">
                         {% if event.start_time %}
                         <span class="event-date">{{ event.start_time|date:"j F Y" }}{% if event.tbc %} · TBC{% endif %}</span>

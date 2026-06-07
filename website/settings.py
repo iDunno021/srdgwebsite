@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'pages',
+    'tutoring',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', '5432'),
+        'CONN_MAX_AGE': 600,
     }
 }
 
@@ -117,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Pacific/Auckland'
 
 USE_I18N = True
 
@@ -155,3 +157,7 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False
 
 MEDIA_URL = f"{os.getenv('SUPABASE_S3_ENDPOINT')}/{os.getenv('SUPABASE_S3_BUCKET')}/"
+
+
+import os
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY") 

@@ -1,0 +1,149 @@
+{% extends 'tutoring/base.html' %}
+{% load static %}
+
+{% block title %}SRDG Tutoring — Peer tutoring for Auckland students{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'tutoring/styles/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="th-page">
+
+    <!-- Hero -->
+    <section class="th-hero">
+        <div class="th-hero-inner">
+            <span class="th-eyebrow">Auckland's student tutoring network</span>
+            <h1 class="th-hero-title">Learn from students<br>who've been there.</h1>
+            <p class="th-hero-subtitle">Get matched with a high-achieving peer tutor from your city, or share your expertise and earn — all organised by SRDG.</p>
+            <div class="th-hero-actions">
+                <a href="#students" class="th-btn-primary">I need a tutor</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmHCNYbNN4L3tFEYUXd8wQX2NIwQrN8q2ptHnao2YPtSt7FQ/viewform" class="th-btn-secondary" target="_blank">I want to tutor</a>
+            </div>
+        </div>
+        <div class="th-hero-aside">
+            <div class="th-aside-card">
+                <div class="th-aside-card-row">
+                    <span class="th-aside-dot th-aside-dot--orange"></span>
+                    <span>Student matched with tutor</span>
+                </div>
+                <div class="th-aside-card-row">
+                    <span class="th-aside-dot th-aside-dot--navy"></span>
+                    <span>Session scheduled</span>
+                </div>
+                <div class="th-aside-card-row">
+                    <span class="th-aside-dot th-aside-dot--green"></span>
+                    <span>Progress tracked</span>
+                </div>
+            </div>
+            <div class="th-aside-stats">
+                <div class="th-aside-stat">
+                    <span class="th-aside-stat-num">50+</span>
+                    <span class="th-aside-stat-label">Active tutors</span>
+                </div>
+                <div class="th-aside-stat">
+                    <span class="th-aside-stat-num">12</span>
+                    <span class="th-aside-stat-label">Subjects</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust bar -->
+    <div class="th-trust-bar">
+        <div class="th-trust-inner">
+            <div class="th-trust-item">
+                <strong>50+</strong>
+                <span>Tutors across Auckland</span>
+            </div>
+            <div class="th-trust-divider"></div>
+            <div class="th-trust-item">
+                <strong>12</strong>
+                <span>NCEA subjects</span>
+            </div>
+            <div class="th-trust-divider"></div>
+            <div class="th-trust-item">
+                <strong>15+</strong>
+                <span>Schools represented</span>
+            </div>
+            <div class="th-trust-divider"></div>
+            <div class="th-trust-item">
+                <strong>100%</strong>
+                <span>Student-led</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="th-how">
+        <div class="th-section-wrap">
+            <div class="th-section-header">
+                <h2 class="th-section-title">How it works</h2>
+                <p class="th-section-sub">Up and running in three simple steps.</p>
+            </div>
+            <div class="th-steps">
+                <div class="th-step">
+                    <div class="th-step-num">01</div>
+                    <h3>Sign up</h3>
+                    <p>Fill in a short form with your subject, year level, and availability. Takes under two minutes.</p>
+                </div>
+                <div class="th-step-arrow">→</div>
+                <div class="th-step">
+                    <div class="th-step-num">02</div>
+                    <h3>Get matched</h3>
+                    <p>We personally pair you with a tutor who fits your subject, schedule, and learning style.</p>
+                </div>
+                <div class="th-step-arrow">→</div>
+                <div class="th-step">
+                    <div class="th-step-num">03</div>
+                    <h3>Start learning</h3>
+                    <p>Meet in person or online and start making genuine progress toward your goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup cards -->
+    <section class="th-signup">
+        <div class="th-signup-wrap">
+            <div id="students" class="th-signup-card th-signup-card--light">
+                <div class="th-card-stripe"></div>
+                <span class="th-card-label">For Students</span>
+                <h2 class="th-card-title">Find the right tutor for you</h2>
+                <p class="th-card-text">Get paired with a peer tutor who knows your syllabus inside out. From NCEA Level 1 through to Scholarship — we cover the subjects that matter.</p>
+                <ul class="th-card-features">
+                    <li>Vetted, high-achieving tutors</li>
+                    <li>In-person or online sessions</li>
+                    <li>Flexible scheduling around school</li>
+                    <li>All NCEA levels covered</li>
+                </ul>
+                <a href="https://forms.gle/h8ZKfMofhrJq5p5y6" class="th-card-btn">Sign up as a Student &rarr;</a>
+            </div>
+            <div id="tutors" class="th-signup-card th-signup-card--dark">
+                <div class="th-card-stripe"></div>
+                <span class="th-card-label">For Tutors</span>
+                <h2 class="th-card-title">Share your knowledge, earn while you learn</h2>
+                <p class="th-card-text">Open to high-achieving secondary school students. Build real teaching experience, strengthen your CV, and help your peers succeed — all on your schedule.</p>
+                <ul class="th-card-features">
+                    <li>Flexible hours that fit your timetable</li>
+                    <li>Competitive hourly pay</li>
+                    <li>Meaningful experience for applications</li>
+                    <li>Full training and support provided</li>
+                </ul>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmHCNYbNN4L3tFEYUXd8wQX2NIwQrN8q2ptHnao2YPtSt7FQ/viewform" class="th-card-btn th-card-btn--ghost" target="_blank">Sign up as a Tutor &rarr;</a>
+            </div>
+        </div>
+    </section>
+    <!-- Bottom CTA -->
+    <section class="th-cta">
+        <div class="th-cta-inner">
+            <h2 class="th-cta-title">Ready to get started?</h2>
+            <p class="th-cta-text">Join hundreds of Auckland students already improving their grades through peer tutoring.</p>
+            <div class="th-cta-actions">
+                <a href="#students" class="th-btn-primary">Find a Tutor</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmHCNYbNN4L3tFEYUXd8wQX2NIwQrN8q2ptHnao2YPtSt7FQ/viewform" class="th-btn-outline" target="_blank">Become a Tutor</a>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

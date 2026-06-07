@@ -14,7 +14,7 @@
         <p class="hero-subtitle">Bridging academic thought with tangible action.</p>
         <div class="hero-actions">
             <a href="{% url 'signup' %}" class="btn-primary">Join Us</a>
-            <a href="{% url 'about' %}" class="btn-secondary">Learn More</a>
+            <a href="{% url 'staff' %}" class="btn-secondary">Learn More</a>
         </div>
     </div>
 
@@ -39,7 +39,14 @@
         <div class="promo-inner">
             <span class="promo-tag">Upcoming Event</span>
             <p class="promo-text">Register your intent to attend the Youth Electoral Debate</p>
-            <a href="{% url 'events' %}" class="btn-promo">I'll Attend &rarr;</a>
+            <a href="{% url 'events' %}" class="btn-promo">Learn More &rarr;</a>
+        </div>
+    </div>
+    <div class="promo-banner">
+        <div class="promo-inner">
+            <p class="promo-text">
+Staff applications open: Join us now!!</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7RDudLizrAd5tt-3ovwGGgrLOd0uYig8-tTcnWfuRlJLmwg/viewform?usp=dialog" class="btn-promo">Join us now &rarr;</a>
         </div>
     </div>
 
@@ -71,7 +78,10 @@
     <div class="cta-section">
         <h2 class="cta-title">Ready to get involved?</h2>
         <p class="cta-text">Join a community of students committed to discourse, action, and impact.</p>
-        <a href="{% url 'signup' %}" class="btn-primary">Become a Member</a>
+        <div class="cta-actions">
+            <a href="{% url 'signup' %}" class="btn-primary">Become a Member</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7RDudLizrAd5tt-3ovwGGgrLOd0uYig8-tTcnWfuRlJLmwg/viewform?usp=dialog" class="btn-primary">Join as Staff</a>
+        </div>
     </div>
 
 </div>

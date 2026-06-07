@@ -251,6 +251,13 @@
     line-height: 1.6;
 }
 
+.cta-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 /* ── Mobile ── */
 
 @media (max-width: 768px) {

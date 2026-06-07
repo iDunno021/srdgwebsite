@@ -22,6 +22,7 @@ class Member(models.Model):
         ('WBC', 'Westlake Boys\' College'),
         ('WGC', 'Westlake Girls\' College'),
         ('MAC', 'Maclean\'s College'),
+        ('SDCC', 'St Dominic\'s Catholic College'),
         ('other', 'Other')
     ]
 
@@ -59,6 +60,7 @@ class Initiative(models.Model):
     summary = models.CharField(max_length=150, blank=True)
     hidden = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
+    director = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='initiatives')
     
 
     def __str__(self):
@@ -121,9 +123,9 @@ class Seminar(models.Model):
 class MemberRole(models.Model):
     COMMITTEES = [
         ('general', 'Board of Directors'),
-        ('eduunlocked', 'EduUnlocked Initiative'),
-        ('nextgen', 'NextGen Change Initiative'),
-        ('young_artists', 'Young Artists Initiative'),
+        ('ea', 'Eductional Advancement'),
+        ('ype', 'Youth Political Engagement'),
+        ('yac', 'Young Artists Collective'),
         ('administrative', 'Administrative Committee'),
         ('technical', 'Technical Committee'),
         ('outreach', 'Outreach Department'),
@@ -178,10 +180,11 @@ class EventRSVP(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='rsvps', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('event', 'email')
+        unique_together = [('event', 'email'), ('event', 'member')]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} — {self.event.title}"

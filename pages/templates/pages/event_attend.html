@@ -3,6 +3,7 @@
 {% block title %}{{ event.title }} — Attend | SRDG{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'pages/styles/events.css' %}">
+<link rel="stylesheet" href="{% static 'pages/styles/event_attend.css' %}">
 {% endblock %}
 {% block content %}
 <div class="events-page">
@@ -11,14 +12,12 @@
         <div class="underline"></div>
     </div>
 
-    {% if success %}
-    <div class="ita-success" style="margin-bottom: 1.5rem;">You're registered! We'll see you there.</div>
-    {% elif duplicate %}
-    <div class="ita-duplicate" style="margin-bottom: 1.5rem;">You've already registered for this event with that email.</div>
-    {% endif %}
+    {% for message in messages %}
+    <div class="ita-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
 
-    <div class="event-card {{ event.get_status }}" style="margin-bottom: 2rem;">
-        <div class="event-meta" style="margin-bottom: 0;">
+    <div class="event-card {{ event.get_status }}">
+        <div class="event-meta">
             {% if event.start_time %}
             <span class="event-date">{{ event.start_time|date:"j F Y" }}{% if event.tbc %} · TBC{% endif %}</span>
             <span class="event-time">{{ event.start_time|date:"g:i A" }}</span>
@@ -33,13 +32,13 @@
             {% endif %}
         </div>
         {% if event.description %}
-        <p class="event-description" style="margin-top: 10px; margin-bottom: 0;">{{ event.description }}</p>
+        <p class="event-description" style="white-space: pre-line;">{{ event.description }}</p>
         {% endif %}
     </div>
 
-    {% if not success and event.get_status != 'completed' %}
-    <div class="ita-form" style="display: block; margin-top: 0; padding-top: 0; border-top: none;">
-        <p style="font-size: 13.5px; color: var(--color-text-muted); margin: 0 0 1rem;">Fill in your details to confirm attendance.</p>
+    {% if event.get_status != 'completed' %}
+    <div class="ita-form">
+        <p class="ita-instructions">Fill in your details to confirm attendance.</p>
         <form method="post" action="{% url 'event_rsvp' event.id %}">
             {% csrf_token %}
             <div class="ita-row">
@@ -51,9 +50,9 @@
         </form>
     </div>
     {% elif event.get_status == 'completed' %}
-    <p style="font-size: 13.5px; color: #888;">This event has already taken place.</p>
+    <p class="ita-closed">This event has already taken place.</p>
     {% endif %}
 
-    <a href="{% url 'events' %}" style="display: inline-block; margin-top: 2rem; font-size: 13px; color: var(--color-text-muted); text-decoration: none;">← Back to Events</a>
+    <a href="{% url 'events' %}" class="ita-back">← Back to Events</a>
 </div>
 {% endblock %}

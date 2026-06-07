@@ -32,6 +32,7 @@
     line-height: 1.75;
     margin: 0;
     max-width: 660px;
+    white-space: pre-line;
 }
 
 .initiative-events {
@@ -100,6 +101,7 @@
     color: var(--color-text-muted);
     line-height: 1.65;
     margin: 0 0 12px;
+    white-space: pre-line;
 }
 
 .event-meta {

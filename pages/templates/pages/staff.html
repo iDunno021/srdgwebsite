@@ -1,0 +1,62 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %}Staff | SRDG{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/staff.css' %}">
+{% endblock %}
+{% block content %}
+<div class="about-page">
+
+    <div class="about-header">
+        <h1>Our Team</h1>
+        <div class="underline"></div>
+    </div>
+
+    <div class="section-select">
+        <button class="section-btn active" data-target="action">Action</button>
+        <button class="section-btn" data-target="support">Support</button>
+    </div>
+
+    {% for committee_name, members in committees.items %}
+    {% if members %}
+    {% if committee_name == 'Education Advancement' or committee_name == 'Politics of Tomorrow' or committee_name == 'Young Artists Collective' %}
+    <div class="committee-section" data-group="action">
+    {% else %}
+    <div class="committee-section" data-group="support">
+    {% endif %}
+        <h2 class="committee-heading">{{ committee_name }}</h2>
+        <div class="members-grid">
+            {% for role in members %}
+            <div class="member-card">
+                {% if role.member.photo %}
+                    <img class="member-img" src="{{role.member.photo.url}}" alt="{{role.member.first_name|capfirst}} {{role.member.last_name|capfirst}}">
+                {% else %}
+                    <div class="member-img"></div>
+                {% endif %}
+                <div class="member-info">
+                    <h3 class="member-name">{{ role.member.first_name|capfirst }} {{ role.member.last_name|capfirst }}</h3>
+                    {% if role.title %}
+                    <p class="member-role">{{ role.title }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+<script>
+    const btns = document.querySelectorAll('.section-btn');
+    const sections = document.querySelectorAll('.committee-section');
+
+    function showGroup(group) {
+        sections.forEach(s => s.style.display = s.dataset.group === group ? '' : 'none');
+        btns.forEach(b => b.classList.toggle('active', b.dataset.target === group));
+    }
+
+    btns.forEach(btn => btn.addEventListener('click', () => showGroup(btn.dataset.target)));
+    showGroup('action');
+</script>
+{% endblock %}

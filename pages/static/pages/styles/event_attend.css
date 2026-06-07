@@ -1,0 +1,59 @@
+.ita-success {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 10px 14px;
+    background: #e4f4e6;
+    color: #2d7a3a;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.ita-error {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 10px 14px;
+    background: #fdf0e2;
+    color: #a06010;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.event-card {
+    margin-bottom: 2rem;
+}
+
+.event-card .event-meta {
+    margin-bottom: 0;
+}
+
+.event-description {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.ita-form {
+    display: block;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.ita-instructions {
+    font-size: 13.5px;
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
+}
+
+.ita-closed {
+    font-size: 13.5px;
+    color: #888;
+}
+
+.ita-back {
+    display: inline-block;
+    margin-top: 2rem;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+}

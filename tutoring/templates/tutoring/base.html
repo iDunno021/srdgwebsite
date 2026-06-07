@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SRDG Tutoring{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'tutoring/styles/base.css' %}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <nav class="t-nav">
+        <div class="t-nav-inner">
+            <div class="t-nav-brand">
+                <a href="{% url 'home' %}" class="t-brand-srdg">SRDG</a>
+                <span class="t-brand-sep">/</span>
+                <a href="/tutoring/" class="t-brand-tutoring">Tutoring</a>
+            </div>
+            <div class="t-nav-links" id="tNavLinks">
+                <a href="#how-it-works">How it works</a>
+                <a href="#students">For Students</a>
+                <a href="#tutors">For Tutors</a>
+            </div>
+            <div class="t-nav-right">
+                <a href="#students" class="t-nav-cta">Get Started</a>
+                <button class="t-nav-hamburger" id="tNavHamburger" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="t-nav-overlay" id="tNavOverlay"></div>
+
+    <main class="t-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="t-footer">
+        <div class="t-footer-inner">
+            <div class="t-footer-brand">
+                <div class="t-footer-logo">SRDG <span>Tutoring</span></div>
+                <p>Peer tutoring by students, for students.</p>
+                <a href="{% url 'home' %}" class="t-footer-back">← Back to SRDG</a>
+            </div>
+            <div class="t-footer-col">
+                <h4>Get involved</h4>
+                <a href="#students">Find a tutor</a>
+                <a href="#tutors">Become a tutor</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#subjects">Subjects</a>
+            </div>
+            <div class="t-footer-col">
+                <h4>SRDG</h4>
+                <a href="{% url 'home' %}">Main website</a>
+                <a href="{% url 'staff' %}">About us</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+        </div>
+        <div class="t-footer-bottom">
+            <span>&copy; 2025 SRDG. All rights reserved.</span>
+            <a href="https://docs.google.com/document/d/1og8Zlt8cj9SycZ9ToMgIoXq8X2OPF14Z_0KPdqMrco0/edit?tab=t.0" target="_blank" rel="noopener noreferrer" class="t-footer-privacy">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('tNavHamburger');
+        const navLinks  = document.getElementById('tNavLinks');
+        const overlay   = document.getElementById('tNavOverlay');
+
+        function openMenu() {
+            navLinks.classList.add('open');
+            overlay.classList.add('visible');
+            hamburger.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            overlay.classList.remove('visible');
+            hamburger.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', () =>
+            navLinks.classList.contains('open') ? closeMenu() : openMenu()
+        );
+        overlay.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    </script>
+
+</body>
+</html>
