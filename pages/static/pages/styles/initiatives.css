@@ -1,5 +1,3 @@
-/* ── Initiatives page – Editorial design ─────────────────────────────────── */
-
 .initiatives-page {
   --font-display: 'Newsreader', 'Playfair Display', Georgia, serif;
 }
@@ -10,7 +8,7 @@
   padding: 0 clamp(20px, 5vw, 56px);
 }
 
-/* ── Page header ── */
+
 .init-page-head {
   padding: clamp(48px, 7vw, 92px) 0 clamp(28px, 3vw, 44px);
 }
@@ -69,7 +67,7 @@
   color: var(--color-text-muted);
 }
 
-/* ── Initiative rows ── */
+
 .inits {
   padding-bottom: clamp(40px, 5vw, 70px);
 }
@@ -88,16 +86,16 @@
   border-top: none;
 }
 
-/* Alternating layout: even rows swap copy/visual */
+
 .init-row:nth-child(even) .init-copy { order: 2; }
 .init-row:nth-child(even) .init-visual { order: 1; }
 
-/* Per-row accent colours */
+
 .init-row--1 { --ac: var(--color-red); }
 .init-row--2 { --ac: #c8870f; }
 .init-row--3 { --ac: var(--color-blue); }
 
-/* ── Copy block ── */
+
 .init-index {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 4vw, 3.4rem);
@@ -199,7 +197,7 @@
   transform: translateX(4px);
 }
 
-/* ── Visual placeholder ── */
+
 .init-visual {
   position: relative;
 }
@@ -228,7 +226,7 @@
   user-select: none;
 }
 
-/* ── CTA / Join section ── */
+
 .init-join {
   padding: clamp(48px, 6vw, 88px) 0;
   border-top: 1px solid var(--color-border);
@@ -282,7 +280,7 @@
   color: #1a1a1a;
 }
 
-/* ── Scroll reveal ── */
+
 @media (prefers-reduced-motion: no-preference) {
   .init-reveal {
     opacity: 0;
