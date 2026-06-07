@@ -155,7 +155,7 @@ def blog_attachment_path(instance, filename):
 
 
 class ArtPiece(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=True)
     artist = models.CharField(max_length=100, blank=True)
     image = models.ImageField(upload_to=art_piece_path)
     order = models.PositiveIntegerField(default=0)
