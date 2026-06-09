@@ -142,6 +142,7 @@
 
 .work {
     margin-top: 100px;
+    margin-bottom: 40px;
 }
 
 .work-content {
@@ -170,5 +171,29 @@
 .work-items{
     display: flex;
     flex-direction: row;
-    
+    align-items: center;
+    gap: 40px;
+}
+
+.work-card {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+.work-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #f0f0f0;
+    display: block;
+}
+
+.work-card .work-label {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    padding: 20px 0px 40px 0px;
 }
