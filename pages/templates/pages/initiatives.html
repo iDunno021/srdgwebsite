@@ -43,7 +43,7 @@
               {% elif forloop.counter == 3 %}Education &amp; Equity
               {% else %}Initiative{% endif %}
             </span>
-            <span class="init-status"><span class="init-status-dot"></span>Active</span>
+            {% include 'pages/includes/status_dot.html' %}
           </div>
           <h2>{{ initiative.title }}</h2>
           {% if initiative.summary %}
@@ -56,9 +56,36 @@
           </a>
         </div>
         <div class="init-visual">
+          {% if forloop.counter == 1 and art_pieces %}
+          <div class="init-slideshow">
+            {% for piece in art_pieces %}
+            <div class="init-slide{% if forloop.first %} active{% endif %}">
+              <img src="{{ piece.image.url }}" alt="{{ piece.title }}" class="init-visual-img">
+              {% if piece.title or piece.artist %}
+              <div class="init-slide-caption">
+                {% if piece.title %}<span class="init-slide-title">{{ piece.title }}</span>{% endif %}
+                {% if piece.artist %}<span class="init-slide-artist">{{ piece.artist }}</span>{% endif %}
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+            {% if art_pieces|length > 1 %}
+            <div class="init-slide-dots">
+              {% for piece in art_pieces %}
+              <button class="init-slide-dot{% if forloop.first %} active{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          {% elif forloop.counter == 2 %}
+          <img src="{% static 'pages/images/politics-of-tomorrow.png' %}" alt="Politics of Tomorrow" class="init-visual-img">
+          {% elif forloop.counter == 3 %}
+          <img src="{% static 'pages/images/edu-unlocked.png' %}" alt="Education Unlocked" class="init-visual-img">
+          {% else %}
           <div class="init-visual-placeholder">
             <span class="init-visual-num">{{ forloop.counter|stringformat:"02d" }}</span>
           </div>
+          {% endif %}
         </div>
       </article>
       {% empty %}
@@ -80,6 +107,22 @@
 
 </div>
 <script>
+  // Slideshow
+  const slides = document.querySelectorAll('.init-slide');
+  const dots = document.querySelectorAll('.init-slide-dot');
+  if (slides.length > 1) {
+    let current = 0;
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    setInterval(() => goTo(current + 1), 4000);
+  }
+
   const io = new IntersectionObserver(
     es => es.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
