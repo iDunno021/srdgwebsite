@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.urls import path, reverse
 from django.template.response import TemplateResponse
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, EventRSVP
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, EventRSVP, ArtPiece
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
@@ -96,6 +96,13 @@ class InitiativeAdmin(admin.ModelAdmin):
     search_fields = ['title']
     inlines = [EventInline]
     autocomplete_fields = ['director']
+
+@admin.register(ArtPiece)
+class ArtPieceAdmin(admin.ModelAdmin):
+    list_display = ['title', 'artist', 'order', 'hidden']
+    list_editable = ['order', 'hidden']
+    search_fields = ['title', 'artist']
+
 
 class BlogImageInline(admin.TabularInline):
     model = BlogImage
