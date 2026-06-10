@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, ArtPiece
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
 from django.views import generic
 import resend
@@ -138,6 +138,11 @@ class InitiativeView(generic.ListView):
     template_name = 'pages/initiatives.html'
     context_object_name = 'initiatives'
     queryset = Initiative.objects.filter(hidden=False).order_by('order', 'pk')
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['art_pieces'] = ArtPiece.objects.filter(hidden=False)
+        return ctx
 
 def initiative_detail(request, slug):
     initiative = get_object_or_404(Initiative, slug=slug, hidden=False)

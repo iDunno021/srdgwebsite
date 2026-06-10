@@ -138,6 +138,11 @@ class MemberRole(models.Model):
     def __str__(self):
         return f"{self.member} — {self.get_committee_display()}"
     
+def art_piece_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f'yac/art/{uuid.uuid4().hex}.{ext}'
+
+
 def blog_cover_path(instance, filename):
     ext = filename.split('.')[-1]
     return f'blog/covers/{uuid.uuid4().hex}.{ext}'
@@ -147,6 +152,20 @@ def blog_image_path(instance, filename):
 
 def blog_attachment_path(instance, filename):
     return f'blog/attachments/{instance.post.slug}/{filename}'
+
+
+class ArtPiece(models.Model):
+    title = models.CharField(max_length=200, blank=True)
+    artist = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(upload_to=art_piece_path)
+    order = models.PositiveIntegerField(default=0)
+    hidden = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['order', 'pk']
+
+    def __str__(self):
+        return self.title
 
 
 class BlogPost(models.Model):
