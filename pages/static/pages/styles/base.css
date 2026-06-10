@@ -358,6 +358,15 @@ footer {
     color: #222;
 }
 
+.green-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #36b37e;
+    box-shadow: 0 0 0 3px rgba(54,179,126,.18);
+}
+
 /* ── Mobile styles ── */
 
 @media (max-width: 768px) {
