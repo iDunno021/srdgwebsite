@@ -1,0 +1,59 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}SRDG — Social Research &amp; Discourse Group{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "pages/styles/new_home.css" %}">
+{% endblock head %}
+
+{% block content %}
+<div class="home-page">
+    <div class="hero">
+        <div class="hero-content">
+            <div class='hero-intro'>
+                <p class="label">— WHAT WE DO</p>
+                <h1 class="motto">MOTTO: SOME RANDOM TEXT WHICH IS PLACEHOLDER</h1>
+                <p class="description">SRDG runs initiatives, seminars, and events that bring students together around humanities, policy and civic discourse — turning dicussion into action.</p>
+            </div>
+            <div class="hero-buttons">
+                <button class="join">Join the Group</button>
+                <button class="work">See our work &rarr;</button>
+            </div>
+            <div class="hero-tagline">
+                <span class="dot"></span>
+                <p>Student-run across {{ schools_count }} Auckland schools — applications open now.</p>
+            </div>
+        </div>
+        <div class="hero-media">
+
+        </div>
+    </div>
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-text">
+                <span class="stat-number">{{ total_members }}</span>
+                <span class="stat-label">Active members</span>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-text">
+                <span class="stat-number">{{ schools_count }}</span>
+                <span class="stat-label">School represented</span>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-text">
+                <span class="stat-number">{{ total_initiatives }}</span>
+                <span class="stat-label">Active initiatives</span>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-text">
+                <span class="stat-number">{{ total_activities }}</span>
+                <span class="stat-label">Seminars and events held</span>
+            </div>
+        </div>
+    <div class="work"></div>
+</div>
+{% endblock content %}
