@@ -5,18 +5,19 @@
 }
 
 .hero {
-    margin-top: 10px;
     display: flex;
     flex-direction: row;
-    padding-bottom: 50px;
+    background-color: #1a2f4d;
+    padding: 60px 0;
 }
 
 .hero-content {
-    padding: 0px 40px 0px 40px;
+    padding: 0 40px;
     flex: 2;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    color: #fff;
 }
 
 .hero-intro {
@@ -25,21 +26,32 @@
     gap: 10px;
 }
 
-.hero-intro .label{
-    color: var(--color-red);
-    letter-spacing: 0.05em;
+.hero-intro .label {
+    color: var(--color-yellow);
+    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
-.hero-intro .motto{
+.hero-intro .motto {
     font-family: var(--font-serif);
-    font-size: 2rem;
+    font-size: 3rem;
+    line-height: 1.2;
+    color: #fff;
     padding-bottom: 10px;
 }
 
+.hero-intro .motto .highlight {
+    color: var(--color-yellow);
+    font-style: italic;
+}
+
 .hero-intro .description {
-    width: 60%;
+    width: 65%;
     letter-spacing: 0.03em;
-    line-height: 2.5;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .hero-buttons {
@@ -56,7 +68,8 @@
 
 .hero-buttons .work-btn {
     background-color: transparent;
-    color: var(--color-text);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .hero-buttons button{
@@ -70,6 +83,7 @@
     gap: 8px;
     padding-top: 15px;
     font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .hero-media {
@@ -89,31 +103,33 @@
     position: absolute;
     bottom: 40px;
     left: -20px;
-    background: white;
-    border-radius: 10px;
-    padding: 14px 20px;
+    background: var(--color-red);
+    border-radius: 12px;
+    padding: 16px 22px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    gap: 12px;
 }
 .stat-card-number {
     font-family: var(--font-serif);
-    font-size: 2rem;
-} 
+    font-size: 2.5rem;
+    color: #fff;
+}
 .stat-card-label {
     font-size: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
 }
 
 .stats-bar {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     align-items: center;
-    background-color: #ffff;
+    background-color: #4a7d8e;
 }
 
 .stat:not(:last-child) {
-  border-right: 1px solid var(--color-text);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .stat {
@@ -129,12 +145,16 @@
 
 .stat-number {
     font-size: 3rem;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     font-family: var(--font-serif);
+    color: #fff;
 }
 
 .stat-label {
-    font-size: 12px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .work {
