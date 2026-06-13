@@ -98,15 +98,15 @@
     <div class="about">
         <div class="about-media">
             <div class="stacked-photo">
-                <img src="https://placehold.co/200x280" alt="">
-                <img src="https://placehold.co/200x280" alt="">
+                {% if about_side_photos|length > 0 %}<img src="{{ about_side_photos.0.image.url }}" alt="">{% else %}<img src="https://placehold.co/200x280" alt="">{% endif %}
+                {% if about_side_photos|length > 1 %}<img src="{{ about_side_photos.1.image.url }}" alt="">{% else %}<img src="https://placehold.co/200x280" alt="">{% endif %}
             </div>
             <div class="stretched-photo">
-                <img src="https://placehold.co/200x580" alt="">
+                {% if about_middle_photo %}<img src="{{ about_middle_photo.image.url }}" alt="">{% else %}<img src="https://placehold.co/200x580" alt="">{% endif %}
             </div>
             <div class="stacked-photo">
-                <img src="https://placehold.co/200x280" alt="">
-                <img src="https://placehold.co/200x280" alt="">
+                {% if about_side_photos|length > 2 %}<img src="{{ about_side_photos.2.image.url }}" alt="">{% else %}<img src="https://placehold.co/200x280" alt="">{% endif %}
+                {% if about_side_photos|length > 3 %}<img src="{{ about_side_photos.3.image.url }}" alt="">{% else %}<img src="https://placehold.co/200x280" alt="">{% endif %}
             </div>
         </div>
         <div class="about-content">
