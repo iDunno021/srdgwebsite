@@ -1,6 +1,6 @@
 .signup-page {
     min-height: 100%;
-    background: var(--color-bg);
+    background: var(--paper);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,14 +11,14 @@
 .signup-card {
     background: #fff;
     border-radius: 12px;
-    border: 0.5px solid var(--color-border);
+    border: 0.5px solid var(--line);
     padding: 2.5rem;
     width: 100%;
     max-width: 480px;
 }
 
 .signup-header {
-    border-left: 3px solid var(--color-red);
+    border-left: 3px solid var(--red);
     padding-left: 14px;
     margin-bottom: 2rem;
 }
@@ -28,7 +28,7 @@
     font-family: var(--font-serif);
     font-size: 24px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
 }
 
 .signup-header p {
@@ -51,7 +51,7 @@
     display: block;
     font-size: 12.5px;
     font-weight: 500;
-    color: var(--color-blue);
+    color: var(--teal);
     margin-bottom: 6px;
     letter-spacing: 0.02em;
 }
@@ -65,7 +65,7 @@
     border-radius: 6px;
     font-size: 14px;
     font-family: var(--font-sans);
-    color: var(--color-text);
+    color: var(--ink);
     background: #fff;
     outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
@@ -73,7 +73,7 @@
 
 .signup-form input:focus,
 .signup-form select:focus {
-    border-color: var(--color-blue);
+    border-color: var(--teal);
     box-shadow: 0 0 0 3px rgba(26, 74, 122, 0.08);
 }
 
@@ -81,7 +81,7 @@
     margin-top: 8px;
     width: 100%;
     padding: 11px;
-    background: var(--color-red);
+    background: var(--red);
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -93,7 +93,7 @@
 }
 
 .signup-form button:hover {
-    background: var(--color-yellow);
+    background: var(--yellow);
 }
 
 #other-school-input {

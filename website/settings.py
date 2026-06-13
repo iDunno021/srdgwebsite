@@ -132,7 +132,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
 
-# Required for Supabase transaction pooler on Vercel (serverless)
+# Requi--red for Supabase transaction pooler on Vercel (serverless)
 DISABLE_SERVER_SIDE_CURSORS = True
 
 STATICFILES_DIRS = [

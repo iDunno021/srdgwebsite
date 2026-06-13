@@ -13,14 +13,14 @@
     font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0 0 10px;
 }
 
 .seminars-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-red);
+    background: var(--red);
 }
 
 .seminars-list {
@@ -33,7 +33,7 @@
     background: #fff;
     border-radius: 10px;
     border: 0.5px solid #e8e0d8;
-    border-left: 3px solid var(--color-red);
+    border-left: 3px solid var(--red);
     padding: 1.5rem 1.75rem;
     width: 100%;
     display: flex;
@@ -53,12 +53,12 @@
 
 .seminar-card.upcoming {
     border-color: #e8e0d8;
-    border-left-color: var(--color-red);
+    border-left-color: var(--red);
 }
 
 .seminar-card.completed {
     border-color: #d4dde8;
-    border-left-color: var(--color-blue);
+    border-left-color: var(--teal);
 }
 
 .seminar-info {
@@ -69,7 +69,7 @@
     font-family: var(--font-serif);
     font-size: 17px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     text-decoration: none;
     display: block;
     margin-bottom: 8px;
@@ -82,7 +82,7 @@
 
 .seminar-card .description {
     font-size: 13.5px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     line-height: 1.65;
     margin: 0 0 12px;
 }
@@ -103,12 +103,12 @@
 }
 
 .badge-upcoming {
-    color: var(--color-yellow);
+    color: var(--yellow);
     background: #fdf0e2;
 }
 
 .badge-completed {
-    color: var(--color-blue);
+    color: var(--teal);
     background: #e6f0fb;
 }
 
