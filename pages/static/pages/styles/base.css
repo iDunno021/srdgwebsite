@@ -1,16 +1,16 @@
 :root {
-    --color-bg: #F6F4F1;
-    --color-red: #A72222;
-    --color-yellow: #EAAC42;
-    --color-blue: #5A94A6;
-    --color-dark: #233D68;
-    --color-text: #1a1a1a;
-    --color-text-muted: #555;
-    --color-border: #e0dbd5;
+    --paper: #f6f4ef;
+    --red: #A72222;
+    --yellow: #EAAC42;
+    --teal: #4a8295;
+    --navy: #233D68;
+    --ink: #1c2a44;
+    --muted: #5f6b80;
+    --line: #e4e0d7;
     --color-error: #A72222;
     --nav-height: 64px;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-serif: 'Playfair Display', Georgia, serif; 
 }
 
 * {
@@ -21,12 +21,12 @@
 
 html, body {
     height: 100%;
-    background: var(--color-bg);
+    background: var(--paper);
 }
 
 body {
     font-family: var(--font-sans);
-    color: var(--color-text);
+    color: var(--ink);
 }
 
 /* ── Nav ── */
@@ -35,7 +35,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--color-dark);
+    background: var(--navy);
     padding: 0 2rem;
     height: var(--nav-height);
     position: sticky;
@@ -151,7 +151,7 @@ nav {
 /* ── Join button ── */
 
 .btn-join {
-    background: var(--color-red);
+    background: var(--red);
     color: #fff;
     text-decoration: none;
     font-size: 13.5px;
@@ -162,7 +162,7 @@ nav {
 }
 
 .btn-join:hover {
-    background: var(--color-yellow);
+    background: var(--yellow);
 }
 
 /* Mobile join button (inside nav-links drawer) — hidden on desktop */
@@ -236,7 +236,7 @@ nav {
 /* ── Page wrapper ── */
 
 .wip-banner {
-    background: var(--color-yellow);
+    background: var(--yellow);
     color: #1a1a1a;
     text-align: center;
     padding: 10px 20px;
@@ -253,7 +253,7 @@ nav {
 /* ── Footer ── */
 
 footer {
-    background: var(--color-dark);
+    background: var(--navy);
     border-top: 1px solid #2a2a2a;
     padding: 3rem 2rem 0;
     margin-top: auto;
@@ -318,7 +318,7 @@ footer {
 }
 
 .btn-join-footer {
-    background: var(--color-red);
+    background: var(--red);
     color: #fff;
     text-decoration: none;
     font-size: 13px;
@@ -330,7 +330,7 @@ footer {
 }
 
 .btn-join-footer:hover {
-    background: var(--color-yellow);
+    background: var(--yellow);
 }
 
 .footer-bottom {

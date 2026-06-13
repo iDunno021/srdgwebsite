@@ -11,7 +11,7 @@
   <fieldset class="module aligned">
     <div class="form-row">
       <label for="id_committee">Committee:</label>
-      <select name="committee" id="id_committee" required>
+      <select name="committee" id="id_committee" requi--red>
         {% for value, label in committees %}
           <option value="{{ value }}">{{ label }}</option>
         {% endfor %}
