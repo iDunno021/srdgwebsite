@@ -328,3 +328,56 @@
     padding: 1.25rem 0;
     border-top: 1px solid #e0ddd8;
 }
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        padding: 40px 0 0 0;
+    }
+
+    .hero-content {
+        padding: 0 20px 30px 20px;
+    }
+
+    .hero-intro .description {
+        width: 100%;
+    }
+
+    .hero-media {
+        padding: 0;
+        width: 100%;
+    }
+
+    .hero-image {
+        border-radius: 0;
+        height: 300px;
+    }
+
+    .hero-stat-card {
+        bottom: 20px;
+        left: 16px;
+    }
+
+    .stats-bar {
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        flex: 0 0 50%;
+        box-sizing: border-box;
+    }
+
+    .stat:not(:last-child) {
+        border-right: none;
+    }
+
+    .stat:nth-child(1),
+    .stat:nth-child(3) {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat:nth-child(1),
+    .stat:nth-child(2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
