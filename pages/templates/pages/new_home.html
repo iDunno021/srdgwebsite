@@ -65,12 +65,33 @@
             <h2 class="work-heading">SOMETHING ABOUT WORK</h2>
             <p class="work-description">PLACEHOLDER</p>
             <div class="work-items">
-                {% for initiative in initiatives %}
                     <div class="work-card">
                         <img src="" alt="">
-                        <p class="work-label">{{ initiative.title }}</p>
+                        <div class="card-content">
+                            <p class="card-label">INITIATIVES</p>
+                            <p class="card-heading">Long-running projects with real outcomes</p>
+                            <p class="card-description">Student-led campaigns and programmes that carry an idea from a seminar room all the way to community impact</p>
+                            <a href="card-redirect" class="card-redirect">Explore initiatives &rarr;</a>
+                        </div>
                     </div>
-                {% endfor %}
+                    <div class="work-card">
+                        <img src="" alt="">
+                        <div class="card-content">
+                            <p class="card-label">SEMINARS</p>
+                            <p class="card-heading">Sharp discussion on ideas that matter</p>
+                            <p class="card-description">Regular sessions where students debate philosophy, policy, and the humanities — and learn to disagree well</p>
+                            <a href="card-redirect" class="card-redirect">See the schedule &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <img src="" alt="">
+                        <div class="card-content">
+                            <p class="card-label">EVENTS</p>
+                            <p class="card-heading">Bringing schools into one room</p>
+                            <p class="card-description">From the Youth Electoral Debate to open forums, our events connect students across the city around civic life</p>
+                            <a class="card-redirect">Upcoming events &rarr;</a>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
