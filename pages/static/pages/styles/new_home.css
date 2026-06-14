@@ -381,3 +381,92 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 }
+
+.why {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5rem;
+    padding: 5rem;
+    background: #f6f4ef;
+}
+
+.why-left {
+    flex: 0 0 44%;
+    display: flex;
+    flex-direction: column;
+}
+
+.why-label {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4a8295;
+    margin: 0 0 1.5rem 0;
+}
+
+.why-quote {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 2.05rem;
+    line-height: 1.33;
+    color: #1c2a44;
+    margin: 0 0 2rem 0;
+}
+
+.why-mark {
+    font-family: 'Newsreader', serif;
+    font-style: normal;
+    color: #A72222;
+}
+
+.why-attribution {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #5f6b80;
+    margin: 0;
+}
+
+.why-right {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+    padding-top: 2.2rem;
+}
+
+.why-point-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+}
+
+.why-square {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    background-color: #A72222;
+    flex-shrink: 0;
+}
+
+.why-point-heading {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1c2a44;
+    margin: 0;
+}
+
+.why-point-body {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.88rem;
+    color: #5f6b80;
+    line-height: 1.65;
+    margin: 0;
+    padding-left: 1.55rem;
+}
