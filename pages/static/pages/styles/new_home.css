@@ -444,35 +444,35 @@
 }
 
 .why-label {
-    font-family: 'Hanken Grotesk', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #4a8295;
+    color: var(--teal);
     margin: 0 0 1.5rem 0;
 }
 
 .why-quote {
-    font-family: 'Newsreader', serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-size: 2.05rem;
     line-height: 1.33;
-    color: #1c2a44;
+    color: var(--ink);
     margin: 0 0 2rem 0;
 }
 
 .why-mark {
-    font-family: 'Newsreader', serif;
+    font-family: var(--font-serif);
     font-style: normal;
-    color: #A72222;
+    color: var(--red);
 }
 
 .why-attribution {
-    font-family: 'Hanken Grotesk', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.82rem;
     font-weight: 400;
-    color: #5f6b80;
+    color: var(--muted);
     margin: 0;
 }
 
@@ -496,22 +496,22 @@
     width: 10px;
     height: 10px;
     min-width: 10px;
-    background-color: #A72222;
+    background-color: var(--red);
     flex-shrink: 0;
 }
 
 .why-point-heading {
-    font-family: 'Hanken Grotesk', sans-serif;
+    font-family: var(--font-sans);
     font-weight: 700;
     font-size: 0.95rem;
-    color: #1c2a44;
+    color: var(--ink);
     margin: 0;
 }
 
 .why-point-body {
-    font-family: 'Hanken Grotesk', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.88rem;
-    color: #5f6b80;
+    color: var(--muted);
     line-height: 1.65;
     margin: 0;
     padding-left: 1.55rem;
