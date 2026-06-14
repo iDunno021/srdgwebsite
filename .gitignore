@@ -243,3 +243,10 @@ celerybeat.pid
 venv/
 CLAUDE.md
 db.sqlite3
+
+# Mac junk
+.DS_Store
+**/.DS_Store
+
+# Virtual environments (any name)
+SRDG/
