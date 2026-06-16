@@ -204,10 +204,13 @@
         const middleImgs = document.querySelectorAll('.about-media [data-middle-slot]');
 
         function setSrc(img, url) {
-            if (!url) return;
-            img.classList.remove('loaded');
-            img.src = url;
-            if (img.complete) img.classList.add('loaded');
+            if (!url || url === img.src) return;
+            const preload = new Image();
+            preload.onload = function() {
+                img.src = url;
+                img.classList.add('loaded');
+            };
+            preload.src = url;
         }
 
         let sideOffset = 0;
@@ -226,7 +229,7 @@
                     setSrc(img, middlePhotos[(middleOffset + i) % middlePhotos.length]);
                 });
             }
-        }, 4000);
+        }, 6000);
     })();
 </script>
 {% endblock content %}
