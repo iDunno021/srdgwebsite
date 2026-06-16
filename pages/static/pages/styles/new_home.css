@@ -534,6 +534,7 @@
     }
 
     .about-media {
+        flex: none;
         height: 600px;
     }
 
