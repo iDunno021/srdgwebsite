@@ -23,6 +23,7 @@ class Member(models.Model):
         ('WGC', 'Westlake Girls\' College'),
         ('MAC', 'Maclean\'s College'),
         ('SDCC', 'St Dominic\'s Catholic College'),
+        ('GBHS', 'Green Bay High School'),
         ('other', 'Other')
     ]
 
