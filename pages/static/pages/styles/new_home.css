@@ -502,10 +502,7 @@
     }
 
     .work-card img {
-        width: 130px;
-        height: auto;
-        flex-shrink: 0;
-        border-radius: 10px 0 0 10px;
+        display: none;
     }
 
     .card-content {
@@ -534,7 +531,16 @@
     }
 
     .about-media {
-        min-height: 360px;
+        min-height: 420px;
+    }
+
+    .about-media > .stacked-photo:first-child {
+        display: none;
+    }
+
+    .about-media > .stretched-photo,
+    .about-media > .stacked-photo:last-child {
+        flex: 1.5;
     }
 
     .why {
