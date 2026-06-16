@@ -1,5 +1,4 @@
 import json
-import random
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
@@ -16,18 +15,21 @@ def home(request):
     schools_count = len([s for s in Member.SCHOOLS if s[0] != 'other'])
     total_activites = Seminar.objects.filter(hidden=False).count() + Event.objects.count()
     initiatives = Initiative.objects.filter(hidden=False)
-    about_photos = list(AboutPhoto.objects.all())
-    random.shuffle(about_photos)
-    about_middle_photo = about_photos[0] if about_photos else None
-    about_side_photos = about_photos[1:5]
+    about_side_photos = list(AboutPhoto.objects.filter(slot='side'))
+    about_middle_photos = list(AboutPhoto.objects.filter(slot='middle'))
+    about_middle_photo = about_middle_photos[0] if about_middle_photos else None
+    about_side_urls_json = json.dumps([p.image.url for p in about_side_photos])
+    about_middle_urls_json = json.dumps([p.image.url for p in about_middle_photos])
     return render(request, 'pages/new_home.html', {
         'total_members': total_members,
         'total_initiatives': total_initiatives,
         'schools_count': schools_count,
         'total_activities': total_activites,
         'initiatives': initiatives,
-        'about_side_photos': about_side_photos,
+        'about_side_photos': about_side_photos[:4],
         'about_middle_photo': about_middle_photo,
+        'about_side_urls_json': about_side_urls_json,
+        'about_middle_urls_json': about_middle_urls_json,
     })
 
 def signup(request):

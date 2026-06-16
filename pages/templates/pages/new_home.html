@@ -130,15 +130,15 @@
     <div class="about">
         <div class="about-media">
             <div class="stacked-photo">
-                {% if about_side_photos|length > 0 %}<img src="{{ about_side_photos.0.image.url }}" alt="" class="lazy-fade">{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade">{% endif %}
-                {% if about_side_photos|length > 1 %}<img src="{{ about_side_photos.1.image.url }}" alt="" class="lazy-fade">{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade">{% endif %}
+                {% if about_side_photos|length > 0 %}<img src="{{ about_side_photos.0.image.url }}" alt="" class="lazy-fade" data-side-slot>{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade" data-side-slot>{% endif %}
+                {% if about_side_photos|length > 1 %}<img src="{{ about_side_photos.1.image.url }}" alt="" class="lazy-fade" data-side-slot>{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade" data-side-slot>{% endif %}
             </div>
             <div class="stretched-photo">
-                {% if about_middle_photo %}<img src="{{ about_middle_photo.image.url }}" alt="" class="lazy-fade">{% else %}<img src="https://placehold.co/200x580" alt="" class="lazy-fade">{% endif %}
+                {% if about_middle_photo %}<img src="{{ about_middle_photo.image.url }}" alt="" class="lazy-fade" data-middle-slot>{% else %}<img src="https://placehold.co/200x580" alt="" class="lazy-fade" data-middle-slot>{% endif %}
             </div>
             <div class="stacked-photo">
-                {% if about_side_photos|length > 2 %}<img src="{{ about_side_photos.2.image.url }}" alt="" class="lazy-fade">{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade">{% endif %}
-                {% if about_side_photos|length > 3 %}<img src="{{ about_side_photos.3.image.url }}" alt="" class="lazy-fade">{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade">{% endif %}
+                {% if about_side_photos|length > 2 %}<img src="{{ about_side_photos.2.image.url }}" alt="" class="lazy-fade" data-side-slot>{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade" data-side-slot>{% endif %}
+                {% if about_side_photos|length > 3 %}<img src="{{ about_side_photos.3.image.url }}" alt="" class="lazy-fade" data-side-slot>{% else %}<img src="https://placehold.co/200x280" alt="" class="lazy-fade" data-side-slot>{% endif %}
             </div>
         </div>
         <div class="about-content">
@@ -195,4 +195,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function() {
+        const sidePhotos = {{ about_side_urls_json|safe }};
+        const middlePhotos = {{ about_middle_urls_json|safe }};
+        const sideImgs = document.querySelectorAll('.about-media [data-side-slot]');
+        const middleImgs = document.querySelectorAll('.about-media [data-middle-slot]');
+
+        function setSrc(img, url) {
+            if (!url) return;
+            img.classList.remove('loaded');
+            img.src = url;
+            if (img.complete) img.classList.add('loaded');
+        }
+
+        let sideOffset = 0;
+        let middleOffset = 0;
+
+        setInterval(function() {
+            if (sidePhotos.length > sideImgs.length) {
+                sideOffset = (sideOffset + 1) % sidePhotos.length;
+                sideImgs.forEach(function(img, i) {
+                    setSrc(img, sidePhotos[(sideOffset + i) % sidePhotos.length]);
+                });
+            }
+            if (middlePhotos.length > middleImgs.length) {
+                middleOffset = (middleOffset + 1) % middlePhotos.length;
+                middleImgs.forEach(function(img, i) {
+                    setSrc(img, middlePhotos[(middleOffset + i) % middlePhotos.length]);
+                });
+            }
+        }, 4000);
+    })();
+</script>
 {% endblock content %}
