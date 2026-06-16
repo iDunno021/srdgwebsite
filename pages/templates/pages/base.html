@@ -139,6 +139,13 @@
                 document.addEventListener('click', () => {
                     document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
                 });
+
+                // Fade in images once loaded
+                document.querySelectorAll('img.lazy-fade').forEach(img => {
+                    const markLoaded = () => img.classList.add('loaded');
+                    if (img.complete) markLoaded();
+                    else img.addEventListener('load', markLoaded);
+                });
             </script>
         </body>
     </html>

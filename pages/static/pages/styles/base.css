@@ -19,6 +19,18 @@
     box-sizing: border-box;
 }
 
+/* ── Image fade-in loader ── */
+
+img.lazy-fade {
+    background-color: var(--line);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+img.lazy-fade.loaded {
+    opacity: 1;
+}
+
 html, body {
     height: 100%;
     background: var(--paper);
