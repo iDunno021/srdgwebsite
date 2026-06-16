@@ -557,3 +557,116 @@
         padding-top: 0;
     }
 }
+
+.awareness {
+    background-color: var(--navy);
+    padding: 64px 40px;
+    margin-top: 100px;
+}
+
+.awareness-label {
+    color: var(--yellow);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.awareness-heading {
+    color: #FFFFFF;
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+.awareness-description {
+    color: #c4d0e2;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    max-width: 480px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.awareness-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.awareness-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #1a2f52;
+    min-height: 280px;
+    text-decoration: none;
+    display: block;
+}
+
+.awareness-card--wide {
+    min-height: 500px;
+}
+
+.awareness-card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.awareness-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.awareness-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: linear-gradient(transparent, rgba(15, 24, 44, 0.86));
+}
+
+.awareness-kicker {
+    color: var(--yellow);
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.awareness-title {
+    color: #FFFFFF;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .awareness {
+        padding: 40px 20px;
+        margin-top: 60px;
+    }
+
+    .awareness-heading {
+        font-size: 2.2rem;
+    }
+
+    .awareness-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .awareness-card--wide {
+        min-height: 320px;
+    }
+}
