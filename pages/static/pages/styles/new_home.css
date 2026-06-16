@@ -611,6 +611,14 @@
     min-height: 500px;
 }
 
+.awareness-card--wide .awareness-img {
+    object-fit: contain;
+}
+
+.awareness-img--top {
+    object-position: top;
+}
+
 .awareness-card-stack {
     display: flex;
     flex-direction: column;
