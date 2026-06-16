@@ -13,20 +13,20 @@
     font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0 0 10px;
 }
 
 .calendar-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-red);
+    background: var(--red);
     margin-bottom: 1.25rem;
 }
 
 .calendar-intro {
     font-size: 15px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     line-height: 1.75;
 }
 
@@ -35,14 +35,14 @@
 #calendar {
     background: #fff;
     border-radius: 10px;
-    border: 0.5px solid var(--color-border);
+    border: 0.5px solid var(--line);
     padding: 1.5rem;
 }
 
 .fc {
     font-family: var(--font-sans);
     font-size: 14px;
-    color: var(--color-text);
+    color: var(--ink);
 }
 
 /* Toolbar */
@@ -54,8 +54,8 @@
 
 .fc-button {
     background: transparent !important;
-    border: 0.5px solid var(--color-border) !important;
-    color: var(--color-text) !important;
+    border: 0.5px solid var(--line) !important;
+    color: var(--ink) !important;
     box-shadow: none !important;
     border-radius: 6px !important;
     padding: 5px 10px !important;
@@ -65,12 +65,12 @@
 }
 
 .fc-button:hover {
-    background: var(--color-bg) !important;
+    background: var(--paper) !important;
 }
 
 .fc-button-active,
 .fc-button:focus {
-    background: var(--color-bg) !important;
+    background: var(--paper) !important;
     outline: none !important;
 }
 
@@ -80,13 +80,13 @@
     font-size: 12px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: var(--muted);
     padding: 8px 0;
     border: none;
 }
 
 .fc-col-header-cell a {
-    color: var(--color-text-muted) !important;
+    color: var(--muted) !important;
     text-decoration: none;
 }
 
@@ -97,7 +97,7 @@
 
 .fc-daygrid-day-number {
     font-size: 13px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     text-decoration: none !important;
     padding: 6px 8px;
 }
@@ -107,7 +107,7 @@
 }
 
 .fc-day-today .fc-daygrid-day-number {
-    color: var(--color-red);
+    color: var(--red);
     font-weight: 600;
 }
 
@@ -153,5 +153,5 @@
 
 .fc-scrollgrid td,
 .fc-scrollgrid th {
-    border-color: var(--color-border) !important;
+    border-color: var(--line) !important;
 }

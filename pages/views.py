@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, ArtPiece
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, ArtPiece, AboutPhoto
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
 from django.views import generic
 import resend
@@ -13,10 +13,18 @@ def home(request):
     total_members = Member.objects.count()
     total_initiatives = Initiative.objects.filter(hidden=False).count()
     schools_count = len([s for s in Member.SCHOOLS if s[0] != 'other'])
-    return render(request, 'pages/home.html', {
+    total_activites = Seminar.objects.filter(hidden=False).count() + Event.objects.count()
+    initiatives = Initiative.objects.filter(hidden=False)
+    about_side_photos = list(AboutPhoto.objects.filter(slot='side')[:4])
+    about_middle_photo = AboutPhoto.objects.filter(slot='middle').first()
+    return render(request, 'pages/new_home.html', {
         'total_members': total_members,
         'total_initiatives': total_initiatives,
         'schools_count': schools_count,
+        'total_activities': total_activites,
+        'initiatives': initiatives,
+        'about_side_photos': about_side_photos,
+        'about_middle_photo': about_middle_photo,
     })
 
 def signup(request):

@@ -13,20 +13,20 @@
     font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0 0 10px;
 }
 
 .contact-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-red);
+    background: var(--red);
     margin-bottom: 1.25rem;
 }
 
 .contact-intro {
     font-size: 15px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     line-height: 1.75;
     max-width: 520px;
 }
@@ -41,8 +41,8 @@
 .contact-card {
     background: #fff;
     border-radius: 10px;
-    border: 0.5px solid var(--color-border);
-    border-top: 3px solid var(--color-blue);
+    border: 0.5px solid var(--line);
+    border-top: 3px solid var(--teal);
     padding: 1.5rem 1.75rem;
 }
 
@@ -50,25 +50,25 @@
     font-family: var(--font-serif);
     font-size: 16px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0 0 8px;
 }
 
 .contact-card p {
     font-size: 13.5px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     line-height: 1.65;
     margin: 0 0 14px;
 }
 
 .contact-email {
     font-size: 13px;
-    color: var(--color-blue);
+    color: var(--teal);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.15s;
 }
 
 .contact-email:hover {
-    color: var(--color-red);
+    color: var(--red);
 }
