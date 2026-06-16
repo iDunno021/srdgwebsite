@@ -41,7 +41,7 @@
 
 .ita-instructions {
     font-size: 13.5px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     margin: 0 0 1rem;
 }
 
@@ -54,6 +54,6 @@
     display: inline-block;
     margin-top: 2rem;
     font-size: 13px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     text-decoration: none;
 }

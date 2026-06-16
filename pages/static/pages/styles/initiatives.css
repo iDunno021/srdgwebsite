@@ -18,7 +18,7 @@
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--color-blue);
+  color: var(--teal);
   margin-bottom: 20px;
 }
 
@@ -28,13 +28,13 @@
   letter-spacing: -.015em;
   line-height: 1;
   font-size: clamp(3rem, 8vw, 6.2rem);
-  color: var(--color-text);
+  color: var(--ink);
   margin-bottom: 22px;
 }
 
 .init-lead {
   font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-  color: var(--color-text-muted);
+  color: var(--muted);
   max-width: 52ch;
   line-height: 1.6;
 }
@@ -46,7 +46,7 @@
   flex-wrap: wrap;
   align-items: center;
   padding-top: 26px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--line);
 }
 
 .init-meta-item {
@@ -59,12 +59,12 @@
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-dark);
+  color: var(--navy);
 }
 
 .init-meta-item span {
   font-size: 14px;
-  color: var(--color-text-muted);
+  color: var(--muted);
 }
 
 
@@ -78,8 +78,8 @@
   gap: clamp(36px, 5vw, 80px);
   align-items: center;
   padding: clamp(40px, 5vw, 72px) 0;
-  border-top: 1px solid var(--color-border);
-  --ac: var(--color-blue);
+  border-top: 1px solid var(--line);
+  --ac: var(--teal);
 }
 
 .init-row:first-child {
@@ -91,9 +91,9 @@
 .init-row:nth-child(even) .init-visual { order: 1; }
 
 
-.init-row--1 { --ac: var(--color-red); }
+.init-row--1 { --ac: var(--red); }
 .init-row--2 { --ac: #c8870f; }
-.init-row--3 { --ac: var(--color-blue); }
+.init-row--3 { --ac: var(--teal); }
 
 
 .init-index {
@@ -129,7 +129,7 @@
   gap: 7px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--muted);
 }
 
 .init-status-dot {
@@ -148,13 +148,13 @@
   letter-spacing: -.01em;
   line-height: 1.04;
   font-size: clamp(2rem, 3.4vw, 2.9rem);
-  color: var(--color-text);
+  color: var(--ink);
   margin-bottom: 14px;
 }
 
 .init-mission {
   font-size: clamp(1.05rem, 1.4vw, 1.18rem);
-  color: var(--color-text);
+  color: var(--ink);
   line-height: 1.48;
   margin-bottom: 14px;
   max-width: 42ch;
@@ -162,7 +162,7 @@
 
 .init-body {
   font-size: 15.5px;
-  color: var(--color-text-muted);
+  color: var(--muted);
   max-width: 46ch;
   margin-bottom: 26px;
   line-height: 1.65;
@@ -206,7 +206,7 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--line);
   border-top: 3px solid var(--ac);
   box-shadow: 0 30px 60px -34px rgba(28,42,68,.18);
   height: clamp(300px, 34vw, 440px);
@@ -288,7 +288,7 @@
   height: clamp(300px, 34vw, 440px);
   object-fit: cover;
   border-radius: 20px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--line);
   border-top: 3px solid var(--ac);
   box-shadow: 0 30px 60px -34px rgba(28,42,68,.18);
   display: block;
@@ -299,7 +299,7 @@
   height: clamp(300px, 34vw, 440px);
   background: #fff;
   border-radius: 20px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--line);
   border-top: 3px solid var(--ac);
   display: flex;
   align-items: center;
@@ -321,18 +321,18 @@
 
 .init-join {
   padding: clamp(48px, 6vw, 88px) 0;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--line);
 }
 
 .init-join-card {
-  background: var(--color-dark);
+  background: var(--navy);
   border-radius: 18px;
   padding: clamp(36px, 5vw, 60px) clamp(28px, 5vw, 56px);
   max-width: 700px;
 }
 
 .init-join-card .init-eyebrow {
-  color: var(--color-yellow);
+  color: var(--yellow);
   margin-bottom: 16px;
 }
 
@@ -360,21 +360,21 @@
   font-size: 14.5px;
   padding: 13px 26px;
   border-radius: 10px;
-  background: var(--color-red);
+  background: var(--red);
   color: #fff;
   text-decoration: none;
   transition: background 0.15s, transform .18s cubic-bezier(.22,.61,.36,1), box-shadow .18s;
 }
 
 .init-join-btn:hover {
-  background: var(--color-yellow);
+  background: var(--yellow);
   transform: translateY(-2px);
   box-shadow: 0 10px 24px -10px rgba(234,172,66,.4);
   color: #1a1a1a;
 }
 
 
-@media (prefers-reduced-motion: no-preference) {
+@media (prefers---reduced-motion: no-preference) {
   .init-reveal {
     opacity: 0;
     transform: translateY(20px);

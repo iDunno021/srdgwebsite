@@ -13,14 +13,14 @@
     font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0 0 10px;
 }
 
 .create-blog-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-red);
+    background: var(--red);
 }
 
 .create-blog-form {
@@ -38,7 +38,7 @@
 .form-group label {
     font-size: 13px;
     font-weight: 500;
-    color: var(--color-text);
+    color: var(--ink);
     letter-spacing: 0.02em;
 }
 
@@ -49,9 +49,9 @@
     padding: 0.6rem 0.85rem;
     font-size: 14.5px;
     font-family: inherit;
-    color: var(--color-text);
+    color: var(--ink);
     background: #fff;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--line);
     border-radius: 6px;
     box-sizing: border-box;
     transition: border-color 0.15s;
@@ -65,7 +65,7 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: var(--color-red);
+    border-color: var(--red);
 }
 
 .form-group textarea {
@@ -77,7 +77,7 @@
     display: inline-block;
     margin-top: 6px;
     font-size: 13px;
-    color: var(--color-red);
+    color: var(--red);
     cursor: pointer;
 }
 
@@ -93,7 +93,7 @@
 
 .file-item {
     font-size: 13px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     padding: 4px 8px;
     background: #f7f7f7;
     border-radius: 4px;
@@ -114,17 +114,17 @@
 
 .cancel-link {
     font-size: 14px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     text-decoration: none;
 }
 
 .cancel-link:hover {
-    color: var(--color-text);
+    color: var(--ink);
 }
 
 .form-actions button {
     padding: 0.5rem 1.4rem;
-    background: var(--color-red);
+    background: var(--red);
     color: #fff;
     font-size: 14px;
     font-weight: 500;

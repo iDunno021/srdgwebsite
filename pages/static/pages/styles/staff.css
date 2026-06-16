@@ -7,27 +7,27 @@
 
 .about-header {
     margin-bottom: 1rem;
-    border-bottom: 0.5px solid var(--color-border);
+    border-bottom: 0.5px solid var(--line);
 }
 
 .about-header h1 {
     font-family: var(--font-serif);
     font-size: 36px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0 0 10px;
 }
 
 .about-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-red);
+    background: var(--red);
     margin-bottom: 1.5rem;
 }
 
 .about-intro {
     font-size: 16px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     line-height: 1.8;
     max-width: 640px;
 }
@@ -36,7 +36,7 @@
     display: flex;
     gap: 0;
     margin-bottom: 3rem;
-    border: 0.5px solid var(--color-border);
+    border: 0.5px solid var(--line);
     border-radius: 6px;
     overflow: hidden;
     width: fit-content;
@@ -49,17 +49,17 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--color-text-muted);
+    color: var(--muted);
     transition: background 0.15s, color 0.15s;
 }
 
 .section-btn.active {
-    background: var(--color-red);
+    background: var(--red);
     color: #fff;
 }
 
 .section-btn:not(.active):hover {
-    background: var(--color-border);
+    background: var(--line);
 }
 
 .committee-section {
@@ -71,10 +71,10 @@
     font-family: var(--font-serif);
     font-size: 20px;
     font-weight: 400;
-    color: var(--color-blue);
+    color: var(--teal);
     margin: 0 0 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 0.5px solid var(--color-border);
+    border-bottom: 0.5px solid var(--line);
     text-align: center;
 }
 
@@ -99,14 +99,14 @@
     height: 80px;
     border-radius: 50%;
     background: #e8e4df;
-    border: 0.5px solid var(--color-border);
+    border: 0.5px solid var(--line);
     object-fit: cover;
 }
 
 .member-name {
     font-size: 14.5px;
     font-weight: 500;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0;
 }
 

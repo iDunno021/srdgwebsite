@@ -13,14 +13,14 @@
     font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     margin: 0 0 10px;
 }
 
 .events-header .underline {
     width: 32px;
     height: 2px;
-    background: var(--color-red);
+    background: var(--red);
 }
 
 .events-list {
@@ -38,7 +38,7 @@
     background: #fff;
     border-radius: 10px;
     border: 0.5px solid #e8e0d8;
-    border-left: 3px solid var(--color-red);
+    border-left: 3px solid var(--red);
     padding: 1.5rem 1.75rem;
     width: 100%;
     transition: box-shadow 0.15s;
@@ -55,12 +55,12 @@
 
 .event-card.upcoming {
     border-color: #e8e0d8;
-    border-left-color: var(--color-red);
+    border-left-color: var(--red);
 }
 
 .event-card.completed {
     border-color: #d4dde8;
-    border-left-color: var(--color-blue);
+    border-left-color: var(--teal);
 }
 
 .event-main {
@@ -77,14 +77,14 @@
     font-family: var(--font-serif);
     font-size: 17px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--ink);
     display: block;
     margin-bottom: 8px;
 }
 
 .event-description {
     font-size: 13.5px;
-    color: var(--color-text-muted);
+    color: var(--muted);
     line-height: 1.65;
     margin: 0 0 12px;
 }
@@ -151,21 +151,21 @@
 }
 
 .badge-upcoming {
-    color: var(--color-yellow);
+    color: var(--yellow);
     background: #fdf0e2;
 }
 
 .badge-completed {
-    color: var(--color-blue);
+    color: var(--teal);
     background: #e6f0fb;
 }
 
 .btn-ita {
     font-size: 12.5px;
     font-weight: 500;
-    color: var(--color-red);
+    color: var(--red);
     background: transparent;
-    border: 1.5px solid var(--color-red);
+    border: 1.5px solid var(--red);
     border-radius: 6px;
     padding: 5px 12px;
     cursor: pointer;
@@ -174,7 +174,7 @@
 }
 
 .btn-ita:hover {
-    background: var(--color-red);
+    background: var(--red);
     color: #fff;
 }
 
@@ -198,14 +198,14 @@
     border-radius: 6px;
     outline: none;
     font-family: var(--font-sans);
-    color: var(--color-text);
+    color: var(--ink);
     background: #fafafa;
     transition: border-color 0.15s;
     box-sizing: border-box;
 }
 
 .ita-form input:focus {
-    border-color: var(--color-red);
+    border-color: var(--red);
     background: #fff;
 }
 
@@ -219,7 +219,7 @@
     font-size: 13px;
     font-weight: 500;
     color: #fff;
-    background: var(--color-red);
+    background: var(--red);
     border: none;
     border-radius: 6px;
     cursor: pointer;

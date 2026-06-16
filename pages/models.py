@@ -23,6 +23,7 @@ class Member(models.Model):
         ('WGC', 'Westlake Girls\' College'),
         ('MAC', 'Maclean\'s College'),
         ('SDCC', 'St Dominic\'s Catholic College'),
+        ('GBHS', 'Green Bay High School'),
         ('other', 'Other')
     ]
 
@@ -138,6 +139,27 @@ class MemberRole(models.Model):
     def __str__(self):
         return f"{self.member} — {self.get_committee_display()}"
     
+def about_photo_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f'about/{uuid.uuid4().hex}.{ext}'
+
+
+class AboutPhoto(models.Model):
+    SLOT_CHOICES = [
+        ('side', 'Side Photo'),
+        ('middle', 'Middle Photo'),
+    ]
+    image = models.ImageField(upload_to=about_photo_path)
+    slot = models.CharField(max_length=10, choices=SLOT_CHOICES, default='side')
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'pk']
+
+    def __str__(self):
+        return f"{self.get_slot_display()} #{self.pk}"
+
+
 def art_piece_path(instance, filename):
     ext = filename.split('.')[-1]
     return f'yac/art/{uuid.uuid4().hex}.{ext}'

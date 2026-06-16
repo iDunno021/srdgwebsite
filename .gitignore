@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+SRDG
 # Distribution / packaging
 .Python
 build/
@@ -95,13 +95,13 @@ ipython_config.py
 # UV
 #   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
+#   commonly igno--red for libraries.
 #uv.lock
 
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
+#   commonly igno--red for libraries.
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
 #poetry.toml
@@ -174,8 +174,8 @@ cython_debug/
 #.idea/
 
 # Abstra
-# Abstra is an AI-powered process automation framework.
-# Ignore directories containing user credentials, local state, and settings.
+# Abstra is an AI-powe--red process automation framework.
+# Ignore directories containing user c--redentials, local state, and settings.
 # Learn more at https://abstra.io/docs
 .abstra/
 
@@ -193,7 +193,7 @@ cython_debug/
 .pypirc
 
 # Cursor
-#  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
+#  Cursor is an AI-powe--red code editor. `.cursorignore` specifies files/directories to
 #  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
@@ -243,3 +243,10 @@ celerybeat.pid
 venv/
 CLAUDE.md
 db.sqlite3
+
+# Mac junk
+.DS_Store
+**/.DS_Store
+
+# Virtual environments (any name)
+SRDG/
