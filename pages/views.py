@@ -1,4 +1,5 @@
 import json
+import random
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
@@ -15,8 +16,10 @@ def home(request):
     schools_count = len([s for s in Member.SCHOOLS if s[0] != 'other'])
     total_activites = Seminar.objects.filter(hidden=False).count() + Event.objects.count()
     initiatives = Initiative.objects.filter(hidden=False)
-    about_side_photos = list(AboutPhoto.objects.filter(slot='side')[:4])
-    about_middle_photo = AboutPhoto.objects.filter(slot='middle').first()
+    about_photos = list(AboutPhoto.objects.all())
+    random.shuffle(about_photos)
+    about_middle_photo = about_photos[0] if about_photos else None
+    about_side_photos = about_photos[1:5]
     return render(request, 'pages/new_home.html', {
         'total_members': total_members,
         'total_initiatives': total_initiatives,
