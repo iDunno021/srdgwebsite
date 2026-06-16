@@ -531,7 +531,7 @@
     }
 
     .about-media {
-        min-height: 420px;
+        height: 600px;
     }
 
     .about-media > .stacked-photo:first-child {
