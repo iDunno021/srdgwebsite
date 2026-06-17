@@ -17,8 +17,8 @@
                 <p class="description">SRDG runs initiatives, seminars, and events that bring students together around humanities, policy, and civic discourse — turning discussion into action.</p>
             </div>
             <div class="hero-buttons">
-                <button class="join">Join the Group</button>
-                <button class="work-btn">See our work &rarr;</button>
+                <a href="{% url 'signup' %}"><button class="join">Join the Group</button></a>
+                <a href="#our-work"><button class="work-btn">See our work &rarr;</button></a>
             </div>
             <div class="hero-tagline">
                 <span class="green-dot"></span>
@@ -59,10 +59,10 @@
             </div>
         </div>
     </div>
-    <div class="work">
+    <div class="work" id="our-work">
         <div class="work-content">
             <p class="work-label">OUR WORK</p>
-            <h2 class="work-heading">The work, made in the open.</h2>
+            <h2 class="work-heading">The work,<br>made in the open.</h2>
             <p class="work-description">Three ways we move from conversation to contribution — each one led, run and shaped by students</p>
             <div class="work-items">
                     <div class="work-card">

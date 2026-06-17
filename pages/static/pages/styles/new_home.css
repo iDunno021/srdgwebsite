@@ -170,6 +170,7 @@
 .work-label {
     letter-spacing: 0.05em;
     color: var(--teal);
+    margin-bottom: 0.75rem;
 }
 
 .work-heading {

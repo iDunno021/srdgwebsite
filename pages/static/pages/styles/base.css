@@ -34,6 +34,7 @@ img.lazy-fade.loaded {
 html, body {
     height: 100%;
     background: var(--paper);
+    scroll-behavior: smooth;
 }
 
 body {
