@@ -4,7 +4,7 @@
 {% block title %}SRDG — Social Research &amp; Discourse Group{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static "pages/styles/new_home.css" %}">
+<link rel="stylesheet" href="{% static 'pages/styles/new_home.css' %}">
 {% endblock head %}
 
 {% block content %}
@@ -14,7 +14,7 @@
             <div class='hero-intro'>
                 <p class="label">WHAT WE DO</p>
                 <h1 class="motto">We take big questions <span class="highlight">out of the classroom</span> and into the real world.</h1>
-                <p class="description">SRDG runs initiatives, seminars, and events that bring students together around humanities, policy, and civic discourse — turning discussion into action.</p>
+                <p class="description">SRDG operates through initiatives; sustained campaigns each aimed at addressing a pressing issue, and seminars as an outlet for our members to voice their opinions to stimulate conversation and discourse.</p>
             </div>
             <div class="hero-buttons">
                 <a href="{% url 'signup' %}"><button class="join">Join the Group</button></a>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="hero-media">
-            <img src="{% static "pages/images/holidays-28.jpg" %}" alt="" class="hero-image lazy-fade">
+            <img src="{% static 'pages/images/holidays-28.jpg' %}" alt="" class="hero-image lazy-fade">
             <div class="hero-stat-card">
                 <p class="stat-card-number">{{ total_members }}</p>
                 <p class="stat-card-label">members and <br>counting</p>
@@ -63,70 +63,70 @@
         <div class="work-content">
             <p class="work-label">OUR WORK</p>
             <h2 class="work-heading">The work,<br>made in the open.</h2>
-            <p class="work-description">Three ways we move from conversation to contribution — each one led, run and shaped by students</p>
+            <p class="work-description">Three ways we move from conversation to contribution, each one led, run and shaped by students</p>
             <div class="work-items">
-                    <div class="work-card">
-                        <img src="{% static "pages/images/net.png" %}" alt="" class="lazy-fade">
-                        <div class="card-content">
-                            <p class="card-label">INITIATIVES</p>
-                            <p class="card-heading">Long-running projects with real outcomes</p>
-                            <p class="card-description">Student-led campaigns and programmes that carry an idea from a seminar room all the way to community impact</p>
-                            <a href="{% url "initiatives" %}" class="card-redirect">Explore initiatives &rarr;</a>
-                        </div>
+                <div class="work-card">
+                    <img src="{% static 'pages/images/net.png' %}" alt="" class="lazy-fade">
+                    <div class="card-content">
+                        <p class="card-label">INITIATIVES</p>
+                        <p class="card-heading">Sustained, action-oriented campaigns with the mission to address a pressing social issue.</p>
+                        <p class="card-description">Platforms to empower students and young people to lead a diverse range of projects, activities and to genuinely benefit communities through their own contributions in a collaborative environment.</p>
+                        <a href="{% url 'initiatives' %}" class="card-redirect">Explore initiatives &rarr;  </a>
                     </div>
-                    <div class="work-card">
-                        <img src="{% static "pages/images/sem.png" %}" alt="" class="lazy-fade">
-                        <div class="card-content">
-                            <p class="card-label">SEMINARS</p>
-                            <p class="card-heading">Sharp discussion on ideas that matter</p>
-                            <p class="card-description">Regular sessions where students debate philosophy, policy, and the humanities — and learn to disagree well</p>
-                            <a href="{% url "seminars" %}" class="card-redirect">See the schedule &rarr;</a>
-                        </div>
+                </div>
+                <div class="work-card">
+                    <img src="{% static 'pages/images/sem.png' %}" alt="" class="lazy-fade">
+                    <div class="card-content">
+                        <p class="card-label">SEMINARS</p>
+                        <p class="card-heading">Member-led discussions and workshops on ideas that stimulate and challenge us</p>
+                        <p class="card-description">Seminars are member-led discussions that explore topics of interest ranging from philosophy to art. </p>
+                        <a href="{% url 'seminars' %}" class="card-redirect">See the schedule &rarr;</a>
                     </div>
-                    <div class="work-card">
-                        <img src="{% static "pages/images/ype.png" %}" alt="" class="lazy-fade">
-                        <div class="card-content">
-                            <p class="card-label">EVENTS</p>
-                            <p class="card-heading">Bringing schools into one room</p>
-                            <p class="card-description">From the Youth Electoral Debate to open forums, our events connect students across the city around civic life</p>
-                            <a href="{% url "events" %}" class="card-redirect">Upcoming events &rarr;</a>
-                        </div>
+                </div>
+                <div class="work-card">
+                    <img src="{% static 'pages/images/ype.png' %}" alt="" class="lazy-fade">
+                    <div class="card-content">
+                        <p class="card-label">EVENTS</p>
+                        <p class="card-heading">Our ethos, manifest.</p>
+                        <p class="card-description">From the Youth Electoral Debate to open forums, our events connect students across the city around civic life</p>
+                        <a href="{% url 'events' %}" class="card-redirect">Upcoming events &rarr;</a>
                     </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="awareness">
-    <div class="awareness-content">
-        <p class="awareness-label">AWARENESS INITIATIVES</p>
-        <h2 class="awareness-heading">Awareness, in action.</h2>
-        <p class="awareness-description">Three active initiatives are underway right now. Here's what they look like on the ground.</p>
-    </div>
-    <div class="awareness-grid">
-        <a href="/events/6/attend/" class="awareness-card awareness-card--wide">
-            <img src="{% static "pages/images/ype.png" %}" alt="" class="awareness-img lazy-fade">
-            <div class="awareness-caption">
-                <p class="awareness-kicker">ACTIVE INITIATIVE</p>
-                <p class="awareness-title">Youth Electoral Debate – getting young voices into the conversation</p>
+        <div class="awareness-content">
+            <p class="awareness-label">AWARENESS INITIATIVES</p>
+            <h2 class="awareness-heading">Awareness, in action.</h2>
+            <p class="awareness-description">Three active initiatives are underway right now. Here's what they look like on the ground.</p>
+        </div>
+        <div class="awareness-grid">
+            <a href="/events/6/attend/" class="awareness-card awareness-card--wide">
+                <img src="{% static 'pages/images/ype.png' %}" alt="" class="awareness-img lazy-fade">
+                <div class="awareness-caption">
+                    <p class="awareness-kicker">ACTIVE INITIATIVE</p>
+                    <p class="awareness-title">Youth Electoral Debate – getting young voices into the conversation</p>
+                </div>
+            </a>
+            <div class="awareness-card-stack">
+                <a href="{% url 'initiatives' %}" class="awareness-card">
+                    <img src="{% static 'pages/images/network263.jpg' %}" alt="" class="awareness-img lazy-fade">
+                    <div class="awareness-caption">
+                        <p class="awareness-kicker">EDUUNLOCKED</p>
+                        <p class="awareness-title">Network 263</p>
+                    </div>
+                </a>
+                <a href="/tutoring/" class="awareness-card">
+                    <img src="{% static 'pages/images/tutor.png' %}" alt="" class="awareness-img awareness-img--top lazy-fade">
+                    <div class="awareness-caption">
+                        <p class="awareness-kicker">EDUUNLOCKED</p>
+                        <p class="awareness-title">SRDG Tutoring Network</p>
+                    </div>
+                </a>
             </div>
-        </a>
-        <div class="awareness-card-stack">
-            <a href="{% url 'initiatives' %}" class="awareness-card">
-                <img src="{% static "pages/images/network263.jpg" %}" alt="" class="awareness-img lazy-fade">
-                <div class="awareness-caption">
-                    <p class="awareness-kicker">EDUUNLOCKED</p>
-                    <p class="awareness-title">Network 263</p>
-                </div>
-            </a>
-            <a href="/tutoring/" class="awareness-card">
-                <img src="{% static "pages/images/tutor.png" %}" alt="" class="awareness-img awareness-img--top lazy-fade">
-                <div class="awareness-caption">
-                    <p class="awareness-kicker">EDUUNLOCKED</p>
-                    <p class="awareness-title">SRDG Tutoring Network</p>
-                </div>
-            </a>
         </div>
     </div>
-</div>
     <div class="about">
         <div class="about-media">
             <div class="stacked-photo">
@@ -144,7 +144,7 @@
         <div class="about-content">
             <p class="about-label">WHO WE ARE</p>
             <h2 class="about-heading">Run entirely by students.</h2>
-            <p class="about-body">A group of secondary school students from across Auckland, united by a shared passion for intellectual discussion and meaningful action.</p>
+            <p class="about-body">A collective of students united by mission and purpose to prove that change is always possible.   </p>
             <dl class="about-points">
                 <div class="about-point">
                     <dt class="about-stat">100%</dt>
@@ -166,7 +166,7 @@
         <div class="why-left">
             <p class="why-label">WHY WE DO IT</p>
             <p class="why-quote">
-                <span class="why-mark">“</span>The group exists as the bridge connecting academic thought with more tangible applications of our opinions and discussions.<span class="why-mark">”</span>
+                <span class="why-mark">"</span>The group exists as the bridge connecting academic thought with more tangible applications of our opinions and discussions.<span class="why-mark">"</span>
             </p>
             <p class="why-attribution">— The SRDG founding principle</p>
         </div>
@@ -174,38 +174,40 @@
             <div class="why-point">
                 <div class="why-point-header">
                     <span class="why-square"></span>
-                    <p class="why-point-heading">Humanities is not optional</p>
+                    <p class="why-point-heading">Humanities is only human</p>
                 </div>
-                <p class="why-point-body">We believe the humanities are integral to a healthy society — and worth defending in practice, not just in theory.</p>
+                <p class="why-point-body">Democracy cannot exist without discourse</p>
             </div>
             <div class="why-point">
                 <div class="why-point-header">
                     <span class="why-square"></span>
                     <p class="why-point-heading">Privilege, put to work</p>
                 </div>
-                <p class="why-point-body">It's our duty to leverage the opportunities we have to give back and create tangible impact in our communities.</p>
+                <p class="why-point-body">Always Aware/Always Watchful</p>
             </div>
             <div class="why-point">
                 <div class="why-point-header">
                     <span class="why-square"></span>
-                    <p class="why-point-heading">Discourse that goes somewhere</p>
+                    <p class="why-point-heading">For a Kinder Future</p>
                 </div>
-                <p class="why-point-body">Good discussion shouldn't end at the door. We build the bridge from ideas to action.</p>
+                <p class="why-point-body">It's our duty to leverage the opportunities we have to give back and create tangible impact in our communities.</p>
             </div>
         </div>
     </div>
 </div>
 
+<script type="application/json" id="side-photos-data">{{ about_side_urls_json|safe }}</script>
+<script type="application/json" id="middle-photos-data">{{ about_middle_urls_json|safe }}</script>
 <script>
     (function() {
-        const sidePhotos = {{ about_side_urls_json|safe }};
-        const middlePhotos = {{ about_middle_urls_json|safe }};
-        const sideImgs = document.querySelectorAll('.about-media [data-side-slot]');
-        const middleImgs = document.querySelectorAll('.about-media [data-middle-slot]');
+        var sidePhotos = JSON.parse(document.getElementById('side-photos-data').textContent);
+        var middlePhotos = JSON.parse(document.getElementById('middle-photos-data').textContent);
+        var sideImgs = document.querySelectorAll('.about-media [data-side-slot]');
+        var middleImgs = document.querySelectorAll('.about-media [data-middle-slot]');
 
         function setSrc(img, url) {
             if (!url || url === img.src) return;
-            const preload = new Image();
+            var preload = new Image();
             preload.onload = function() {
                 img.src = url;
                 img.classList.add('loaded');
@@ -213,8 +215,8 @@
             preload.src = url;
         }
 
-        let sideOffset = 0;
-        let middleOffset = 0;
+        var sideOffset = 0;
+        var middleOffset = 0;
 
         setInterval(function() {
             if (sidePhotos.length > sideImgs.length) {
