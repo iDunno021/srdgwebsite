@@ -18,4 +18,7 @@ urlpatterns = [
     path('blog/', views.BlogView.as_view(), name='blog'),
     path('blog/<int:id>/', views.blog_detail, name='blog_detail'),
     path('blog/create/', views.create_blog, name='create_blog'),
+    path('partners/', views.partners, name='partners'),
+
+
 ]
