@@ -123,8 +123,8 @@ class Seminar(models.Model):
 
 class MemberRole(models.Model):
     COMMITTEES = [
-        ('general', 'Board of Directors'),
-        ('ea', 'Eductional Advancement'),
+        ('general', 'General Committee'),
+        ('ea', 'EduUnlocked'),
         ('ype', 'Youth Political Engagement'),
         ('yac', 'Young Artists Collective'),
         ('administrative', 'Administrative Committee'),
