@@ -170,6 +170,7 @@
 .work-label {
     letter-spacing: 0.05em;
     color: var(--teal);
+    margin-bottom: 0.75rem;
 }
 
 .work-heading {
@@ -279,6 +280,7 @@
     flex: 1;
     display: flex;
     height: 100%;
+    min-height: 0;
 }
 
 .stacked-photo {
@@ -288,10 +290,12 @@
 
 .stacked-photo img {
     flex: 1;
+    min-height: 0;
 }
 
 .stretched-photo img {
     flex: 1;
+    min-height: 0;
 }
 
 .about-content{
@@ -531,7 +535,8 @@
     }
 
     .about-media {
-        min-height: 420px;
+        flex: none;
+        height: 600px;
     }
 
     .about-media > .stacked-photo:first-child {

@@ -15,16 +15,21 @@ def home(request):
     schools_count = len([s for s in Member.SCHOOLS if s[0] != 'other'])
     total_activites = Seminar.objects.filter(hidden=False).count() + Event.objects.count()
     initiatives = Initiative.objects.filter(hidden=False)
-    about_side_photos = list(AboutPhoto.objects.filter(slot='side')[:4])
-    about_middle_photo = AboutPhoto.objects.filter(slot='middle').first()
+    about_side_photos = list(AboutPhoto.objects.filter(slot='side'))
+    about_middle_photos = list(AboutPhoto.objects.filter(slot='middle'))
+    about_middle_photo = about_middle_photos[0] if about_middle_photos else None
+    about_side_urls_json = json.dumps([p.image.url for p in about_side_photos])
+    about_middle_urls_json = json.dumps([p.image.url for p in about_middle_photos])
     return render(request, 'pages/new_home.html', {
         'total_members': total_members,
         'total_initiatives': total_initiatives,
         'schools_count': schools_count,
         'total_activities': total_activites,
         'initiatives': initiatives,
-        'about_side_photos': about_side_photos,
+        'about_side_photos': about_side_photos[:4],
         'about_middle_photo': about_middle_photo,
+        'about_side_urls_json': about_side_urls_json,
+        'about_middle_urls_json': about_middle_urls_json,
     })
 
 def signup(request):
@@ -50,8 +55,8 @@ def signup_success(request):
 def staff(request):
     roles = sorted(MemberRole.objects.select_related('member').all(), key=lambda r: (r.member.first_name.lower() != 'amber' or r.member.last_name.lower() != 'cai'))
     committees = {
-        'Board of Directors': [r for r in roles if r.committee == 'general'],
-        'Education Advancement': [r for r in roles if r.committee == 'ea'],
+        'General Committee': [r for r in roles if r.committee == 'general'],
+        'EduUnlocked': [r for r in roles if r.committee == 'ea'],
         'Politics of Tomorrow': [r for r in roles if r.committee == 'ype'],
         'Young Artists Collective': [r for r in roles if r.committee == 'yac'],
         'Administrative Committee': [r for r in roles if r.committee == 'administrative'],
