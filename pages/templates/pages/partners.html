@@ -1,0 +1,155 @@
+{% extends "pages/base.html" %}
+
+{% load static %}
+
+{% block title %}Partners in Discourse — SRDG{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "pages/styles/partners.css" %}">
+{% endblock head %}
+
+{% block content %}
+<div class="partners-page">
+
+    <div class="record">
+
+        <div class="record-topbar">
+            <span class="record-location">AUCKLAND &middot; AOTEAROA</span>
+            <span class="record-name">THE PARTNERSHIP RECORD</span>
+            <span class="record-est">EST. 2021</span>
+        </div>
+
+        <div class="record-masthead">
+            <p class="masthead-label">PARTNERS &amp; SUPPORTERS</p>
+            <h1 class="masthead-title">Partners in <span class="highlight">Discourse</span></h1>
+        </div>
+
+        <div class="record-substrip">
+            <span>UNIVERSITIES</span>
+            <span class="dot">&#9670;</span>
+            <span>COMMUNITY &amp; NGOS</span>
+            <span class="dot">&#9670;</span>
+            <span>20+ SUPPORTERS</span>
+        </div>
+
+        <div class="record-intro">
+            <div class="intro-main">
+                <h2 class="intro-heading">A standing invitation to back student-led ideas.</h2>
+                <p class="intro-body">
+                    <span class="drop-cap">U</span>niversities and community organisations across Auckland lend their platforms, expertise and trust to the Social Research &amp; Discourse Group — so that {{ total_members }} students from {{ schools_count }} schools can take big questions out of the classroom and into the real world. This is the record of who stands with them, and what that partnership offers.
+                </p>
+            </div>
+            <div class="intro-sidebar">
+                <p class="sidebar-label">IN THIS ISSUE</p>
+                <a href="#what-partners-get" class="sidebar-item">
+                    <span class="sidebar-number">01</span>
+                    <span class="sidebar-text">What partners get</span>
+                </a>
+                <a href="#partner-register" class="sidebar-item">
+                    <span class="sidebar-number">02</span>
+                    <span class="sidebar-text">The partner register</span>
+                </a>
+                <a href="#become-a-partner" class="sidebar-item">
+                    <span class="sidebar-number">03</span>
+                    <span class="sidebar-text">Become a partner</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="section" id="what-partners-get">
+            <div class="section-heading-row">
+                <span class="section-number">01</span>
+                <h2 class="section-heading">What partners get</h2>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <h3 class="benefit-heading">Reach across the city</h3>
+                    <p class="benefit-body">Direct access to {{ total_members }}+ motivated students from {{ schools_count }} Auckland schools.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Shape real initiatives</h3>
+                    <p class="benefit-body">Help steer campaigns that move from conversation to genuine contribution.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Visible support</h3>
+                    <p class="benefit-body">Your organisation recognised across our platforms, events and materials.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Co-host events</h3>
+                    <p class="benefit-body">Partner on seminars, open forums and the Youth Electoral Debate.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">A thoughtful pipeline</h3>
+                    <p class="benefit-body">Connect with curious young people who take ideas — and your work — seriously.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Mentor &amp; give back</h3>
+                    <p class="benefit-body">Run workshops or mentor students leading their own community projects.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="partner-register">
+            <div class="section-heading-row">
+                <span class="section-number">02</span>
+                <h2 class="section-heading">The partner register</h2>
+            </div>
+
+            <div class="register-grid">
+                <div class="register-col">
+                    <p class="register-label register-label-teal">UNIVERSITIES &amp; ACADEMIC</p>
+                    <ul class="register-list">
+                        <li class="register-item">
+                            <!-- <img src="{% static "pages/images/uoadebating.png" %}" alt="UoA Debating Society" class="register-logo"> -->
+                            <span class="register-initials register-initials-teal">UA</span>
+                            <span class="register-name">UoA Debating Society</span>
+                        </li>
+                        <li class="register-item">
+                            <span class="register-initials register-initials-teal">AD</span>
+                            <span class="register-name">Auckland Debating Association</span>
+                        </li>
+                        <li class="register-item">
+                            <span class="register-initials register-initials-teal">AS</span>
+                            <span class="register-name">AUT Student Forum</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="register-col">
+                    <p class="register-label register-label-red">NGOS &amp; COMMUNITY</p>
+                    <ul class="register-list">
+                        <li class="register-item">
+                            <span class="register-initials register-initials-red">LM</span>
+                            <span class="register-name">Let Me Speak (LMS)</span>
+                        </li>
+                        <li class="register-item">
+                            <span class="register-initials register-initials-red">N2</span>
+                            <span class="register-name">Network 263</span>
+                        </li>
+                        <li class="register-item">
+                            <span class="register-initials register-initials-red">YV</span>
+                            <span class="register-name">Youth Voices Aotearoa</span>
+                        </li>
+                        <li class="register-item">
+                            <span class="register-initials register-initials-red">PC</span>
+                            <span class="register-name">Parnell Community Trust</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section cta-section" id="become-a-partner">
+            <div class="section-heading-row cta-heading-row">
+                <span class="section-number">03</span>
+                <h2 class="section-heading">Become a partner or <span class="highlight">supporter</span></h2>
+            </div>
+            <p class="cta-body">University, NGO or community organisation — write to us and let's add your name to the record.</p>
+            <a href="mailto:outreach@srdg.org.nz" class="cta-button">Email our partnerships team &rarr;</a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}
