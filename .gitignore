@@ -242,6 +242,7 @@ celerybeat.pid
 
 venv/
 CLAUDE.md
+.claude/
 db.sqlite3
 
 # Mac junk
