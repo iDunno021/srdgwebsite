@@ -1,5 +1,6 @@
 import json
 from django.shortcuts import render, redirect, get_object_or_404
+from ratelimit.decorators import ratelimit
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError
@@ -174,15 +175,12 @@ def blog_detail(request, id):
     post = get_object_or_404(BlogPost, id=id, approved=True)
     return render(request, 'pages/blog_detail.html', {'post': post})
 
+@ratelimit(key='ip', rate='1/h', method='POST', block=True)
 def create_blog(request):
     if request.method == 'POST':
-        form = BlogPostForm(request.POST, request.FILES)
+        form = BlogPostForm(request.POST)
         if form.is_valid():
-            post = form.save()
-            for image in request.FILES.getlist('images'):
-                BlogImage.objects.create(post=post, image=image)
-            for attachment in request.FILES.getlist('attachments'):
-                BlogAttachment.objects.create(post=post, file=attachment, name=attachment.name)
+            form.save()
             return redirect('blog')
     else:
         form = BlogPostForm()
