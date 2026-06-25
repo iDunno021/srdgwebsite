@@ -1,0 +1,150 @@
+{% extends "pages/base.html" %}
+
+{% load static %}
+
+{% block title %}Partners in Discourse — SRDG{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "pages/styles/partners.css" %}">
+{% endblock head %}
+
+{% block content %}
+<div class="partners-page">
+
+    <div class="record">
+
+        <div class="record-topbar">
+            <span class="record-location">AUCKLAND &middot; AOTEAROA</span>
+            <span class="record-name">THE PARTNERSHIP RECORD</span>
+            <span class="record-est">EST. 2021</span>
+        </div>
+
+        <div class="record-masthead">
+            <p class="masthead-label">PARTNERS &amp; SUPPORTERS</p>
+            <h1 class="masthead-title">Partners in <span class="highlight">Discourse and Action</span></h1>
+        </div>
+
+        <div class="record-substrip">
+            <span>UNIVERSITIES</span>
+            <span class="dot">&#9670;</span>
+            <span>COMMUNITY &amp; NGOS</span>
+            <span class="dot">&#9670;</span>
+            <span>20+ SUPPORTERS</span>
+        </div>
+
+        <div class="record-intro">
+            <div class="intro-main">
+                <h2 class="intro-heading">A standing invitation to back student-led ideas.</h2>
+                <p class="intro-body">
+                    <span class="drop-cap">U</span>niversities and organisations within our communities and internationally work with us to empower change. These are our people; united in mind, mission, and purpose.
+                </p>
+            </div>
+            <div class="intro-sidebar">
+                <p class="sidebar-label">IN THIS ISSUE</p>
+                <a href="#what-partners-get" class="sidebar-item">
+                    <span class="sidebar-number">01</span>
+                    <span class="sidebar-text">What partners get</span>
+                </a>
+                <a href="#partner-register" class="sidebar-item">
+                    <span class="sidebar-number">02</span>
+                    <span class="sidebar-text">Who we work with</span>
+                </a>
+                <a href="#become-a-partner" class="sidebar-item">
+                    <span class="sidebar-number">03</span>
+                    <span class="sidebar-text">Become a partner</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="section" id="what-partners-get">
+            <div class="section-heading-row">
+                <span class="section-number">01</span>
+                <h2 class="section-heading">What partners get</h2>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <h3 class="benefit-heading">Create change</h3>
+                    <p class="benefit-body">Have a positive impact on society through real initiatives.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Shape real initiatives</h3>
+                    <p class="benefit-body">Help steer campaigns that move from conversation to genuine contribution.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Visible support</h3>
+                    <p class="benefit-body">Your organisation recognised across our platforms, events and materials.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Co-host events</h3>
+                    <p class="benefit-body">Partner on seminars, open forums and the Youth Electoral Debate.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">A thoughtful pipeline</h3>
+                    <p class="benefit-body">Connect with curious young people who take ideas — and your work — seriously.</p>
+                </div>
+                <div class="benefit">
+                    <h3 class="benefit-heading">Mentor &amp; give back</h3>
+                    <p class="benefit-body">Run workshops or mentor students leading their own community projects.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="partner-register">
+            <div class="section-heading-row">
+                <span class="section-number">02</span>
+                <h2 class="section-heading">Who we work with</h2>
+            </div>
+
+            <div class="register-grid">
+                <div class="register-col">
+                    <p class="register-label register-label-teal">UNIVERSITIES &amp; ACADEMIC</p>
+                    <ul class="register-list">
+                        <li class="register-item has-logo">
+                            <img src="{% static 'pages/images/uoadebating.png' %}" alt="UoA Debating Society" class="register-logo">
+                            <span class="register-name">UoA Debating Society</span>
+                        </li>
+                        <li class="register-item has-logo">
+                            <img src="{% static 'pages/images/uoapp.jpg' %}" alt="UoA Public Policy Club" class="register-logo">
+                            <span class="register-name">UoA Public Policy Club</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="register-col">
+                    <p class="register-label register-label-red">NGOS &amp; COMMUNITY</p>
+                    <ul class="register-list">
+                        <li class="register-item has-logo">
+                            <img src="{% static 'pages/images/letmespeak.png' %}" alt="Let Me Speak" class="register-logo">
+                            <span class="register-name">Let Me Speak (LMS)</span>
+                        </li>
+                        <li class="register-item has-logo">
+                            <img src="{% static 'pages/images/network263logo.png' %}" alt="Network 263" class="register-logo">
+                            <span class="register-name">Network 263</span>
+                        </li>
+                        <li class="register-item has-logo">
+                            <img src="{% static 'pages/images/os.png' %}" alt="Objectspace" class="register-logo">
+                            <span class="register-name">Objectspace</span>
+                        </li>
+                        <li class="register-item has-logo">
+                            <img src="{% static 'pages/images/lit.jpg' %}" alt="Literati" class="register-logo">
+                            <span class="register-name">Literati</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section cta-section" id="become-a-partner">
+            <div class="section-heading-row cta-heading-row">
+                <span class="section-number">03</span>
+                <h2 class="section-heading">Become a partner or <span class="highlight">supporter</span></h2>
+            </div>
+            <p class="cta-body">University, NGO or community organisation — write to us and let's add your name to the record.</p>
+            <a href="https://www.srdg.co.nz/contact/" class="cta-button">Email our partnerships team &rarr;</a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}

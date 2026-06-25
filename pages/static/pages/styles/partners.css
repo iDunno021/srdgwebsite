@@ -1,0 +1,361 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.partners-page {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--paper);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+}
+
+.record {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 54px 48px 64px 48px;
+}
+
+.record-topbar {
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    padding: 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.record-masthead {
+    text-align: center;
+    padding: 30px 0 18px;
+    border-bottom: 1px solid var(--ink);
+}
+
+.masthead-label {
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+}
+
+.masthead-title {
+    font: 500 84px/0.96 var(--font-serif);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.masthead-title .highlight {
+    font-style: italic;
+    color: var(--red);
+}
+
+.record-substrip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 9px 0;
+    border-bottom: 3px double var(--ink);
+    font: 500 12px/1 var(--font-sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.record-substrip .dot {
+    color: var(--yellow);
+}
+
+.record-intro {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 44px;
+    padding: 40px 0 48px;
+    border-bottom: 1px solid rgba(22, 34, 61, 0.25);
+}
+
+.intro-main {
+    min-width: 0;
+}
+
+.intro-heading {
+    font: 500 38px/1.12 var(--font-serif);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0 0 18px 0;
+}
+
+.intro-body {
+    font: 400 17px/1.7 var(--font-sans);
+    color: var(--muted);
+    margin: 0;
+}
+
+.drop-cap {
+    float: left;
+    font: 500 64px/0.78 var(--font-serif);
+    color: var(--red);
+    padding: 6px 12px 0 0;
+}
+
+.intro-sidebar {
+    min-width: 0;
+    border-left: 1px solid rgba(22, 34, 61, 0.25);
+    padding-left: 32px;
+}
+
+.sidebar-label {
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 18px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(22, 34, 61, 0.3);
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+}
+
+.sidebar-item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sidebar-number {
+    font: 500 15px/1 var(--font-serif);
+    color: var(--red);
+}
+
+.sidebar-text {
+    font: 500 15px/1.3 var(--font-sans);
+    color: var(--ink);
+}
+
+.section {
+    padding: 44px 0 48px;
+    border-bottom: 1px solid rgba(22, 34, 61, 0.25);
+    scroll-margin-top: 2rem;
+}
+
+.section-heading-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.section-number {
+    font: 500 22px/1 var(--font-serif);
+    color: var(--yellow);
+}
+
+.section-heading {
+    font: 500 34px/1.05 var(--font-serif);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.section-heading .highlight {
+    font-style: italic;
+    color: var(--red);
+}
+
+.benefits-grid {
+    column-count: 3;
+    column-gap: 38px;
+    column-rule: 1px solid rgba(22, 34, 61, 0.2);
+}
+
+.benefit {
+    break-inside: avoid;
+    margin-bottom: 26px;
+}
+
+.benefit-heading {
+    font: 600 19px/1.25 var(--font-serif);
+    color: var(--ink);
+    margin: 0 0 7px 0;
+    padding-top: 14px;
+    border-top: 2px solid var(--ink);
+}
+
+.benefit-body {
+    font: 400 15px/1.62 var(--font-sans);
+    color: var(--muted);
+    margin: 0;
+}
+
+.register-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+}
+
+.register-label {
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 2px solid;
+    margin: 0 0 6px 0;
+}
+
+.register-label-teal {
+    color: var(--teal);
+    border-color: var(--teal);
+}
+
+.register-label-red {
+    color: var(--red);
+    border-color: var(--red);
+}
+
+.register-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.register-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px dotted rgba(22, 34, 61, 0.3);
+}
+
+.register-item.has-logo {
+    align-items: center;
+}
+
+.register-item:last-child {
+    border-bottom: none;
+}
+
+.register-initials {
+    font: 500 14px/1 var(--font-serif);
+    min-width: 30px;
+}
+
+.register-initials-teal {
+    color: var(--teal);
+}
+
+.register-initials-red {
+    color: var(--red);
+}
+
+.register-logo {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+}
+
+.register-name {
+    font: 500 17px/1.3 var(--font-sans);
+    color: var(--ink);
+}
+
+.cta-section {
+    text-align: center;
+    padding: 50px 0 64px;
+    border-bottom: none;
+}
+
+.cta-heading-row {
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.cta-heading-row .section-heading {
+    font-size: 44px;
+}
+
+.cta-body {
+    font: 400 17px/1.6 var(--font-sans);
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 30px;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--ink);
+    color: var(--paper);
+    font: 600 16px/1 var(--font-sans);
+    padding: 18px 32px;
+    border-radius: 11px;
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .record {
+        padding: 32px 24px 48px 24px;
+    }
+
+    .masthead-title {
+        font-size: 2.6rem;
+        line-height: 1.05;
+    }
+
+    .record-substrip {
+        flex-wrap: wrap;
+    }
+
+    .record-intro {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .intro-heading {
+        font-size: 1.7rem;
+    }
+
+    .intro-sidebar {
+        border-left: none;
+        border-top: 1px solid rgba(22, 34, 61, 0.25);
+        padding-left: 0;
+        padding-top: 1.6rem;
+    }
+
+    .benefits-grid {
+        column-count: 1;
+    }
+
+    .register-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .section-heading {
+        font-size: 1.6rem;
+    }
+
+    .cta-heading-row .section-heading {
+        font-size: 1.9rem;
+    }
+}

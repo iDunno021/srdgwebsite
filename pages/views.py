@@ -56,7 +56,7 @@ def staff(request):
     roles = sorted(MemberRole.objects.select_related('member').all(), key=lambda r: (r.member.first_name.lower() != 'amber' or r.member.last_name.lower() != 'cai'))
     committees = {
         'General Committee': [r for r in roles if r.committee == 'general'],
-        'EduUnlocked': [r for r in roles if r.committee == 'ea'],
+        'Educational Advancement': [r for r in roles if r.committee == 'ea'],
         'Politics of Tomorrow': [r for r in roles if r.committee == 'ype'],
         'Young Artists Collective': [r for r in roles if r.committee == 'yac'],
         'Administrative Committee': [r for r in roles if r.committee == 'administrative'],
@@ -222,5 +222,11 @@ def event_rsvp(request, event_id):
             return redirect('event_attend', event_id=event_id)
     return redirect('events')
 
-    
-        
+def partners(request):
+    total_members = Member.objects.count()
+    schools_count = len([s for s in Member.SCHOOLS if s[0] != 'other'])
+
+    return render(request, 'pages/partners.html', {
+        'total_members': total_members,
+        'schools_count': schools_count,
+    })
