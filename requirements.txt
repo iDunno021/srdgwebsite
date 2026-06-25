@@ -10,4 +10,3 @@ requests==2.33.1
 sqlparse==0.5.5
 whitenoise==6.9.0
 resend
-django-ratelimit==4.1.0

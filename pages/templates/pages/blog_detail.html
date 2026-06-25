@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block title %}{{ post.title }} | SRDG{% endblock %}
-{% block meta_description %}{{ post.title }}{% if post.excerpt %} — {{ post.excerpt|truncatechars:120 }}{% else %} — an essay by {{ post.author }} on the SRDG blog.{% endif %}{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'pages/styles/blog_detail.css' %}">
 {% endblock %}

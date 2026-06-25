@@ -248,6 +248,15 @@ nav {
 
 /* ── Page wrapper ── */
 
+.wip-banner {
+    background: var(--yellow);
+    color: #1a1a1a;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 .page-content {
     min-height: calc(100vh - var(--nav-height));
     display: flex;
