@@ -40,7 +40,7 @@
             <span class="init-cat">
               {% if forloop.counter == 1 %}Arts &amp; Culture
               {% elif forloop.counter == 2 %}Civic &amp; Political
-              {% elif forloop.counter == 3 %}Education &amp; Equity
+              {% elif forloop.counter == 3 %}Educational
               {% else %}Initiative{% endif %}
             </span>
             {% include 'pages/includes/status_dot.html' %}
@@ -80,7 +80,7 @@
           {% elif forloop.counter == 2 %}
           <img src="{% static 'pages/images/politics-of-tomorrow.png' %}" alt="Politics of Tomorrow" class="init-visual-img">
           {% elif forloop.counter == 3 %}
-          <img src="{% static 'pages/images/edu-unlocked.png' %}" alt="Education Unlocked" class="init-visual-img">
+          <img src="{% static 'pages/images/edu-unlocked.png' %}" alt="Educational Advancement" class="init-visual-img">
           {% else %}
           <div class="init-visual-placeholder">
             <span class="init-visual-num">{{ forloop.counter|stringformat:"02d" }}</span>
@@ -97,7 +97,7 @@
   <section class="init-join">
     <div class="container">
       <div class="init-join-card init-reveal">
-        <div class="init-eyebrow">Get involved</div>
+        <div class="init-eyebrow">  t involved</div>
         <h2>Have an idea for an initiative?</h2>
         <p>Our initiatives are started and run by students. If you see a gap, we'll help you build it.</p>
         <a href="{% url 'signup' %}" class="init-join-btn">Become a member</a>
