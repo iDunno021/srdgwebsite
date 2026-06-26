@@ -1,4 +1,5 @@
 import json
+from django.core.cache import cache
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
@@ -176,6 +177,13 @@ def blog_detail(request, id):
 
 def create_blog(request):
     if request.method == 'POST':
+        ip = request.META.get('REMOTE_ADDR', 'unknown')
+        cache_key = f'blog_create_{ip}'
+        if cache.get(cache_key):
+            return render(request, 'pages/create_blog.html', {
+                'form': BlogPostForm(),
+                'rate_limited': True,
+            })
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
@@ -183,6 +191,7 @@ def create_blog(request):
                 BlogImage.objects.create(post=post, image=image)
             for attachment in request.FILES.getlist('attachments'):
                 BlogAttachment.objects.create(post=post, file=attachment, name=attachment.name)
+            cache.set(cache_key, True, 3600)
             return redirect('blog')
     else:
         form = BlogPostForm()

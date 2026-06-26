@@ -10,6 +10,9 @@
         <h1>New Post</h1>
         <div class="underline"></div>
     </div>
+    {% if rate_limited %}
+    <p class="field-error" style="margin-bottom:1rem;">You've already submitted a post in the last hour. Please try again later.</p>
+    {% endif %}
     <form class="create-blog-form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
