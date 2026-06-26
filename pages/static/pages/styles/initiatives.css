@@ -374,7 +374,7 @@
 }
 
 
-@media (prefers---reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .init-reveal {
     opacity: 0;
     transform: translateY(20px);
