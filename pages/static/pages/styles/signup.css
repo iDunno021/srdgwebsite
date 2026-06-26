@@ -120,3 +120,25 @@
 .signup-form select.error {
     border: 1px solid var(--color-error);
 }
+
+.staff-signup-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14.5px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.staff-signup-btn:hover {
+    background: var(--yellow);
+}
