@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'website.rate_limiter.RateLimiterMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,6 +59,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+RATE_LIMIT = {
+    "WINDOW_SECONDS": 900,
+    "MAX_REQUESTS": 100,
+    "API_MAX_REQUESTS": 20,
+    "LOGIN_MAX_REQUESTS": 10,
+}
 
 ROOT_URLCONF = 'website.urls'
 
