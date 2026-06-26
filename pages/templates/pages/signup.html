@@ -35,10 +35,104 @@
     </div>
 </div>
 <script>
+
+    const SCHOOLS_BY_REGION = {
+        'auckland': ['AGS', 'STC', 'STK', 'BAR', 'EGGS', 'KC', 'GDC', 'selwyn', 'DIO', 'RGT', 'DIL', 'ACGP', 'ACGS', 'WBC', 'WGC', 'MAC', 'SDCC', 'GBHS', 'other'],
+        'bayofplenty': ['other'],
+        'canterbury': ['other'],
+        'gisbourne': ['other'],
+        'hawkesbay': ['other'],
+        'manawatuwhanganui': ['other'],
+        'marlborough': ['other'],
+        'nelson': ['other'],
+        'northland': ['other'],
+        'otago': ['other'],
+        'southland': ['other'],
+        'taranaki': ['other'],
+        'tasman': ['other'],
+        'waikato': ['other'],
+        'wellington': ['other'],
+        'westcoast': ['other'],
+    };
     const schoolSelect = document.getElementById('id_school');
     const otherInput = document.getElementById('other-school-input');
 
-    schoolSelect.parentElement.appendChild(otherInput);
+    const allOptions = Array.from(schoolSelect.options);
+    const schoolP = schoolSelect.closest('p');
+    const regionP = document.createElement('p');
+
+    const regionLabel = document.createElement('label');
+    regionLabel.textContent = 'Region:';
+    regionLabel.htmlFor = 'id_region';
+
+    const regionSelect = document.createElement('select');
+    regionSelect.id   = 'id_region';
+    regionSelect.name = 'region';
+
+    const regionOptions = [
+        ['', 'Select your region…'],
+        ['auckland',    'Auckland'],
+        ['bayofplenty',   'Bay of Plenty'],
+        ['canterbury',   'Canterbury'],
+        ['gisbourne',   'Gisbourne'],
+        ['hawkesbay',   'Hawke\'s Bay'],
+        ['manawatuwhanganui',   'Manawatū-Whanganui'],
+        ['marlborough',   'Marlborough'],
+        ['nelson',   'Nelson'],
+        ['northland', 'Northland'],
+        ['otago',   'Otago'],
+        ['southland',   'Southland'],
+        ['taranaki',   'Taranaki'],
+        ['tasman',   'Tasman'],
+        ['waikato',    'Waikato'],
+        ['wellington',   'Wellington'],
+        ['westcoast',   'West Coast'],
+
+    ];
+
+    regionOptions.forEach(([val, label]) => {
+        const opt = new Option(label, val);
+        regionSelect.appendChild(opt);
+    });
+
+    regionP.appendChild(regionLabel);
+    regionP.appendChild(regionSelect);
+    schoolP.before(regionP);
+
+    schoolP.style.display = 'none';
+
+    regionSelect.addEventListener('change', function () {
+        const region = this.value;
+
+        schoolSelect.innerHTML = '';
+
+        if (!region) {
+            schoolP.style.display = 'none';
+            hideOtherInput();
+            return;
+        }
+
+        const allowed = SCHOOLS_BY_REGION[region] || [];
+        const filtered = allOptions.filter(o => allowed.includes(o.value));
+
+        schoolSelect.appendChild(new Option('Select your school…', ''));
+        filtered.forEach(o => schoolSelect.appendChild(o.cloneNode(true)));
+
+        if (filtered.length === 1) {
+            schoolSelect.value = filtered[0].value;
+        }
+
+        schoolP.style.display = '';
+        showOther();
+    });
+
+    schoolP.appendChild(otherInput);
+
+    function hideOtherInput() {
+    otherInput.style.maxHeight = '0';
+    otherInput.style.opacity = '0';
+    setTimeout(() => { otherInput.style.display = 'none'; }, 300);
+    }
 
     function showOther() {
         if (schoolSelect.value === 'other') {
@@ -48,14 +142,23 @@
                 otherInput.style.opacity = '1';
             }, 10);
         } else {
-            otherInput.style.maxHeight = '0';
-            otherInput.style.opacity = '0';
-            setTimeout(() => {
-                otherInput.style.display = 'none';
-            }, 300);
+            hideOtherInput();
         }
     }
-    document.querySelector('form').addEventListener('submit', function(e) {
+    
+    schoolSelect.addEventListener('change', showOther);
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+        if (!regionSelect.value) {
+            e.preventDefault();
+            regionSelect.classList.add('error');
+            return;
+        }
+        if (!schoolSelect.value) {
+            e.preventDefault();
+            schoolSelect.classList.add('error');
+            return;
+        }
         if (schoolSelect.value === 'other' && !otherInput.value.trim()) {
             e.preventDefault();
             otherInput.classList.add('error');
@@ -63,13 +166,16 @@
         }
     });
 
-    otherInput.addEventListener('input', function() {
+    otherInput.addEventListener('input', function () {
         otherInput.classList.remove('error');
         otherInput.placeholder = 'Enter your school name';
     });
 
-    showOther();
+    regionSelect.addEventListener('change', function () {
+        regionSelect.classList.remove('error');
+        schoolSelect.classList.remove('error');
+    });
 
-    schoolSelect.addEventListener('change', showOther);
+    showOther();
 </script>
 {% endblock %}
