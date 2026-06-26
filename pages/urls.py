@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -19,6 +20,5 @@ urlpatterns = [
     path('blog/<int:id>/', views.blog_detail, name='blog_detail'),
     path('blog/create/', views.create_blog, name='create_blog'),
     path('partners/', views.partners, name='partners'),
-
-
+    path('robots.txt', TemplateView.as_view(template_name='pages/robots.txt', content_type='text/plain')),
 ]
