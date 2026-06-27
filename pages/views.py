@@ -177,7 +177,7 @@ def blog_detail(request, id):
 
 def create_blog(request):
     if request.method == 'POST':
-        ip = request.META.get('REMOTE_ADDR', 'unknown')
+        ip = request.META.get('HTTP_X_FORWARDED_FOR', '').split(',')[0].strip() or request.META.get('REMOTE_ADDR', 'unknown')
         cache_key = f'blog_create_{ip}'
         if cache.get(cache_key):
             return render(request, 'pages/create_blog.html', {
