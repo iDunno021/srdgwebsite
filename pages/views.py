@@ -10,6 +10,25 @@ from django.views import generic
 import resend
 from django.conf import settings
 
+SCHOOLS_BY_REGION = {
+    'auckland': ['AGS', 'STC', 'STK', 'BAR', 'EGGS', 'KC', 'GDC', 'selwyn', 'DIO', 'RGT', 'DIL', 'ACGP', 'ACGS', 'WBC', 'WGC', 'MAC', 'SDCC', 'GBHS', 'other'],
+    'bayofplenty': ['other'],
+    'canterbury': ['other'],
+    'gisbourne': ['other'],
+    'hawkesbay': ['other'],
+    'manawatuwhanganui': ['other'],
+    'marlborough': ['other'],
+    'nelson': ['other'],
+    'northland': ['other'],
+    'otago': ['other'],
+    'southland': ['other'],
+    'taranaki': ['other'],
+    'tasman': ['other'],
+    'waikato': ['other'],
+    'wellington': ['other'],
+    'westcoast': ['other'],
+}
+
 def home(request):
     total_members = Member.objects.count()
     total_initiatives = Initiative.objects.filter(hidden=False).count()
@@ -42,13 +61,13 @@ def signup(request):
                 other_school = request.POST.get('other_school')
                 if not other_school:
                     form.add_error(None, 'Please enter your school name.')
-                    return render(request, 'pages/signup.html', {'form': form})
+                    return render(request, 'pages/signup.html', {'form': form, 'schools_by_region': json.dumps(SCHOOLS_BY_REGION)})
                 member.school = other_school
             member.save()
             return redirect('signup_success')
     else:
         form = MemberForm()
-    return render(request, 'pages/signup.html', {'form': form})
+    return render(request, 'pages/signup.html', {'form': form, 'schools_by_region': json.dumps(SCHOOLS_BY_REGION)})
 
 def signup_success(request):
     return render(request, 'pages/signup_success.html')
