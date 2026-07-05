@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from django.utils import timezone
 from django.utils.text import slugify
 import uuid
@@ -195,7 +196,10 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=220, unique=True, blank=True)
     author = models.CharField(max_length=100, default="anonymous")
     body = models.TextField()
-    cover_image = models.ImageField(upload_to=blog_cover_path, blank=True, null=True)
+    cover_image = models.ImageField(
+        upload_to=blog_cover_path, blank=True, null=True,
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'])],
+    )
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

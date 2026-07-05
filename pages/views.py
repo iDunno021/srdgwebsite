@@ -10,6 +10,18 @@ from django.views import generic
 import resend
 from django.conf import settings
 
+ALLOWED_IMAGE_EXTS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
+ALLOWED_ATTACHMENT_EXTS = {'pdf', 'doc', 'docx', 'txt'}
+MAX_UPLOAD_SIZE = 10 * 1024 * 1024  # 10MB
+
+def _validate_upload(f, allowed_exts):
+    ext = f.name.rsplit('.', 1)[-1].lower() if '.' in f.name else ''
+    if ext not in allowed_exts:
+        return f'"{f.name}" has an unsupported file type.'
+    if f.size > MAX_UPLOAD_SIZE:
+        return f'"{f.name}" is too large (max 10MB).'
+    return None
+
 SCHOOLS_BY_REGION = {
     'auckland': ['AGS', 'STC', 'STK', 'BAR', 'EGGS', 'KC', 'GDC', 'selwyn', 'DIO', 'RGT', 'DIL', 'ACGP', 'ACGS', 'WBC', 'WGC', 'MAC', 'SDCC', 'GBHS', 'other'],
     'bayofplenty': ['other'],
@@ -196,7 +208,11 @@ def blog_detail(request, id):
 
 def create_blog(request):
     if request.method == 'POST':
-        ip = request.META.get('HTTP_X_FORWARDED_FOR', '').split(',')[0].strip() or request.META.get('REMOTE_ADDR', 'unknown')
+        ip = (
+            request.META.get('HTTP_X_REAL_IP')
+            or request.META.get('HTTP_X_FORWARDED_FOR', '').split(',')[-1].strip()
+            or request.META.get('REMOTE_ADDR', 'unknown')
+        )
         cache_key = f'blog_create_{ip}'
         if cache.get(cache_key):
             return render(request, 'pages/create_blog.html', {
@@ -205,6 +221,17 @@ def create_blog(request):
             })
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
+            errors = []
+            for f in request.FILES.getlist('images'):
+                if err := _validate_upload(f, ALLOWED_IMAGE_EXTS):
+                    errors.append(err)
+            for f in request.FILES.getlist('attachments'):
+                if err := _validate_upload(f, ALLOWED_ATTACHMENT_EXTS):
+                    errors.append(err)
+
+            if errors:
+                return render(request, 'pages/create_blog.html', {'form': form, 'upload_errors': errors})
+
             post = form.save()
             for image in request.FILES.getlist('images'):
                 BlogImage.objects.create(post=post, image=image)
