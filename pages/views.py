@@ -188,7 +188,7 @@ class InitiativeView(generic.ListView):
 def initiative_detail(request, slug):
     initiative = get_object_or_404(Initiative, slug=slug, hidden=False)
     custom = f'pages/initiatives/{slug}.html'
-    default = 'pages/initiatives/initiative_base.html'
+    default = 'pages/initiatives/initiative_base.html'  
     try:
         get_template(custom)
         template = custom
