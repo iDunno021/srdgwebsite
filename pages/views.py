@@ -244,10 +244,10 @@ def event_rsvp(request, event_id):
                 resend.Emails.send({
                     "from": "noreply@srdg.co.nz",
                     "to": email,
-                    "subject": "You've registered for the Youth Political Debate!",
-                    "html": """
+                    "subject": f"You've registered for {event.title}!",
+                    "html": f"""
                         <h2> You're in! </h2>
-                        <p>Thanks for registering for the <strong>Youth Political Debate</strong>.</p>
+                        <p>Thanks for registering for the <strong>{event.title}</strong>.</p>
                         <p>We'll see you there!</p>
                     """
                 })

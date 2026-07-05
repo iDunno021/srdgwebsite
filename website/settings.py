@@ -106,6 +106,7 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', '5432'),
         'CONN_MAX_AGE': 600,
+        'DISABLE_SERVER_SIDE_CURSORS': True,  # required for Supabase transaction pooler on Vercel (serverless)
     }
 }
 
@@ -146,9 +147,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
-
-# Required for Supabase transaction pooler on Vercel (serverless)
-DISABLE_SERVER_SIDE_CURSORS = True
 
 STATICFILES_DIRS = [
     BASE_DIR / 'pages' / 'static',
