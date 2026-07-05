@@ -112,26 +112,6 @@ def event_attend(request, event_id):
         'form': EventRSVPForm(),
     })
 
-def event_rsvp(request, event_id):
-    event = get_object_or_404(Event, id=event_id)
-    if request.method == 'POST':
-        form = EventRSVPForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            member = Member.objects.filter(email=email).first()
-            rsvp = form.save(commit=False)
-            rsvp.event = event
-            if member:
-                rsvp.member = member
-            try:
-                rsvp.save()
-            except IntegrityError:
-                messages.error(request, "You've already registered for this event with that email.")
-                return redirect('event_attend', event_id=event_id)
-            messages.success(request, "You're registered! We'll see you there.")
-            return redirect('event_attend', event_id=event_id)
-    return redirect('events')
-
 def calendar(request):
     status_colors = {'upcoming': '#C8391A', 'active': '#2e7d32', 'completed': '#1a4a7a'}
 
