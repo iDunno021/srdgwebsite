@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, ArtPiece, AboutPhoto
+from django.db.models import Count, Q
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, BlogReaction, ArtPiece, AboutPhoto
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
+from .utils import get_client_ip
 from django.views import generic
 import resend
 from django.conf import settings
@@ -180,19 +182,54 @@ class BlogView(generic.ListView):
     model = BlogPost
     template_name = 'pages/blog.html'
     context_object_name = 'posts'
-    queryset = BlogPost.objects.filter(approved=True).order_by('-published_at')
+
+    def get_queryset(self):
+        qs = BlogPost.objects.filter(approved=True).annotate(
+            like_count=Count('reactions', filter=Q(reactions__reaction=BlogReaction.LIKE)),
+        )
+        if self.request.GET.get('sort') == 'liked':
+            return qs.order_by('-like_count', '-published_at')
+        return qs.order_by('-published_at')
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['current_sort'] = self.request.GET.get('sort', 'recent')
+        return ctx
 
 def blog_detail(request, id):
     post = get_object_or_404(BlogPost, id=id, approved=True)
-    return render(request, 'pages/blog_detail.html', {'post': post})
+    like_count = post.reactions.filter(reaction=BlogReaction.LIKE).count()
+    dislike_count = post.reactions.filter(reaction=BlogReaction.DISLIKE).count()
+    user_reaction = None
+    ip = get_client_ip(request)
+    if ip != 'unknown':
+        existing = post.reactions.filter(ip_address=ip).first()
+        user_reaction = existing.reaction if existing else None
+    return render(request, 'pages/blog_detail.html', {
+        'post': post,
+        'like_count': like_count,
+        'dislike_count': dislike_count,
+        'user_reaction': user_reaction,
+    })
+
+def blog_react(request, id, reaction):
+    post = get_object_or_404(BlogPost, id=id, approved=True)
+    if request.method == 'POST' and reaction in (BlogReaction.LIKE, BlogReaction.DISLIKE):
+        ip = get_client_ip(request)
+        if ip != 'unknown':
+            existing = BlogReaction.objects.filter(post=post, ip_address=ip).first()
+            if existing and existing.reaction == reaction:
+                existing.delete()
+            elif existing:
+                existing.reaction = reaction
+                existing.save(update_fields=['reaction'])
+            else:
+                BlogReaction.objects.create(post=post, ip_address=ip, reaction=reaction)
+    return redirect('blog_detail', id=id)
 
 def create_blog(request):
     if request.method == 'POST':
-        ip = (
-            request.META.get('HTTP_X_REAL_IP')
-            or request.META.get('HTTP_X_FORWARDED_FOR', '').split(',')[-1].strip()
-            or request.META.get('REMOTE_ADDR', 'unknown')
-        )
+        ip = get_client_ip(request)
         cache_key = f'blog_create_{ip}'
         if cache.get(cache_key):
             return render(request, 'pages/create_blog.html', {

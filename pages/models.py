@@ -220,6 +220,26 @@ class BlogPost(models.Model):
         return self.title
 
 
+class BlogReaction(models.Model):
+    LIKE = 'like'
+    DISLIKE = 'dislike'
+    REACTION_CHOICES = [
+        (LIKE, 'Like'),
+        (DISLIKE, 'Dislike'),
+    ]
+
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='reactions')
+    ip_address = models.GenericIPAddressField()
+    reaction = models.CharField(max_length=10, choices=REACTION_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = [('post', 'ip_address')]
+
+    def __str__(self):
+        return f"{self.ip_address} {self.reaction}d {self.post.title}"
+
+
 class EventRSVP(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='rsvps')
     first_name = models.CharField(max_length=100)

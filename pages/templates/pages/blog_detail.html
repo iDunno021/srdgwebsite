@@ -26,6 +26,21 @@
         {{ post.body|linebreaks }}
     </div>
 
+    <div class="blog-post-reactions">
+        <form method="POST" action="{% url 'blog_react' post.id 'like' %}" class="reaction-form">
+            {% csrf_token %}
+            <button type="submit" class="reaction-button reaction-like {% if user_reaction == 'like' %}active{% endif %}">
+                &#128077; {{ like_count }}
+            </button>
+        </form>
+        <form method="POST" action="{% url 'blog_react' post.id 'dislike' %}" class="reaction-form">
+            {% csrf_token %}
+            <button type="submit" class="reaction-button reaction-dislike {% if user_reaction == 'dislike' %}active{% endif %}">
+                &#128078; {{ dislike_count }}
+            </button>
+        </form>
+    </div>
+
     {% if post.images.all %}
     <div class="blog-post-gallery">
         <h3 class="blog-post-section-title">Images</h3>

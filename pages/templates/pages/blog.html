@@ -15,6 +15,10 @@
         <p class="blog-intro">
             Essays, opinion pieces, and reflections written by our members — a space for developing our academic voice and exploring the issues that matter to us.
         </p>
+        <div class="blog-sort">
+            <a href="{% url 'blog' %}" class="blog-sort-link {% if current_sort == 'recent' %}active{% endif %}">Most Recent</a>
+            <a href="{% url 'blog' %}?sort=liked" class="blog-sort-link {% if current_sort == 'liked' %}active{% endif %}">Most Liked</a>
+        </div>
     </div>
     <div class="blog-list">
         {% for post in posts %}
@@ -28,7 +32,10 @@
                 <span class="blog-card-author">{{ post.author }}</span>
                 <h2 class="blog-card-title">{{ post.title }}</h2>
                 <p class="blog-card-excerpt">{{ post.body|truncatewords:30 }}</p>
-                <span class="blog-card-date">{{ post.published_at|date:"j F Y" }}</span>
+                <div class="blog-card-meta">
+                    <span class="blog-card-date">{{ post.published_at|date:"j F Y" }}</span>
+                    <span class="blog-card-likes">&#9829; {{ post.like_count }}</span>
+                </div>
             </div>
         </a>
         {% empty %}

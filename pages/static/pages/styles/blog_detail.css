@@ -71,6 +71,43 @@
     margin-bottom: 1.25rem;
 }
 
+/* ── Reactions ── */
+
+.blog-post-reactions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 3rem;
+}
+
+.reaction-form {
+    display: inline-block;
+}
+
+.reaction-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.45rem 1rem;
+    background: #fff;
+    border: 0.5px solid var(--line);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.reaction-button:hover {
+    border-color: var(--red);
+}
+
+.reaction-button.active {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+}
+
 /* ── Section titles ── */
 
 .blog-post-section-title {
