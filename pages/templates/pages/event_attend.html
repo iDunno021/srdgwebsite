@@ -42,10 +42,10 @@
         <form method="post" action="{% url 'event_rsvp' event.id %}">
             {% csrf_token %}
             <div class="ita-row">
-                <input type="text" name="first_name" placeholder="First name" requi--red>
-                <input type="text" name="last_name" placeholder="Last name" requi--red>
+                <input type="text" name="first_name" placeholder="First name" required>
+                <input type="text" name="last_name" placeholder="Last name" required>
             </div>
-            <input type="email" name="email" placeholder="Email address" requi--red>
+            <input type="email" name="email" placeholder="Email address" required>
             <button type="submit" class="btn-submit">Confirm attendance</button>
         </form>
     </div>

@@ -1,13 +1,47 @@
 import json
+from django.core.cache import cache
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, ArtPiece, AboutPhoto
+from django.db.models import Count, Q
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, BlogReaction, ArtPiece, AboutPhoto
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
+from .utils import get_client_ip
 from django.views import generic
 import resend
 from django.conf import settings
+
+ALLOWED_IMAGE_EXTS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
+ALLOWED_ATTACHMENT_EXTS = {'pdf', 'doc', 'docx', 'txt'}
+MAX_UPLOAD_SIZE = 10 * 1024 * 1024  # 10MB
+
+def _validate_upload(f, allowed_exts):
+    ext = f.name.rsplit('.', 1)[-1].lower() if '.' in f.name else ''
+    if ext not in allowed_exts:
+        return f'"{f.name}" has an unsupported file type.'
+    if f.size > MAX_UPLOAD_SIZE:
+        return f'"{f.name}" is too large (max 10MB).'
+    return None
+
+SCHOOLS_BY_REGION = {
+    'auckland': ['AGS', 'STC', 'STK', 'BAR', 'EGGS', 'KC', 'GDC', 'selwyn', 'DIO', 'RGT', 'DIL', 'ACGP', 'ACGS', 'WBC', 'WGC', 'MAC', 'SDCC', 'GBHS', 'other'],
+    'bayofplenty': ['other'],
+    'canterbury': ['other'],
+    'gisbourne': ['other'],
+    'hawkesbay': ['other'],
+    'manawatuwhanganui': ['other'],
+    'marlborough': ['other'],
+    'nelson': ['other'],
+    'northland': ['other'],
+    'otago': ['other'],
+    'southland': ['other'],
+    'taranaki': ['other'],
+    'tasman': ['other'],
+    'waikato': ['other'],
+    'wellington': ['other'],
+    'westcoast': ['other'],
+}
 
 def home(request):
     total_members = Member.objects.count()
@@ -41,13 +75,13 @@ def signup(request):
                 other_school = request.POST.get('other_school')
                 if not other_school:
                     form.add_error(None, 'Please enter your school name.')
-                    return render(request, 'pages/signup.html', {'form': form})
+                    return render(request, 'pages/signup.html', {'form': form, 'schools_by_region': json.dumps(SCHOOLS_BY_REGION)})
                 member.school = other_school
             member.save()
             return redirect('signup_success')
     else:
         form = MemberForm()
-    return render(request, 'pages/signup.html', {'form': form})
+    return render(request, 'pages/signup.html', {'form': form, 'schools_by_region': json.dumps(SCHOOLS_BY_REGION)})
 
 def signup_success(request):
     return render(request, 'pages/signup_success.html')
@@ -79,26 +113,6 @@ def event_attend(request, event_id):
         'event': event,
         'form': EventRSVPForm(),
     })
-
-def event_rsvp(request, event_id):
-    event = get_object_or_404(Event, id=event_id)
-    if request.method == 'POST':
-        form = EventRSVPForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            member = Member.objects.filter(email=email).first()
-            rsvp = form.save(commit=False)
-            rsvp.event = event
-            if member:
-                rsvp.member = member
-            try:
-                rsvp.save()
-            except IntegrityError:
-                messages.error(request, "You've already registered for this event with that email.")
-                return redirect('event_attend', event_id=event_id)
-            messages.success(request, "You're registered! We'll see you there.")
-            return redirect('event_attend', event_id=event_id)
-    return redirect('events')
 
 def calendar(request):
     status_colors = {'upcoming': '#C8391A', 'active': '#2e7d32', 'completed': '#1a4a7a'}
@@ -156,7 +170,7 @@ class InitiativeView(generic.ListView):
 def initiative_detail(request, slug):
     initiative = get_object_or_404(Initiative, slug=slug, hidden=False)
     custom = f'pages/initiatives/{slug}.html'
-    default = 'pages/initiatives/initiative_base.html'
+    default = 'pages/initiatives/initiative_base.html'  
     try:
         get_template(custom)
         template = custom
@@ -168,21 +182,79 @@ class BlogView(generic.ListView):
     model = BlogPost
     template_name = 'pages/blog.html'
     context_object_name = 'posts'
-    queryset = BlogPost.objects.filter(approved=True).order_by('-published_at')
+
+    def get_queryset(self):
+        qs = BlogPost.objects.filter(approved=True).annotate(
+            like_count=Count('reactions', filter=Q(reactions__reaction=BlogReaction.LIKE)),
+        )
+        if self.request.GET.get('sort') == 'liked':
+            return qs.order_by('-like_count', '-published_at')
+        return qs.order_by('-published_at')
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['current_sort'] = self.request.GET.get('sort', 'recent')
+        return ctx
 
 def blog_detail(request, id):
     post = get_object_or_404(BlogPost, id=id, approved=True)
-    return render(request, 'pages/blog_detail.html', {'post': post})
+    like_count = post.reactions.filter(reaction=BlogReaction.LIKE).count()
+    dislike_count = post.reactions.filter(reaction=BlogReaction.DISLIKE).count()
+    user_reaction = None
+    ip = get_client_ip(request)
+    if ip != 'unknown':
+        existing = post.reactions.filter(ip_address=ip).first()
+        user_reaction = existing.reaction if existing else None
+    return render(request, 'pages/blog_detail.html', {
+        'post': post,
+        'like_count': like_count,
+        'dislike_count': dislike_count,
+        'user_reaction': user_reaction,
+    })
+
+def blog_react(request, id, reaction):
+    post = get_object_or_404(BlogPost, id=id, approved=True)
+    if request.method == 'POST' and reaction in (BlogReaction.LIKE, BlogReaction.DISLIKE):
+        ip = get_client_ip(request)
+        if ip != 'unknown':
+            existing = BlogReaction.objects.filter(post=post, ip_address=ip).first()
+            if existing and existing.reaction == reaction:
+                existing.delete()
+            elif existing:
+                existing.reaction = reaction
+                existing.save(update_fields=['reaction'])
+            else:
+                BlogReaction.objects.create(post=post, ip_address=ip, reaction=reaction)
+    return redirect('blog_detail', id=id)
 
 def create_blog(request):
     if request.method == 'POST':
+        ip = get_client_ip(request)
+        cache_key = f'blog_create_{ip}'
+        if cache.get(cache_key):
+            return render(request, 'pages/create_blog.html', {
+                'form': BlogPostForm(),
+                'rate_limited': True,
+            })
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
+            errors = []
+            for f in request.FILES.getlist('images'):
+                if err := _validate_upload(f, ALLOWED_IMAGE_EXTS):
+                    errors.append(err)
+            for f in request.FILES.getlist('attachments'):
+                if err := _validate_upload(f, ALLOWED_ATTACHMENT_EXTS):
+                    errors.append(err)
+
+            if errors:
+                return render(request, 'pages/create_blog.html', {'form': form, 'upload_errors': errors})
+
             post = form.save()
             for image in request.FILES.getlist('images'):
                 BlogImage.objects.create(post=post, image=image)
             for attachment in request.FILES.getlist('attachments'):
                 BlogAttachment.objects.create(post=post, file=attachment, name=attachment.name)
+            cache.set(cache_key, True, 3600)
             return redirect('blog')
     else:
         form = BlogPostForm()
@@ -209,10 +281,10 @@ def event_rsvp(request, event_id):
                 resend.Emails.send({
                     "from": "noreply@srdg.co.nz",
                     "to": email,
-                    "subject": "You've registered for the Youth Political Debate!",
-                    "html": """
+                    "subject": f"You've registered for {event.title}!",
+                    "html": f"""
                         <h2> You're in! </h2>
-                        <p>Thanks for registering for the <strong>Youth Political Debate</strong>.</p>
+                        <p>Thanks for registering for the <strong>{event.title}</strong>.</p>
                         <p>We'll see you there!</p>
                     """
                 })
