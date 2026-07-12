@@ -7,29 +7,103 @@
 {% endblock %}
 
 {% block content %}
-    <div class="hero">
+    <section class="hero">
         <div class="container">
-            <p class='title'>A COLLABORATION &middot; 2026</p>
+            <p class='hero-title'>A COLLABORATION &middot; 2026</p>
             <div class='visual'>
                 <div class='visual-group'>
-                    <img class='visual-logo' src="{% static "pages/images/SRDG-Logo-Light.png" %}" alt="SRDG Logo">
+                    <img class='visual-badge visual-badge-srdg' src="{% static "pages/images/SRDG-Logo.png" %}" alt="SRDG Logo">
                     <h2 class='visual-title'>SRDG</h2>
                 </div>
-                <p class='cross'>&times
-                    ;</p>
+                <p class='cross'>&times;</p>
                 <div class='visual-group'>
-                    <img class='visual-logo' src="{% static "pages/images/network263logo.png" %}" alt="SRDG Logo">
+                    <img class='visual-badge' src="{% static "pages/images/network263logo.jpg" %}" alt="Network 263 Logo">
                     <h2 class='visual-title'>Network 263</h2>
                 </div>
             </div>
-            <h1 class='motto'>Empowering young people in <span class='motto-special'>Harare.</span></h1>
+            <h1 class='motto'>Empowering young people <br> in <span class='motto-special'>Harare.</span></h1>
             <p class='hero-description'>
                 SRDG is a proud supporter and partner of Network 263 — <br>
                 committed to advancing sustainable development and <br>
                 empowering young people across Harare, Zimbabwe through <br>
                 education, entrepreneurship and long-term self-sufficiency.
             </p>
-            <a href="{% url "contact" %}"><button>Talk to the team &rarr;</button></a>
+            <a href="{% url "contact" %}"><button class="contact-button">Talk to the team &rarr;</button></a>
         </div>
-    </div>
+    </section>
+    <section class='why'>
+        <p class='why-title'>THE WHY</p>
+        <p class='why-description'>Two organisations, one belief: that meaningful opportunity <br>
+            changes everything. Together we're building a pathway <br>
+            from <span class='blue'>education</span> to <span class='red'>self-sufficiency</span> — for individuals and <br>
+            whole communities.
+        </p>
+    </section>
+    <section class='how'>
+        <p class='title'>HOW IT UNFOLDS</p>
+        <p class='how-motto'>The collaboration roadmap.</p>
+        <div class='roadmap'>
+            <div class='dotted-line'></div>
+            <div class='phase'>
+                <div class='phase-dot'></div>
+                <p class='phase-label'>Phase 01</p>
+                <h3 class='phase-title'>Listen</h3>
+                <p class='phase-description'>We work alongside communities in Harare to understand the opportunities that matter most.</p>
+            </div>
+            <div class='phase'>
+                <div class='phase-dot'></div>
+                <p class='phase-label'>Phase 02</p>
+                <h3 class='phase-title'>Equip</h3>
+                <p class='phase-description'>Education and skills programmes give young people the tools to act on their ambitions.</p>
+            </div>
+            <div class='phase'>
+                <div class='phase-dot'></div>
+                <p class='phase-label'>Phase 03</p>
+                <h3 class='phase-title'>Build</h3>
+                <p class='phase-description'>Entrepreneurship support helps turn ideas into ventures that create real value.</p>
+            </div>
+            <div class='phase'>
+                <div class='phase-dot'></div>
+                <p class='phase-label'>Phase 04</p>
+                <h3 class='phase-title'>Sustain</h3>
+                <p class='phase-description'>We invest for the long term, so progress carries forward independently.</p>
+            </div>
+        </div>
+    </section>
+    <section class='example'>
+        <div class='example-header'>
+            <div>
+                <p class='example-title'>IN THE FIELD</p>
+                <p class='example-motto'>The work, in progress.</p>
+            </div>
+        </div>
+        <div class='example-grid'>
+            <div class='example-image example-image-large'>
+                <img src="{% static 'pages/images/net.png' %}" alt="Workshop session planting trees">
+            </div>
+            <div class='example-image'>
+                <img src="{% static 'pages/images/edu-unlocked.png' %}" alt="Students at a Network 263 programme">
+            </div>
+            <div class='example-image'>
+                <img src="{% static 'pages/images/network263.jpg' %}" alt="Community members planting a tree">
+            </div>
+        </div>
+    </section>
+    <section class='join'>
+        <div class='join-cross'>&times;</div>
+        <div class='join-inner'>
+            <p class='join-title'>GET INVOLVED</p>
+            <p class='join-motto'>Support the work, or join us.</p>
+            <p class='join-description'>
+                Every contribution helps us reach more young people in Harare. <br>
+                Donate to the cause, or sign up to get involved as a volunteer or <br>
+                partner.
+            </p>
+            <div class='join-buttons'>
+                <button class='donate'>Donate now &rarr;</button>
+                <a href="{% url "signup" %}"><button class='join-btn'>Sign up &rarr;</button></a>
+            </div>
+            <a href="" class='donate-link'>Donation link to come — placeholder for now</a>
+        </div>
+    </section>
 {% endblock content %}
