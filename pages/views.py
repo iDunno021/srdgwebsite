@@ -302,3 +302,6 @@ def partners(request):
         'total_members': total_members,
         'schools_count': schools_count,
     })
+
+def network263(request):
+    return render(request, 'pages/network263.html')

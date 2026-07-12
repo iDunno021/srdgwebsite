@@ -1,0 +1,35 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'pages/styles/network263.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="hero">
+        <div class="container">
+            <p class='title'>A COLLABORATION &middot; 2026</p>
+            <div class='visual'>
+                <div class='visual-group'>
+                    <img class='visual-logo' src="{% static "pages/images/SRDG-Logo-Light.png" %}" alt="SRDG Logo">
+                    <h2 class='visual-title'>SRDG</h2>
+                </div>
+                <p class='cross'>&times
+                    ;</p>
+                <div class='visual-group'>
+                    <img class='visual-logo' src="{% static "pages/images/network263logo.png" %}" alt="SRDG Logo">
+                    <h2 class='visual-title'>Network 263</h2>
+                </div>
+            </div>
+            <h1 class='motto'>Empowering young people in <span class='motto-special'>Harare.</span></h1>
+            <p class='hero-description'>
+                SRDG is a proud supporter and partner of Network 263 — <br>
+                committed to advancing sustainable development and <br>
+                empowering young people across Harare, Zimbabwe through <br>
+                education, entrepreneurship and long-term self-sufficiency.
+            </p>
+            <a href="{% url "contact" %}"><button>Talk to the team &rarr;</button></a>
+        </div>
+    </div>
+{% endblock content %}
