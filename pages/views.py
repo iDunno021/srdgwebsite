@@ -305,3 +305,6 @@ def partners(request):
 
 def network263(request):
     return render(request, 'pages/network263.html')
+
+def family_page(request):
+    return render(request, 'pages/family.html')

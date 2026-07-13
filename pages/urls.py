@@ -23,4 +23,6 @@ urlpatterns = [
     path('partners/', views.partners, name='partners'),
     path('robots.txt', TemplateView.as_view(template_name='pages/robots.txt', content_type='text/plain')),
     path('network263/', views.network263, name='network263'),
+    path('s/tumbleweed/', views.family_page, name='family_page'),
+
 ]
