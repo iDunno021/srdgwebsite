@@ -230,3 +230,6 @@ def partners(request):
         'total_members': total_members,
         'schools_count': schools_count,
     })
+
+def family_page(request):
+    return render(request, 'pages/family.html')
