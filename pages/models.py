@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from django.utils import timezone
 from django.utils.text import slugify
 import uuid
@@ -195,7 +196,10 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=220, unique=True, blank=True)
     author = models.CharField(max_length=100, default="anonymous")
     body = models.TextField()
-    cover_image = models.ImageField(upload_to=blog_cover_path, blank=True, null=True)
+    cover_image = models.ImageField(
+        upload_to=blog_cover_path, blank=True, null=True,
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'])],
+    )
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -214,6 +218,26 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BlogReaction(models.Model):
+    LIKE = 'like'
+    DISLIKE = 'dislike'
+    REACTION_CHOICES = [
+        (LIKE, 'Like'),
+        (DISLIKE, 'Dislike'),
+    ]
+
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='reactions')
+    ip_address = models.GenericIPAddressField()
+    reaction = models.CharField(max_length=10, choices=REACTION_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = [('post', 'ip_address')]
+
+    def __str__(self):
+        return f"{self.ip_address} {self.reaction}d {self.post.title}"
 
 
 class EventRSVP(models.Model):

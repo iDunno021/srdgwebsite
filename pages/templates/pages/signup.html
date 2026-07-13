@@ -36,24 +36,7 @@
 </div>
 <script>
 
-    const SCHOOLS_BY_REGION = {
-        'auckland': ['AGS', 'STC', 'STK', 'BAR', 'EGGS', 'KC', 'GDC', 'selwyn', 'DIO', 'RGT', 'DIL', 'ACGP', 'ACGS', 'WBC', 'WGC', 'MAC', 'SDCC', 'GBHS', 'other'],
-        'bayofplenty': ['other'],
-        'canterbury': ['other'],
-        'gisbourne': ['other'],
-        'hawkesbay': ['other'],
-        'manawatuwhanganui': ['other'],
-        'marlborough': ['other'],
-        'nelson': ['other'],
-        'northland': ['other'],
-        'otago': ['other'],
-        'southland': ['other'],
-        'taranaki': ['other'],
-        'tasman': ['other'],
-        'waikato': ['other'],
-        'wellington': ['other'],
-        'westcoast': ['other'],
-    };
+    const SCHOOLS_BY_REGION = JSON.parse('{{ schools_by_region|escapejs }}');
     const schoolSelect = document.getElementById('id_school');
     const otherInput = document.getElementById('other-school-input');
 

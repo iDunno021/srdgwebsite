@@ -16,7 +16,7 @@
         <div class="record-topbar">
             <span class="record-location">AUCKLAND &middot; AOTEAROA</span>
             <span class="record-name">THE PARTNERSHIP RECORD</span>
-            <span class="record-est">EST. 2021</span>
+            <span class="record-est">EST. 2026</span>
         </div>
 
         <div class="record-masthead">
@@ -29,7 +29,7 @@
             <span class="dot">&#9670;</span>
             <span>COMMUNITY &amp; NGOS</span>
             <span class="dot">&#9670;</span>
-            <span>20+ SUPPORTERS</span>
+            <span>8+ SUPPORTERS</span>
         </div>
 
         <div class="record-intro">
@@ -40,7 +40,7 @@
                 </p>
             </div>
             <div class="intro-sidebar">
-                <p class="sidebar-label">IN THIS ISSUE</p>
+                <p class="sidebar-label">IN THIS WEBPAGE</p>
                 <a href="#what-partners-get" class="sidebar-item">
                     <span class="sidebar-number">01</span>
                     <span class="sidebar-text">What partners get</span>
@@ -119,8 +119,10 @@
                             <span class="register-name">Let Me Speak (LMS)</span>
                         </li>
                         <li class="register-item has-logo">
-                            <img src="{% static 'pages/images/network263logo.png' %}" alt="Network 263" class="register-logo">
-                            <span class="register-name">Network 263</span>
+                            <a href="{% url "network263" %}">
+                                <img src="{% static 'pages/images/network263logo.jpg' %}" alt="Network 263" class="register-logo">
+                                <span class="register-name">Network 263</span>
+                            </a>
                         </li>
                         <li class="register-item has-logo">
                             <img src="{% static 'pages/images/os.png' %}" alt="Objectspace" class="register-logo">

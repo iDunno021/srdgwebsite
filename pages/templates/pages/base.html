@@ -5,6 +5,21 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>{% block title %}SRDG{% endblock %}</title>
+            <meta name="description" content="{% block meta_description %}Social Research &amp; Discourse Group — student-led initiatives, seminars and events across Auckland.{% endblock %}">
+
+            <!-- Open Graph -->
+            <meta property="og:site_name" content="SRDG">
+            <meta property="og:title" content="{% block og_title %}SRDG — Social Research &amp; Discourse Group{% endblock %}">
+            <meta property="og:description" content="{% block og_description %}Social Research &amp; Discourse Group — student-led initiatives, seminars and events across Auckland.{% endblock %}">
+            <meta property="og:image" content="{% block og_image %}{% static 'pages/images/SRDG-Logo.png' %}{% endblock %}">
+            <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+            <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+            <!-- Twitter Card -->
+            <meta name="twitter:card" content="summary">
+            <meta name="twitter:title" content="{% block twitter_title %}SRDG — Social Research &amp; Discourse Group{% endblock %}">
+            <meta name="twitter:description" content="{% block twitter_description %}Social Research &amp; Discourse Group — student-led initiatives, seminars and events across Auckland.{% endblock %}">
+            <meta name="twitter:image" content="{% block twitter_image %}{% static 'pages/images/SRDG-Logo.png' %}{% endblock %}">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
