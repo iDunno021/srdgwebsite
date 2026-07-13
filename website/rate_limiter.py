@@ -18,7 +18,6 @@ def _get_client_ip(request):
         return forwarded_for.split(",")[0].strip()
     return request.META.get("REMOTE_ADDR", "unknown")
 
-
 def _get_tier(path):
     if path.startswith("/accounts/login") or path.startswith("/admin/login"):
         return "login"
@@ -35,6 +34,7 @@ def _get_max_requests(tier, config):
     }.get(tier, config["MAX_REQUESTS"])
 
 class RateLimiterMiddleware:
+
     def __init__(self, get_response):
         self.get_response = get_response
         self.config = _get_config()
@@ -69,6 +69,7 @@ class RateLimiterMiddleware:
 
 
 def _build_429(request, retry_after, max_requests):
+    """Return a 429 response — JSON for /api/ routes, plain text for pages."""
     message = f"Too many requests. Please wait {retry_after} seconds and try again."
 
     if request.path_info.startswith("/api/"):

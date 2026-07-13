@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib import admin
+from django.db.models import Count, Q
 from django.http import HttpResponseRedirect
 from django.urls import path, reverse
 from django.template.response import TemplateResponse
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, EventRSVP, ArtPiece, AboutPhoto
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, BlogReaction, EventRSVP, ArtPiece, AboutPhoto
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
@@ -120,7 +121,22 @@ class BlogAttachmentInline(admin.TabularInline):
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'published_at', 'approved']
+    list_display = ['title', 'author', 'published_at', 'approved', 'like_count', 'dislike_count']
     list_filter = ['approved']
     search_fields = ['title', 'author']
     inlines = [BlogImageInline, BlogAttachmentInline]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.annotate(
+            _like_count=Count('reactions', filter=Q(reactions__reaction=BlogReaction.LIKE)),
+            _dislike_count=Count('reactions', filter=Q(reactions__reaction=BlogReaction.DISLIKE)),
+        )
+
+    @admin.display(description='Likes', ordering='_like_count')
+    def like_count(self, obj):
+        return obj._like_count
+
+    @admin.display(description='Dislikes', ordering='_dislike_count')
+    def dislike_count(self, obj):
+        return obj._dislike_count
