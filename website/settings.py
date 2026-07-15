@@ -64,9 +64,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'website.request_logging.RequestLoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'website.rate_limiter.RateLimiterMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'website.rate_limiter.RateLimiterMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -113,7 +114,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', '5432'),
-        'CONN_MAX_AGE': 600,
+        'CONN_MAX_AGE': 0,
         'DISABLE_SERVER_SIDE_CURSORS': True,  # required for Supabase transaction pooler on Vercel (serverless)
     }
 }
@@ -178,6 +179,21 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False
 
 MEDIA_URL = f"{os.getenv('SUPABASE_S3_ENDPOINT')}/{os.getenv('SUPABASE_S3_BUCKET')}/"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler'},
+    },
+    'loggers': {
+        'website.requests': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
 
 
 import os
