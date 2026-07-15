@@ -1,21 +1,23 @@
 {% load static %}
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en"{% if theme == 'dark' %} data-theme="dark"{% endif %}>
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- Set theme before first paint to avoid a light/dark flash -->
+            {% if not theme %}
+            <!-- No theme cookie yet (first-ever visit) -- detect system preference and store it -->
             <script>
                 (function () {
                     try {
-                        var stored = localStorage.getItem('theme');
-                        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                        if (theme === 'dark') {
+                        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        if (prefersDark) {
                             document.documentElement.setAttribute('data-theme', 'dark');
                         }
+                        document.cookie = 'theme=' + (prefersDark ? 'dark' : 'light') + '; path=/; max-age=31536000; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
                     } catch (e) {}
                 })();
             </script>
+            {% endif %}
             <title>{% block title %}SRDG{% endblock %}</title>
             <meta name="description" content="{% block meta_description %}Social Research &amp; Discourse Group — student-led initiatives, seminars and events across Auckland.{% endblock %}">
 
@@ -193,12 +195,13 @@
 
                 themeToggle.addEventListener('click', () => {
                     const isDark = rootEl.getAttribute('data-theme') === 'dark';
+                    const secure = location.protocol === 'https:' ? '; Secure' : '';
                     if (isDark) {
                         rootEl.removeAttribute('data-theme');
-                        localStorage.setItem('theme', 'light');
+                        document.cookie = 'theme=light; path=/; max-age=31536000; SameSite=Lax' + secure;
                     } else {
                         rootEl.setAttribute('data-theme', 'dark');
-                        localStorage.setItem('theme', 'dark');
+                        document.cookie = 'theme=dark; path=/; max-age=31536000; SameSite=Lax' + secure;
                     }
                     syncToggleState();
                 });
