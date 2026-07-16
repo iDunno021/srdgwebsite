@@ -1,9 +1,33 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
+from django.core.files.base import ContentFile
 from django.utils import timezone
 from django.utils.text import slugify
+from io import BytesIO
+from PIL import Image
 import uuid
+
+
+def optimize_image_file(image_field, max_dimension=1200, quality=82):
+    """Resize/recompress an uploaded image to keep page weight down."""
+    img = Image.open(image_field)
+    has_alpha = img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info)
+    if has_alpha:
+        img = img.convert('RGBA')
+        has_alpha = img.split()[-1].getextrema()[0] < 255
+
+    img.thumbnail((max_dimension, max_dimension), Image.LANCZOS)
+
+    buffer = BytesIO()
+    if has_alpha:
+        img.save(buffer, format='PNG', optimize=True)
+        ext = 'png'
+    else:
+        img.convert('RGB').save(buffer, format='JPEG', quality=quality, optimize=True)
+        ext = 'jpg'
+    buffer.seek(0)
+    return ContentFile(buffer.read(), name=f'{uuid.uuid4().hex}.{ext}')
 
 class Member(models.Model):
     SCHOOLS = [
@@ -156,6 +180,12 @@ class AboutPhoto(models.Model):
 
     class Meta:
         ordering = ['order', 'pk']
+
+    def save(self, *args, **kwargs):
+        if self.image and not self.image._committed:
+            optimized = optimize_image_file(self.image, max_dimension=1200)
+            self.image.save(optimized.name, optimized, save=False)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.get_slot_display()} #{self.pk}"
