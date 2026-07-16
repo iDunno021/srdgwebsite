@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'srdg.co.nz,www.srdg.co.nz').split(',')
+ALLOWED_HOSTS = os.getenv('srdg.co.nz,www.srdg.co.nz', '127.0.0.1').split(',')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

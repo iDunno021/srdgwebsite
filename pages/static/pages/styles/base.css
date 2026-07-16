@@ -13,16 +13,16 @@
     --font-serif: 'Newsreader', Georgia, serif;
 }
 
-:root[data-theme="dark"] { /* same so far */
-    --paper: #f6f4ef;
+:root[data-theme="dark"] {
+    --paper: #141B28;
     --red: #A72222;
     --yellow: #EAAC42;
-    --teal: #4a8295;
+    --teal: #6bb0c4;
     --navy: #233D68;
-    --ink: #1c2a44;
-    --muted: #5f6b80;
-    --line: #e4e0d7;
-    --color-error: #A72222;
+    --ink: #f6f4ef;
+    --muted: #97a1b5;
+    --line: #1F2B42;
+    --color-error: #c9453d;
 }
 
 * {

@@ -45,6 +45,9 @@
     border-top: 3px solid var(--teal);
     padding: 1.5rem 1.75rem;
 }
+[data-theme="dark"] .contact-card {
+    background: var(--navy);
+}
 
 .contact-card h3 {
     font-family: var(--font-serif);

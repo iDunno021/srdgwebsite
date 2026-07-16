@@ -62,6 +62,10 @@
   color: var(--navy);
 }
 
+[data-theme="dark"] .init-meta-item b {
+  color: var(--ink);
+}
+
 .init-meta-item span {
   font-size: 14px;
   color: var(--muted);

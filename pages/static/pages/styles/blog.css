@@ -29,6 +29,10 @@
     white-space: nowrap;
 }
 
+[data-theme="dark"] .post-button {
+    background: var(--navy);
+}
+
 .post-button:hover {
     opacity: 0.85;
 }
@@ -96,6 +100,10 @@
     color: inherit;
     overflow: hidden;
     transition: box-shadow 0.15s;
+}
+
+[data-theme="dark"] .blog-card {
+    background: var(--navy);
 }
 
 .blog-card:hover {

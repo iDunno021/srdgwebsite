@@ -39,6 +39,15 @@
     padding: 1.5rem;
 }
 
+[data-theme="dark"] #calender {
+    background: var(--navy);
+}
+
+[data-theme = "dark"] #calendar {
+    background: var(--line);
+    border: 0.5px solid var(--navy);
+}
+
 .fc {
     font-family: var(--font-sans);
     font-size: 14px;
@@ -106,6 +115,11 @@
     background: rgba(200, 57, 26, 0.05) !important;
 }
 
+[data-theme = "dark"] .fc-day-today {
+    background: var(--navy) !important;
+    
+}
+
 .fc-day-today .fc-daygrid-day-number {
     color: var(--red);
     font-weight: 600;
@@ -154,4 +168,9 @@
 .fc-scrollgrid td,
 .fc-scrollgrid th {
     border-color: var(--line) !important;
+}
+
+[data-theme="dark"] .fc-scrollgrid td,
+[data-theme="dark"] .fc-scrollgrid th {
+    border-color: var(--navy) !important;
 }

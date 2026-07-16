@@ -303,10 +303,8 @@ def partners(request):
         'schools_count': schools_count,
     })
 
-<<<<<<< HEAD
-def family_page(request):
-    return render(request, 'pages/family.html')
-=======
+# def family_page(request):
+#     return render(request, 'pages/family.html')
+
 def network263(request):
     return render(request, 'pages/network263.html')
->>>>>>> 20c60cbd5f3d2079d227715b17bb3a5b195089a9
