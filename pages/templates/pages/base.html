@@ -1,9 +1,23 @@
-    {% load static %}
+{% load static %}
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en"{% if theme == 'dark' %} data-theme="dark"{% endif %}>
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            {% if not theme %}
+            <!-- No theme cookie yet (first-ever visit) -- detect system preference and store it -->
+            <script>
+                (function () {
+                    try {
+                        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        if (prefersDark) {
+                            document.documentElement.setAttribute('data-theme', 'dark');
+                        }
+                        document.cookie = 'theme=' + (prefersDark ? 'dark' : 'light') + '; path=/; max-age=31536000; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+                    } catch (e) {}
+                })();
+            </script>
+            {% endif %}
             <title>{% block title %}SRDG{% endblock %}</title>
             <meta name="description" content="{% block meta_description %}Social Research &amp; Discourse Group — student-led initiatives, seminars and events across Auckland.{% endblock %}">
 
@@ -94,6 +108,12 @@
                     </div>
                     <div class="footer-join">
                         <a href="{% url 'signup' %}" class="btn-join-footer">Become a Member</a>
+                        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">
+                            <span class="theme-toggle-track">
+                                <span class="theme-toggle-thumb"></span>
+                            </span>
+                            <span class="theme-toggle-label">Dark mode</span>
+                        </button>
                     </div>
                 </div>
                 <div class="footer-bottom">
@@ -165,6 +185,30 @@
                     if (img.complete) markLoaded();
                     else img.addEventListener('load', markLoaded);
                 });
+
+                // Dark mode toggle
+                const themeToggle = document.getElementById('themeToggle');
+                const rootEl = document.documentElement;
+
+                function syncToggleState() {
+                    const isDark = rootEl.getAttribute('data-theme') === 'dark';
+                    themeToggle.setAttribute('aria-pressed', String(isDark));
+                }
+
+                themeToggle.addEventListener('click', () => {
+                    const isDark = rootEl.getAttribute('data-theme') === 'dark';
+                    const secure = location.protocol === 'https:' ? '; Secure' : '';
+                    if (isDark) {
+                        rootEl.removeAttribute('data-theme');
+                        document.cookie = 'theme=light; path=/; max-age=31536000; SameSite=Lax' + secure;
+                    } else {
+                        rootEl.setAttribute('data-theme', 'dark');
+                        document.cookie = 'theme=dark; path=/; max-age=31536000; SameSite=Lax' + secure;
+                    }
+                    syncToggleState();
+                });
+
+                syncToggleState();
             </script>
         </body>
     </html>

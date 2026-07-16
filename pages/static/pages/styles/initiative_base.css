@@ -65,6 +65,10 @@
     transition: box-shadow 0.15s;
 }
 
+[data-theme="dark"] .event-card {
+    background: var(--line);
+  }
+
 .event-card:hover {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
@@ -149,4 +153,8 @@
     text-align: center;
     color: #999;
     font-size: 14px;
+}
+
+[data-theme="dark"] .events-empty {
+    background: var(--line);
 }
