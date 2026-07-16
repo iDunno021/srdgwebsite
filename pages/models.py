@@ -183,7 +183,7 @@ class AboutPhoto(models.Model):
 
     def save(self, *args, **kwargs):
         if self.image and not self.image._committed:
-            optimized = optimize_image_file(self.image, max_dimension=1200)
+            optimized = optimize_image_file(self.image, max_dimension=900)
             self.image.save(optimized.name, optimized, save=False)
         super().save(*args, **kwargs)
 
