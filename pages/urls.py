@@ -23,9 +23,4 @@ urlpatterns = [
     path('partners/', views.partners, name='partners'),
     path('robots.txt', TemplateView.as_view(template_name='pages/robots.txt', content_type='text/plain')),
     path('network263/', views.network263, name='network263'),
-<<<<<<< HEAD
-=======
-    path('s/tumbleweed/', views.family_page, name='family_page'),
-
->>>>>>> cad85ba002c4928463e5aec78c2845ceade0ae87
 ]
