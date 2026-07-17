@@ -79,6 +79,10 @@
     font-weight: 500;
 }
 
+.blog-sort-link:hover {
+    color: var(--red);
+}
+
 /* ── List ── */
 
 .blog-list {

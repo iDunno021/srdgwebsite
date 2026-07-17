@@ -129,9 +129,6 @@
     cursor: pointer;
     overflow: hidden !important;
     max-width: 100% !important;
-}
-
-[data-theme = "dark"] .fc-event {
     background: var(--yellow) !important;
     color: #1a1a1a !important;
 }

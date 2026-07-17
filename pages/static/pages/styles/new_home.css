@@ -1,4 +1,4 @@
-.debate-banner {
+/* .debate-banner {
     display: flex;
     align-items: center;
     gap: 1.5rem;
@@ -48,7 +48,7 @@
         font-size: 13px;
         padding: 10px 20px;
     }
-}
+} */
 
 .home-page{
     width: 100%;
@@ -117,12 +117,24 @@
     background-color: var(--red);
     color: #ffffff;
     border: none;
+    transition: transform 0.15s ease, background 0.15s;
+
+}
+
+.hero-buttons .join:hover {
+    transform: scale(1.05);
+    background: var(--yellow);
 }
 
 .hero-buttons .work-btn {
     background-color: transparent;
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.35);
+    transition: transform 0.15s ease;
+}
+
+.hero-buttons .work-btn:hover {
+    transform: scale(1.05);
 }
 
 .hero-buttons button{
@@ -310,6 +322,16 @@
     color: var(--navy);
     font-weight: 200;
     margin-top: auto;
+}
+
+[data-theme="dark"] .card-redirect {
+    color: var(--ink);
+}
+
+.card-redirect:hover {
+    color: var(--yellow);
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .about {
@@ -658,7 +680,7 @@
 }
 
 .awareness-description {
-    color: #c4da0e2;
+    color: #c4dae2;
     font-family: var(--font-sans);
     font-size: 1rem;
     max-width: 480px;
