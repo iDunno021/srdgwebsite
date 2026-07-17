@@ -50,6 +50,7 @@ class Member(models.Model):
         ('SDCC', 'St Dominic\'s Catholic College'),
         ('GBHS', 'Green Bay High School'),
         ('other', 'Other')
+        ('SJC', 'St John\'s College')
     ]
 
     YEAR_CHOICES=[
