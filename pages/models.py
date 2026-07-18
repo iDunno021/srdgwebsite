@@ -49,7 +49,7 @@ class Member(models.Model):
         ('MAC', 'Maclean\'s College'),
         ('SDCC', 'St Dominic\'s Catholic College'),
         ('GBHS', 'Green Bay High School'),
-        ('other', 'Other')
+        ('other', 'Other'),
         ('SJC', 'St John\'s College')
     ]
 

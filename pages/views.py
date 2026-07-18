@@ -26,10 +26,10 @@ def _validate_upload(f, allowed_exts):
 
 SCHOOLS_BY_REGION = {
     'auckland': ['AGS', 'STC', 'STK', 'BAR', 'EGGS', 'KC', 'GDC', 'selwyn', 'DIO', 'RGT', 'DIL', 'ACGP', 'ACGS', 'WBC', 'WGC', 'MAC', 'SDCC', 'GBHS', 'other'],
-    'bayofplenty': ['SJC', 'other'],
+    'bayofplenty': ['other'],
     'canterbury': ['other'],
     'gisbourne': ['other'],
-    'hawkesbay': ['other'],
+    'hawkesbay': ['SJC', 'other'],
     'manawatuwhanganui': ['other'],
     'marlborough': ['other'],
     'nelson': ['other'],
