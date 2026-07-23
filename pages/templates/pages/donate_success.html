@@ -1,0 +1,20 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %}Thank You | SRDG{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'pages/styles/signup_success.css' %}">
+{% endblock %}
+{% block content %}
+<div class="success-page">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h1>Thank you for your donation</h1>
+        <p class="success-message">
+            Your donation of ${{ amount|floatformat:2 }} NZD has been received. Your support helps us reach more young people in Harare.
+        </p>
+        <div class="success-actions">
+            <a href="{% url 'network263' %}" class="btn-home">Back to Network 263</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

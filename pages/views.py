@@ -10,6 +10,7 @@ from .forms import MemberForm, BlogPostForm, EventRSVPForm
 from .utils import get_client_ip
 from django.views import generic
 import resend
+import stripe
 from django.conf import settings
 
 ALLOWED_IMAGE_EXTS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
@@ -304,5 +305,57 @@ def partners(request):
     })
 
 
+DONATION_AMOUNTS_NZD = [1, 5, 10, 25, 50, 100]
+
+
 def network263(request):
-    return render(request, 'pages/network263.html')
+    return render(request, 'pages/network263.html', {'donated': request.GET.get('donated')})
+
+
+def donate_checkout(request):
+    if request.method != 'POST':
+        return redirect('network263')
+
+    try:
+        amount = int(request.POST.get('amount', 0))
+    except ValueError:
+        amount = 0
+    if amount not in DONATION_AMOUNTS_NZD:
+        return redirect('network263')
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    session = stripe.checkout.Session.create(
+        mode='payment',
+        payment_method_types=['card'],
+        submit_type='donate',
+        line_items=[{
+            'price_data': {
+                'currency': 'nzd',
+                'product_data': {'name': 'Donation to SRDG — Network 263'},
+                'unit_amount': amount * 100,
+            },
+            'quantity': 1,
+        }],
+        success_url=request.build_absolute_uri('/network263/donate/success/') + '?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url=request.build_absolute_uri('/network263/') + '?donated=cancel',
+    )
+    return redirect(session.url)
+
+
+def donate_success(request):
+    session_id = request.GET.get('session_id')
+    if not session_id:
+        return redirect('network263')
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    try:
+        session = stripe.checkout.Session.retrieve(session_id)
+    except stripe.error.StripeError:
+        return redirect('network263')
+
+    if session.payment_status != 'paid':
+        return redirect('network263')
+
+    return render(request, 'pages/donate_success.html', {
+        'amount': session.amount_total / 100,
+    })

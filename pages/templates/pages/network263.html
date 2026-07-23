@@ -99,11 +99,37 @@
                 Donate to the cause, or sign up to get involved as a volunteer or <br>
                 partner.
             </p>
+            {% if donated == 'cancel' %}
+                <p class='donate-status donate-status--cancel'>Donation cancelled — no charge was made.</p>
+            {% endif %}
             <div class='join-buttons'>
-                <button class='donate'>Donate now &rarr;</button>
+                <button type="button" class='donate' id="donateToggle">Donate now &rarr;</button>
                 <a href="{% url "signup" %}"><button class='join-btn'>Sign up &rarr;</button></a>
             </div>
-            <a href="" class='donate-link'>Donation link to come — placeholder for now</a>
         </div>
     </section>
+
+    <div class="donate-modal-overlay" id="donateOverlay">
+        <div class="donate-modal">
+            <button type="button" class="donate-modal-close" id="donateClose" aria-label="Close">&times;</button>
+            <p class="donate-modal-title">Choose an amount</p>
+            <form method="POST" action="{% url 'donate_checkout' %}" class="donate-form">
+                {% csrf_token %}
+                <button type="submit" name="amount" value="1" class='donate donate--amount'>$1</button>
+                <button type="submit" name="amount" value="5" class='donate donate--amount'>$5</button>
+                <button type="submit" name="amount" value="10" class='donate donate--amount'>$10</button>
+                <button type="submit" name="amount" value="25" class='donate donate--amount'>$25</button>
+                <button type="submit" name="amount" value="50" class='donate donate--amount'>$50</button>
+                <button type="submit" name="amount" value="100" class='donate donate--amount'>$100</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const donateOverlay = document.getElementById('donateOverlay');
+        document.getElementById('donateToggle').addEventListener('click', () => donateOverlay.classList.add('visible'));
+        document.getElementById('donateClose').addEventListener('click', () => donateOverlay.classList.remove('visible'));
+        donateOverlay.addEventListener('click', (e) => {
+            if (e.target === donateOverlay) donateOverlay.classList.remove('visible');
+        });
+    </script>
 {% endblock content %}
