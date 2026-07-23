@@ -336,6 +336,7 @@ def donate_checkout(request):
             },
             'quantity': 1,
         }],
+        payment_intent_data={'description': '(From SRDG website)'},
         success_url=request.build_absolute_uri('/network263/donate/success/') + '?session_id={CHECKOUT_SESSION_ID}',
         cancel_url=request.build_absolute_uri('/network263/') + '?donated=cancel',
     )
