@@ -320,6 +320,12 @@ html {
     padding: 18px 32px;
     border-radius: 11px;
     text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background: var(--yellow);
 }
 
 @media (max-width: 900px) {

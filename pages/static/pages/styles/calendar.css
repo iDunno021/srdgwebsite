@@ -39,10 +39,6 @@
     padding: 1.5rem;
 }
 
-[data-theme="dark"] #calender {
-    background: var(--navy);
-}
-
 [data-theme = "dark"] #calendar {
     background: var(--line);
     border: 0.5px solid var(--navy);
@@ -133,6 +129,8 @@
     cursor: pointer;
     overflow: hidden !important;
     max-width: 100% !important;
+    background: var(--yellow) !important;
+    color: #1a1a1a !important;
 }
 
 .fc-event-card {
