@@ -77,10 +77,11 @@
                     <a href="{% url 'blog' %}">Blog</a>
                     <a href="{% url 'partners' %}">Who we work with</a>
                     <a href="{% url 'contact' %}">Contact</a>
+                    <a href="#" id="navDonate">Donate</a>
                     <!-- Join us link inside mobile menu -->
                     <a href="{% url 'signup' %}" class="btn-join btn-join-mobile">Join us</a>
                 </div>
-    
+
                 <a href="{% url 'signup' %}" class="btn-join btn-join-desktop">Join us</a>
             </nav>
     
@@ -121,6 +122,21 @@
                     <a href="https://docs.google.com/document/d/1og8Zlt8cj9SycZ9ToMgIoXq8X2OPF14Z_0KPdqMrco0/edit?tab=t.0" target="_blank" rel="noopener noreferrer" class="footer-privacy">Privacy Policy</a>
                 </div>
             </footer>
+
+            <div class="donate-modal-overlay" id="donateOverlay">
+                <div class="donate-modal">
+                    <button type="button" class="donate-modal-close" id="donateClose" aria-label="Close">&times;</button>
+                    <p class="donate-modal-title">Choose an amount</p>
+                    <form method="POST" action="{% url 'donate_checkout' %}" class="donate-form">
+                        {% csrf_token %}
+                        <button type="submit" name="amount" value="5" class='donate donate--amount'>$5</button>
+                        <button type="submit" name="amount" value="10" class='donate donate--amount'>$10</button>
+                        <button type="submit" name="amount" value="25" class='donate donate--amount'>$25</button>
+                        <button type="submit" name="amount" value="50" class='donate donate--amount'>$50</button>
+                        <button type="submit" name="amount" value="100" class='donate donate--amount'>$100</button>
+                    </form>
+                </div>
+            </div>
             <script>
                 // Active nav link highlighting
                 const path = window.location.pathname;
@@ -184,6 +200,19 @@
                     const markLoaded = () => img.classList.add('loaded');
                     if (img.complete) markLoaded();
                     else img.addEventListener('load', markLoaded);
+                });
+
+                // Donate modal
+                const donateOverlay = document.getElementById('donateOverlay');
+                document.querySelectorAll('#navDonate, #donateToggle').forEach(trigger => {
+                    trigger.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        donateOverlay.classList.add('visible');
+                    });
+                });
+                document.getElementById('donateClose').addEventListener('click', () => donateOverlay.classList.remove('visible'));
+                donateOverlay.addEventListener('click', (e) => {
+                    if (e.target === donateOverlay) donateOverlay.classList.remove('visible');
                 });
 
                 // Dark mode toggle

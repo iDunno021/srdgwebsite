@@ -305,7 +305,7 @@ def partners(request):
     })
 
 
-DONATION_AMOUNTS_NZD = [1, 5, 10, 25, 50, 100]
+DONATION_AMOUNTS_NZD = [5, 10, 25, 50, 100]
 
 
 def network263(request):
