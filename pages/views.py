@@ -306,3 +306,6 @@ def partners(request):
 
 def network263(request):
     return render(request, 'pages/network263.html')
+
+def debate(request):
+    return render(request, 'pages/debate.html')
