@@ -306,7 +306,6 @@
     flex-wrap: wrap;
 }
 
-.donate,
 .join-btn {
     display: inline-flex;
     align-items: center;
@@ -317,22 +316,15 @@
     border: none;
     text-decoration: none;
     cursor: pointer;
-}
-
-.donate {
-    background: var(--red);
-    color: var(--paper);
-}
-
-.join-btn {
     background: var(--paper);
     color: var(--navy);
 }
 
-.donate-link {
-    display: block;
-    font: italic 400 13px var(--font-sans);
-    color: var(--light-teal);
-    margin-top: 24px;
-    text-decoration: none;
+.donate-status {
+    font: 600 15px var(--font-sans);
+    margin-bottom: 16px;
+}
+
+.donate-status--cancel {
+    color: var(--red);
 }

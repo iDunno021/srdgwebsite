@@ -24,4 +24,6 @@ urlpatterns = [
     path('robots.txt', TemplateView.as_view(template_name='pages/robots.txt', content_type='text/plain')),
     path('network263/', views.network263, name='network263'),
     path('events/debate/', views.debate, name='debate'),
+    path('network263/donate/', views.donate_checkout, name='donate_checkout'),
+    path('network263/donate/success/', views.donate_success, name='donate_success'),
 ]

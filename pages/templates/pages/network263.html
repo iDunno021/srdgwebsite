@@ -99,11 +99,13 @@
                 Donate to the cause, or sign up to get involved as a volunteer or <br>
                 partner.
             </p>
+            {% if donated == 'cancel' %}
+                <p class='donate-status donate-status--cancel'>Donation cancelled — no charge was made.</p>
+            {% endif %}
             <div class='join-buttons'>
-                <button class='donate'>Donate now &rarr;</button>
+                <button type="button" class='donate' id="donateToggle">Donate now &rarr;</button>
                 <a href="{% url "signup" %}"><button class='join-btn'>Sign up &rarr;</button></a>
             </div>
-            <a href="" class='donate-link'>Donation link to come — placeholder for now</a>
         </div>
     </section>
 {% endblock content %}

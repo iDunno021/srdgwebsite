@@ -566,3 +566,74 @@ footer {
         font-size: 14px;
     }
 }
+
+/* ── Donate modal ── */
+
+.donate {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font: 600 16px var(--font-sans);
+    padding: 18px 34px;
+    border-radius: 11px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    background: var(--red);
+    color: var(--paper);
+}
+
+.donate-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+}
+
+.donate-modal-overlay.visible {
+    display: flex;
+}
+
+.donate-modal {
+    position: relative;
+    background: var(--paper);
+    border-radius: 16px;
+    padding: 40px 32px;
+    max-width: 420px;
+    width: calc(100% - 40px);
+    text-align: center;
+}
+
+.donate-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--muted);
+}
+
+.donate-modal-title {
+    font: 600 20px var(--font-serif);
+    margin-bottom: 20px;
+}
+
+.donate-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.donate--amount {
+    padding: 12px 22px;
+}
