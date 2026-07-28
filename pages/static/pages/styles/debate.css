@@ -99,6 +99,15 @@
     margin-top: 16px;
 }
 
+.debate-disclaimer--on-dark {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.debate-cta-actions {
+    display: flex;
+    flex-direction: column;
+}
+
 .debate-actions {
     display: flex;
     gap: 14px;
