@@ -1,32 +1,36 @@
-{% extends 'pages/base.html' %}
-{% load static %}
-{% block title %}Youth Political Debate | SRDG{% endblock %}
-{% block head %}
-    <link rel="stylesheet" href="{% static 'pages/styles/debate.css' %}">
-{% endblock %}
-{% block content %}
+{% extends 'pages/base.html' %} {% load static %} {% block title %}Youth
+Political Debate | SRDG{% endblock %} {% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/debate.css' %}" />
+{% endblock %} {% block content %}
 
 <div class="debate-page">
-
   <div class="debate-hero">
     <div class="debate-wrap">
       <div class="debate-eyebrow">Round Two · Aotearoa New Zealand</div>
-      <h1 class="debate-title">Youth Political<br>Debate Returns</h1>
-      <p class="debate-lead">Step into a live political debate with Members of Parliament and party leaders from across Aotearoa's political spectrum. Challenge ideas, ask the questions that matter to you, and make your voice heard.</p>
-      <div class="debate-location">
-        <span>📍</span> Hastings, Hawke's Bay
-      </div>
+      <h1 class="debate-title">Youth Political<br />Debate Returns</h1>
+      <p class="debate-lead">
+        Step into a live political debate with Members of Parliament and party
+        leaders from across Aotearoa's political spectrum. Challenge ideas, ask
+        the questions that matter to you, and make your voice heard.
+      </p>
+      <div class="debate-location"><span>📍</span> Hastings, Hawke's Bay</div>
       <div class="debate-actions">
         <a href="#register" class="debate-btn-primary">Register your seat</a>
         <a href="#ask" class="debate-btn-outline">Submit a question</a>
       </div>
+      <p class="debate-disclaimer">
+        Details on this page are subject to change. Registrations will open closer to the event.
+      </p>
     </div>
   </div>
 
   <section class="debate-section debate-topics">
     <div class="debate-wrap">
       <div class="debate-eyebrow">What's on the table</div>
-      <h2 class="debate-section-title">From climate policy and the economy to education, housing, and the future of New Zealand.</h2>
+      <h2 class="debate-section-title">
+        From climate policy and the economy to education, housing, and the
+        future of New Zealand.
+      </h2>
       <div class="debate-topics-grid">
         <div class="debate-topic-card">
           <div class="debate-topic-icon">🌱</div>
@@ -53,8 +57,14 @@
       <div class="debate-past-inner">
         <div class="debate-past-text">
           <div class="debate-eyebrow">Last time</div>
-          <h2 class="debate-section-title">Our first debate packed the room.</h2>
-          <p class="debate-past-lead">Rangatahi from across the country came together to put hard questions to New Zealand's political leaders. This time, we're back — with more speakers, more topics, and more room for your voice.</p>
+          <h2 class="debate-section-title">
+            Our first debate packed the room.
+          </h2>
+          <p class="debate-past-lead">
+            Rangatahi from across the country came together to put hard
+            questions to New Zealand's political leaders. This time, we're back,
+            with more speakers, more topics, and more room for your voice.
+          </p>
         </div>
         <div class="debate-stats">
           <div class="debate-stat">
@@ -62,8 +72,8 @@
             <div class="debate-stat-label">attendees</div>
           </div>
           <div class="debate-stat">
-            <div class="debate-stat-number">60+</div>
-            <div class="debate-stat-label">questions asked</div>
+            <div class="debate-stat-number">80+</div>
+            <div class="debate-stat-label">questions received</div>
           </div>
           <div class="debate-stat">
             <div class="debate-stat-number">6</div>
@@ -72,10 +82,10 @@
         </div>
       </div>
       <div class="debate-photos-grid">
-        <div class="debate-photo-slot"></div>
-        <div class="debate-photo-slot"></div>
-        <div class="debate-photo-slot"></div>
-        <div class="debate-photo-slot"></div>
+        <div class="debate-photo-slot"><img src="{% static 'pages/images/debate1.jpg' %}" alt="Panelists at the first Youth Political Debate"></div>
+        <div class="debate-photo-slot"><img src="{% static 'pages/images/debate2.jpg' %}" alt="Speaker addressing attendees at the first Youth Political Debate"></div>
+        <div class="debate-photo-slot"><img src="{% static 'pages/images/debate3.jpg' %}" alt="Speaker addressing attendees at the first Youth Political Debate"></div>
+        <div class="debate-photo-slot"><img src="{% static 'pages/images/debate4.jpg' %}" alt="Attendee speaking at the first Youth Political Debate"></div>
       </div>
     </div>
   </section>
@@ -85,7 +95,10 @@
       <div class="debate-cta-card">
         <div class="debate-cta-text">
           <h2 class="debate-cta-title">Ready to make your voice heard?</h2>
-          <p class="debate-cta-sub">Seats are limited — register to attend or submit your question in advance.</p>
+          <p class="debate-cta-sub">
+            Seats are limited — register to attend or submit your question in
+            advance.
+          </p>
         </div>
         <div class="debate-actions">
           <a href="#" class="debate-btn-primary">Register your seat</a>
@@ -94,7 +107,6 @@
       </div>
     </div>
   </section>
-
 </div>
 
 {% endblock %}
