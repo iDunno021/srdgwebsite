@@ -163,6 +163,47 @@
     color: var(--ink);
 }
 
+.debate-speakers {
+    padding: 70px 0;
+}
+
+.debate-speakers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+}
+
+.debate-speaker-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.debate-speaker-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: top;
+    background: var(--line);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.debate-speaker-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.debate-speaker-party {
+    font-size: 13px;
+    color: var(--muted);
+}
+
 .debate-past {
     padding: 70px 0;
 }
@@ -256,6 +297,9 @@
 
 @media (max-width: 900px) {
     .debate-topics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .debate-speakers-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     .debate-past-inner {
