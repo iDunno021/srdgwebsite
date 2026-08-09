@@ -182,6 +182,15 @@
     color: #fff;
 }
 
+.ticket-coming-soon {
+    display: block;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--muted);
+    text-align: right;
+    max-width: 180px;
+}
+
 .ita-form {
     margin-top: 1.25rem;
     padding-top: 1.25rem;

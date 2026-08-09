@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %}Tickets Confirmed | SRDG{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'pages/styles/signup_success.css' %}">
+{% endblock %}
+{% block content %}
+<div class="success-page">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h1>You're going to {{ event.title }}!</h1>
+        <p class="success-message">
+            Your seat{{ seats|length|pluralize }}: <strong>{% for seat in seats %}{{ seat }}{% if not forloop.last %}, {% endif %}{% endfor %}</strong>
+        </p>
+        <p class="success-message">
+            {{ event.location }}{% if event.start_time %} · {{ event.start_time|date:"j F Y, g:i A" }}{% endif %}
+        </p>
+        <div class="success-actions">
+            <a href="{% url 'events' %}" class="btn-home">Back to Events</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

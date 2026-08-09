@@ -1,0 +1,142 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %}{{ event.title }} — Tickets | SRDG{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'pages/styles/events.css' %}">
+<link rel="stylesheet" href="{% static 'pages/styles/event_attend.css' %}">
+<link rel="stylesheet" href="{% static 'pages/styles/event_tickets.css' %}">
+{% endblock %}
+{% block content %}
+<div class="events-page">
+    <div class="events-header">
+        <h1>{{ event.title }}</h1>
+        <div class="underline"></div>
+    </div>
+
+    {% for message in messages %}
+    <div class="ita-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+
+    <div class="event-card {{ event.get_status }}">
+        <div class="event-meta">
+            {% if event.start_time %}
+            <span class="event-date">{{ event.start_time|date:"j F Y" }}{% if event.tbc %} · TBC{% endif %}</span>
+            <span class="event-time">{{ event.start_time|date:"g:i A" }}</span>
+            {% else %}
+            <span class="event-date">TBC</span>
+            {% endif %}
+            {% if event.location %}
+            <span class="event-location">{{ event.location }}</span>
+            {% endif %}
+            {% if event.initiative %}
+            <span class="event-initiative">{{ event.initiative.title }}</span>
+            {% endif %}
+        </div>
+        {% if event.description %}
+        <p class="event-description" style="white-space: pre-line;">{{ event.description }}</p>
+        {% endif %}
+    </div>
+
+    {% if event.get_status != 'completed' %}
+    <div class="ticket-map">
+        <div class="ticket-stage">STAGE</div>
+        <div class="ticket-seats">
+            {% regroup seats by row as seat_rows %}
+            {% for row in seat_rows %}
+            <div class="seat-row">
+                <span class="seat-row-label">{{ row.grouper }}</span>
+                <div class="seat-row-seats">
+                    {% if row.grouper == 'B' or row.grouper == 'G' %}<span class="seat-spacer-half"></span>{% endif %}
+                    {% for seat in row.list %}
+                    <button type="button"
+                        class="seat{% if seat.is_accessible %} seat-accessible{% endif %}{% if seat.taken %} seat-taken{% endif %}"
+                        data-seat-id="{{ seat.id }}"
+                        data-label="{{ seat.row }}{{ seat.number }}"
+                        {% if seat.taken %}disabled{% endif %}
+                        aria-label="Seat {{ seat.row }}{{ seat.number }}{% if seat.is_accessible %}, wheelchair accessible{% endif %}"
+                    >{% if seat.is_accessible %}♿{% else %}{{ seat.number }}{% endif %}</button>
+                    {% endfor %}
+                    {% if row.grouper == 'B' or row.grouper == 'G' %}<span class="seat-spacer-half"></span>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="seat-legend">
+            <span><span class="seat-swatch"></span> Available</span>
+            <span><span class="seat-swatch seat-swatch--selected"></span> Selected</span>
+            <span><span class="seat-swatch seat-swatch--taken"></span> Taken</span>
+        </div>
+    </div>
+
+    {% if tickets_on_sale %}
+    <div class="ticket-summary" id="ticketSummary">
+        <span id="ticketCount">0 seats selected</span>
+        <span id="ticketTotal">$0 NZD</span>
+    </div>
+
+    <div class="ita-form">
+        <p class="ita-instructions">Select your seats above, then enter your details to check out at ${{ ticket_price }} NZD per seat.</p>
+        <form method="post" action="{% url 'event_tickets_checkout' event.id %}" id="ticketForm">
+            {% csrf_token %}
+            <div class="ita-row">
+                <input type="text" name="name" placeholder="Full name" required>
+            </div>
+            <input type="email" name="email" placeholder="Email address" required>
+            <div id="seatInputs"></div>
+            <button type="submit" class="btn-submit" id="ticketSubmit" disabled>Select seats to continue</button>
+        </form>
+    </div>
+    {% else %}
+    <p class="ticket-coming-soon">Tickets will be available for purchase in the near future.</p>
+    {% endif %}
+    {% elif event.get_status == 'completed' %}
+    <p class="ita-closed">This event has already taken place.</p>
+    {% endif %}
+
+    <a href="{% url 'events' %}" class="ita-back">← Back to Events</a>
+</div>
+
+{% if tickets_on_sale %}
+<script>
+    (function () {
+        const price = {{ ticket_price }};
+        const selected = new Set();
+        const countEl = document.getElementById('ticketCount');
+        const totalEl = document.getElementById('ticketTotal');
+        const submitBtn = document.getElementById('ticketSubmit');
+        const inputsEl = document.getElementById('seatInputs');
+
+        function refresh() {
+            countEl.textContent = selected.size + (selected.size === 1 ? ' seat selected' : ' seats selected');
+            totalEl.textContent = '$' + (selected.size * price) + ' NZD';
+            submitBtn.disabled = selected.size === 0;
+            submitBtn.textContent = selected.size === 0 ? 'Select seats to continue' : 'Continue to payment';
+            inputsEl.innerHTML = '';
+            selected.forEach(function (seatId) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'seat_ids';
+                input.value = seatId;
+                inputsEl.appendChild(input);
+            });
+        }
+
+        document.querySelectorAll('.seat:not(.seat-taken)').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const seatId = btn.dataset.seatId;
+                if (selected.has(seatId)) {
+                    selected.delete(seatId);
+                    btn.classList.remove('seat-selected');
+                } else {
+                    selected.add(seatId);
+                    btn.classList.add('seat-selected');
+                }
+                refresh();
+            });
+        });
+
+        refresh();
+    })();
+</script>
+{% endif %}
+{% endblock %}

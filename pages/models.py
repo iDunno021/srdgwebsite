@@ -102,6 +102,7 @@ class Event(models.Model):
     end_time = models.DateTimeField(null=True, blank=True)
     initiative = models.ForeignKey(Initiative, on_delete=models.SET_NULL, related_name='events', null=True, blank=True)
     tbc = models.BooleanField(default=False, verbose_name='TBC')
+    ticketed = models.BooleanField(default=False)
 
     def clean(self):
         if self.start_time and self.end_time and self.end_time <= self.start_time:
@@ -284,6 +285,37 @@ class EventRSVP(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} — {self.event.title}"
+
+
+class Seat(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='seats')
+    row = models.CharField(max_length=2)
+    number = models.PositiveIntegerField()
+    is_accessible = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['row', 'number']
+        unique_together = [('event', 'row', 'number')]
+
+    def __str__(self):
+        return f"{self.row}{self.number}"
+
+
+class Ticket(models.Model):
+    PENDING = 'pending'
+    PAID = 'paid'
+    STATUS_CHOICES = [(PENDING, 'Pending'), (PAID, 'Paid')]
+
+    seat = models.OneToOneField(Seat, on_delete=models.CASCADE, related_name='ticket')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
+    hold_expires_at = models.DateTimeField(null=True, blank=True)
+    stripe_session_id = models.CharField(max_length=255, blank=True)
+    name = models.CharField(max_length=200, blank=True)
+    email = models.EmailField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.seat} — {self.status}"
 
 
 class BlogAttachment(models.Model):

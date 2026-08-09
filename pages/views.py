@@ -1,11 +1,13 @@
 import json
+from datetime import timedelta
 from django.core.cache import cache
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.db.models import Count, Q
-from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, BlogReaction, ArtPiece, AboutPhoto
+from django.utils import timezone
+from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, BlogReaction, ArtPiece, AboutPhoto, Seat, Ticket
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
 from .utils import get_client_ip
 from django.views import generic
@@ -364,3 +366,110 @@ def donate_success(request):
     return render(request, 'pages/donate_success.html', {
         'amount': session.amount_total / 100,
     })
+
+
+TICKET_PRICE_NZD = 15
+HOLD_MINUTES = 30
+TICKETS_ON_SALE = False  # flip to True when ticket sales open
+
+
+def event_tickets(request, event_id):
+    event = get_object_or_404(Event, id=event_id, ticketed=True)
+    now = timezone.now()
+    seats = list(event.seats.select_related('ticket').all())
+    for seat in seats:
+        ticket = getattr(seat, 'ticket', None)
+        seat.taken = bool(ticket and (ticket.status == Ticket.PAID or (ticket.hold_expires_at and ticket.hold_expires_at > now)))
+    return render(request, 'pages/event_tickets.html', {
+        'event': event,
+        'seats': seats,
+        'ticket_price': TICKET_PRICE_NZD,
+        'tickets_on_sale': TICKETS_ON_SALE,
+    })
+
+
+def event_tickets_checkout(request, event_id):
+    event = get_object_or_404(Event, id=event_id, ticketed=True)
+    if not TICKETS_ON_SALE:
+        return redirect('event_tickets', event_id=event_id)
+    if request.method != 'POST':
+        return redirect('event_tickets', event_id=event_id)
+
+    name = request.POST.get('name', '').strip()
+    email = request.POST.get('email', '').strip()
+    seat_ids = request.POST.getlist('seat_ids')
+    if not name or not email or not seat_ids:
+        messages.error(request, 'Please enter your details and select at least one seat.')
+        return redirect('event_tickets', event_id=event_id)
+
+    now = timezone.now()
+    with transaction.atomic():
+        seats = list(Seat.objects.select_for_update().filter(event=event, id__in=seat_ids))
+        if len(seats) != len(seat_ids):
+            messages.error(request, 'One of the selected seats no longer exists.')
+            return redirect('event_tickets', event_id=event_id)
+
+        for seat in seats:
+            existing = Ticket.objects.filter(seat=seat).first()
+            if existing and (existing.status == Ticket.PAID or (existing.hold_expires_at and existing.hold_expires_at > now)):
+                messages.error(request, 'Sorry, one of your selected seats was just taken. Please choose again.')
+                return redirect('event_tickets', event_id=event_id)
+            if existing:
+                existing.delete()
+
+        Ticket.objects.bulk_create([
+            Ticket(seat=seat, name=name, email=email, hold_expires_at=now + timedelta(minutes=HOLD_MINUTES))
+            for seat in seats
+        ])
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    session = stripe.checkout.Session.create(
+        mode='payment',
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency': 'nzd',
+                'product_data': {'name': f'{event.title} — {len(seats)} seat(s)'},
+                'unit_amount': TICKET_PRICE_NZD * 100,
+            },
+            'quantity': len(seats),
+        }],
+        payment_intent_data={'receipt_email': email},
+        expires_at=int((now + timedelta(minutes=HOLD_MINUTES)).timestamp()),
+        success_url=request.build_absolute_uri(f'/events/{event.id}/tickets/success/') + '?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url=request.build_absolute_uri(f'/events/{event.id}/tickets/cancel/') + '?session_id={CHECKOUT_SESSION_ID}',
+    )
+    Ticket.objects.filter(seat__in=seats).update(stripe_session_id=session.id)
+    return redirect(session.url)
+
+
+def event_tickets_success(request, event_id):
+    session_id = request.GET.get('session_id')
+    event = get_object_or_404(Event, id=event_id)
+    if not session_id:
+        return redirect('event_tickets', event_id=event_id)
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    try:
+        session = stripe.checkout.Session.retrieve(session_id)
+    except stripe.error.StripeError:
+        return redirect('event_tickets', event_id=event_id)
+
+    if session.payment_status != 'paid':
+        return redirect('event_tickets', event_id=event_id)
+
+    pending = list(Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PENDING).select_related('seat'))
+    Ticket.objects.filter(id__in=[t.id for t in pending]).update(status=Ticket.PAID, hold_expires_at=None)
+    tickets = pending or list(Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PAID).select_related('seat'))
+    return render(request, 'pages/event_tickets_success.html', {
+        'event': event,
+        'seats': [t.seat for t in tickets],
+    })
+
+
+def event_tickets_cancel(request, event_id):
+    session_id = request.GET.get('session_id')
+    if session_id:
+        Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PENDING).delete()
+    messages.info(request, 'Checkout cancelled — your seats have been released.')
+    return redirect('event_tickets', event_id=event_id)

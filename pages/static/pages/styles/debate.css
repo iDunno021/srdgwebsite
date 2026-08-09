@@ -82,6 +82,13 @@
     margin-bottom: 20px;
 }
 
+.debate-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 44px;
+}
+
 .debate-location {
     display: flex;
     align-items: center;
@@ -89,7 +96,6 @@
     color: var(--muted);
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: 44px;
 }
 
 .debate-disclaimer {
@@ -130,7 +136,7 @@
 
 .debate-topics-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
 
