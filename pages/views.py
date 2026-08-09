@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError, transaction
-from django.db.models import Count, Q
+from django.db.models import BooleanField, Case, Count, Q, Value, When
 from django.utils import timezone
 from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, BlogReaction, ArtPiece, AboutPhoto, Seat, Ticket
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
@@ -107,7 +107,13 @@ def contact(request):
     return render(request, 'pages/contact.html')
 
 def events(request):
-    all_events = Event.objects.select_related('initiative').order_by('start_time')
+    all_events = Event.objects.select_related('initiative').annotate(
+        is_completed=Case(
+            When(end_time__lt=timezone.now(), then=Value(True)),
+            default=Value(False),
+            output_field=BooleanField(),
+        )
+    ).order_by('is_completed', 'start_time')
     return render(request, 'pages/events.html', {'events': all_events})
 
 def event_attend(request, event_id):
