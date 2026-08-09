@@ -18,12 +18,9 @@ Political Debate | SRDG{% endblock %} {% block head %}
         <div class="debate-location"><span>🗓️</span> Friday 2 October, 1–3pm</div>
       </div>
       <div class="debate-actions">
-        <a href="#register" class="debate-btn-primary">Register your seat</a>
-        <a href="#ask" class="debate-btn-outline">Submit a question</a>
+        <a href="{% url 'event_attend' 10 %}" class="debate-btn-primary">Register your seat</a>
+        <a href="{% url 'contact' %}" class="debate-btn-outline">Submit a question</a>
       </div>
-      <p class="debate-disclaimer">
-        Details on this page are subject to change. Registrations will open closer to the event.
-      </p>
     </div>
   </div>
 
@@ -141,10 +138,9 @@ Political Debate | SRDG{% endblock %} {% block head %}
         </div>
         <div class="debate-cta-actions">
           <div class="debate-actions">
-            <a href="#" class="debate-btn-primary">Register your seat</a>
-            <a href="#" class="debate-btn-outline" id="ask">Submit a question</a>
+            <a href="{% url 'event_attend' 10 %}" class="debate-btn-primary">Register your seat</a>
+            <a href="{% url 'contact' %}" class="debate-btn-outline" id="ask">Submit a question</a>
           </div>
-          <p class="debate-disclaimer debate-disclaimer--on-dark">Registrations will open closer to the event.</p>
         </div>
       </div>
     </div>
