@@ -11,6 +11,10 @@
     background-color: var(--teal);
 }
 
+[data-theme="dark"] .hero {
+    background: var(--navy);
+}
+
 .hero-title {
     color: var(--light-teal);
     font-size: 15px;
@@ -43,13 +47,13 @@
     width: 64px;
     height: 64px;
     padding: 0px;
-    background: var(--paper);
+    background: #f6f4ef;
     object-fit: contain;
 }
 
 .visual-title {
     font: 500 40px/1 var(--font-serif);
-    color: var(--paper);
+    color: #f6f4ef;
     margin: 0;
     white-space: nowrap;
 }
@@ -63,7 +67,7 @@
 .motto {
     font-size: 5rem;
     font-family: var(--font-serif);
-    color: var(--paper);
+    color: #f6f4ef;
     line-height: 1.3;
     font-weight: 130;
 }
@@ -88,6 +92,15 @@
     font-size: 15px;
     border: none;
     font-family: var(--font-sans-serif);
+    transition: transform 0.15s ease;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+
+}
+
+.contact-button:hover {
+    transform: scale(1.05);
 }
 
 .why {
@@ -259,6 +272,11 @@
     overflow: hidden;
 }
 
+[data-theme="dark"] .join {
+    background: var(--paper);
+}
+
+
 .join-cross {
     position: absolute;
     left: -70px;
@@ -286,7 +304,7 @@
 
 .join-motto {
     font: 500 52px var(--font-serif);
-    color: var(--paper);
+    color: #f6f4ef;
     letter-spacing: -0.01em;
     margin-bottom: 20px;
 }
@@ -318,6 +336,11 @@
     cursor: pointer;
     background: var(--paper);
     color: var(--navy);
+    transition: transform 0.15s ease;
+}
+
+.join-btn:hover {
+    transform: scale(1.05);
 }
 
 .donate-status {
@@ -327,4 +350,9 @@
 
 .donate-status--cancel {
     color: var(--red);
+}
+
+.donate:hover {
+    transform: scale(1.05);
+    background: var(--yellow);
 }
