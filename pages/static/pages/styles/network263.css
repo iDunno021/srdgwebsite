@@ -335,6 +335,11 @@
     border: none;
     text-decoration: none;
     cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.join-btn:hover {
+transform: scale(1.05);
 }
 
 .donate {
@@ -347,7 +352,7 @@
 }
 
 .donate {
-    transition: transform 0.15s ease, background 0.15s;
+    transition: background 0.15s;
     color: #fff;
 }
 
