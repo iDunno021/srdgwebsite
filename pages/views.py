@@ -55,8 +55,8 @@ def home(request):
     about_side_photos = list(AboutPhoto.objects.filter(slot='side'))
     about_middle_photos = list(AboutPhoto.objects.filter(slot='middle'))
     about_middle_photo = about_middle_photos[0] if about_middle_photos else None
-    about_side_urls_json = json.dumps([p.image.url for p in about_side_photos])
-    about_middle_urls_json = json.dumps([p.image.url for p in about_middle_photos])
+    about_side_urls = [p.image.url for p in about_side_photos]
+    about_middle_urls = [p.image.url for p in about_middle_photos]
     return render(request, 'pages/new_home.html', {
         'total_members': total_members,
         'total_initiatives': total_initiatives,
@@ -65,8 +65,8 @@ def home(request):
         'initiatives': initiatives,
         'about_side_photos': about_side_photos[:4],
         'about_middle_photo': about_middle_photo,
-        'about_side_urls_json': about_side_urls_json,
-        'about_middle_urls_json': about_middle_urls_json,
+        'about_side_urls': about_side_urls,
+        'about_middle_urls': about_middle_urls,
     })
 
 def signup(request):
@@ -317,11 +317,10 @@ DONATION_AMOUNTS_NZD = [5, 10, 25, 50, 100]
 
 
 def network263(request):
-    return render(request, 'pages/network263.html')
+    return render(request, 'pages/network263.html', {'donated': request.GET.get('donated')})
 
 def debate(request):
     return render(request, 'pages/debate.html')
-    return render(request, 'pages/network263.html', {'donated': request.GET.get('donated')})
 
 
 def donate_checkout(request):

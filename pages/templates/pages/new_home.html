@@ -200,8 +200,8 @@
     </div>
 </div>
 
-<script type="application/json" id="side-photos-data">{{ about_side_urls_json|safe }}</script>
-<script type="application/json" id="middle-photos-data">{{ about_middle_urls_json|safe }}</script>
+{{ about_side_urls|json_script:"side-photos-data" }}
+{{ about_middle_urls|json_script:"middle-photos-data" }}
 <script>
     (function() {
         var sidePhotos = JSON.parse(document.getElementById('side-photos-data').textContent);
