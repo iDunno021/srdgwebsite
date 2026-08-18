@@ -17,6 +17,7 @@
     <div id="calendar"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6/index.global.min.js"></script>
+{{ calendar_events|json_script:"calendar-data" }}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         function fmtTime(date) {
@@ -26,14 +27,22 @@
 
         var cal = new FullCalendar.Calendar(document.getElementById('calendar'), {
             initialView: 'dayGridMonth',
-            events: {{ calendar_events|safe }},
+            events: JSON.parse(document.getElementById('calendar-data').textContent),
             eventContent: function (info) {
                 var start = fmtTime(info.event.start);
                 var end = info.event.end ? fmtTime(info.event.end) : '';
                 var time = end ? start + ' – ' + end : start;
-                return {
-                    html: '<div class="fc-event-card"><span class="fc-event-card-time">' + time + '</span><span class="fc-event-card-title">' + info.event.title + '</span></div>'
-                };
+                var card = document.createElement('div');
+                card.className = 'fc-event-card';
+                var timeEl = document.createElement('span');
+                timeEl.className = 'fc-event-card-time';
+                timeEl.textContent = time;
+                var titleEl = document.createElement('span');
+                titleEl.className = 'fc-event-card-title';
+                titleEl.textContent = info.event.title;
+                card.appendChild(timeEl);
+                card.appendChild(titleEl);
+                return { domNodes: [card] };
             },
             eventClick: function (info) {
                 if (info.event.url) {

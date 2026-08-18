@@ -146,7 +146,7 @@ def calendar(request):
         }
         for s in Seminar.objects.filter(hidden=False)
     ]
-    return render(request, 'pages/calendar.html', {'calendar_events': json.dumps(events + seminars)})
+    return render(request, 'pages/calendar.html', {'calendar_events': events + seminars})
 
 class SeminarView(generic.ListView):
     model = Seminar
