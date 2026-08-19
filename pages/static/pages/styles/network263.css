@@ -359,3 +359,76 @@
   transform: scale(1.05);
   background: var(--yellow);
 }
+
+@media (max-width: 768px) {
+  .container,
+  .how {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .hero,
+  .why,
+  .join {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .why {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .motto {
+    font-size: 2.5rem;
+  }
+
+  .visual-title {
+    font-size: 26px;
+    white-space: normal;
+  }
+
+  .why-description {
+    font-size: 22px;
+  }
+
+  .how-motto {
+    font-size: 28px;
+  }
+
+  .roadmap {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .example-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .example-image-large {
+    grid-row: auto;
+    height: 220px;
+  }
+
+  .example-motto,
+  .join-motto {
+    font-size: 30px;
+  }
+
+  .join-cross {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .how {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .motto {
+    font-size: 2rem;
+  }
+}
