@@ -1,6 +1,17 @@
 :root {
   --light-teal: rgba(244, 241, 233, 0.55);
 }
+
+
+body {
+  overflow-x: hidden;
+}
+
+.container {
+  margin-left: 130px;
+  margin-top: 70px;
+  margin-bottom: 120px;
+}
 .container {
   margin-left: 130px;
   margin-top: 70px;
