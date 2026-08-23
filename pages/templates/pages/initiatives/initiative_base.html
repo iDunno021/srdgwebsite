@@ -20,8 +20,8 @@
     <div class="initiative-events">
         <h2 class="events-heading">Events</h2>
         <div class="events-list">
-            {% if initiative.events.all %}
-                {% for event in initiative.events.all %}
+            {% if events %}
+                {% for event in events %}
                 <div class="event-card {{ event.get_status }}">
                     <div class="event-body">
                         <h3 class="event-title">{{ event.title }}</h3>

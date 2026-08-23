@@ -106,14 +106,18 @@ def staff(request):
 def contact(request):
     return render(request, 'pages/contact.html')
 
-def events(request):
-    all_events = Event.objects.select_related('initiative').annotate(
+def _order_events(queryset):
+    """Upcoming events first (soonest first), completed ones last."""
+    return queryset.annotate(
         is_completed=Case(
             When(end_time__lt=timezone.now(), then=Value(True)),
             default=Value(False),
             output_field=BooleanField(),
         )
     ).order_by('is_completed', 'start_time')
+
+def events(request):
+    all_events = _order_events(Event.objects.select_related('initiative'))
     return render(request, 'pages/events.html', {'events': all_events})
 
 def event_attend(request, event_id):
@@ -185,7 +189,10 @@ def initiative_detail(request, slug):
         template = custom
     except:
         template = default
-    return render(request, template, {'initiative': initiative})
+    return render(request, template, {
+        'initiative': initiative,
+        'events': _order_events(initiative.events.all()),
+    })
 
 class BlogView(generic.ListView):
     model = BlogPost
