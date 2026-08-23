@@ -93,7 +93,7 @@ def staff(request):
     roles = sorted(MemberRole.objects.select_related('member').all(), key=lambda r: (r.member.first_name.lower() != 'amber' or r.member.last_name.lower() != 'cai'))
     committees = {
         'General Committee': [r for r in roles if r.committee == 'general'],
-        'Educational Advancement': [r for r in roles if r.committee == 'ea'],
+        'EduUnlocked': [r for r in roles if r.committee == 'ea'],
         'Politics of Tomorrow': [r for r in roles if r.committee == 'ype'],
         'Young Artists Collective': [r for r in roles if r.committee == 'yac'],
         'Administrative Committee': [r for r in roles if r.committee == 'administrative'],
