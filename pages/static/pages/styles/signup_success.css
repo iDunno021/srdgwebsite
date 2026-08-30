@@ -35,7 +35,8 @@
     font-family: var(--font-serif);
     font-size: 26px;
     font-weight: 400;
-    color: var(--ink);
+    /* fixed dark ink: the card is always #fff, so --ink would vanish in dark mode */
+    color: #1c2a44;
     margin: 0 0 1rem;
 }
 
