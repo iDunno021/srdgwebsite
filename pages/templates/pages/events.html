@@ -37,7 +37,6 @@
                     {% if event.get_status != 'completed' %}
                         {% if event.ticketed %}
                         <a href="{% url 'event_tickets' event.id %}" class="btn-ita">Buy Tickets</a>
-                        <span class="ticket-coming-soon">Tickets will be available for purchase in the near future.</span>
                         {% else %}
                         <a href="{% url 'event_attend' event.id %}" class="btn-ita">I'll Attend</a>
                         {% endif %}

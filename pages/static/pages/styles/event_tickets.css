@@ -123,13 +123,6 @@
 }
 
 /* standalone notice on the tickets page — override the compact events-card variant */
-.events-page > .ticket-coming-soon {
-    max-width: none;
-    text-align: center;
-    font-size: 14px;
-    margin-top: 1.5rem;
-}
-
 .btn-submit:disabled {
     background: var(--muted);
     cursor: not-allowed;

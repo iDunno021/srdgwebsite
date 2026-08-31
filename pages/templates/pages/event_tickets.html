@@ -87,8 +87,6 @@
             <button type="submit" class="btn-submit" id="ticketSubmit" disabled>Select seats to continue</button>
         </form>
     </div>
-    {% else %}
-    <p class="ticket-coming-soon">Tickets will be available for purchase in the near future.</p>
     {% endif %}
     {% elif event.get_status == 'completed' %}
     <p class="ita-closed">This event has already taken place.</p>
