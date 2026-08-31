@@ -49,12 +49,13 @@
                     {% if row.grouper == 'B' or row.grouper == 'G' %}<span class="seat-spacer-half"></span>{% endif %}
                     {% for seat in row.list %}
                     <button type="button"
-                        class="seat{% if seat.is_accessible %} seat-accessible{% endif %}{% if seat.taken %} seat-taken{% endif %}"
+                        class="seat{% if seat.taken %} seat-taken{% endif %}"
                         data-seat-id="{{ seat.id }}"
                         data-label="{{ seat.row }}{{ seat.number }}"
+                        data-price="{{ seat.price }}"
                         {% if seat.taken %}disabled{% endif %}
-                        aria-label="Seat {{ seat.row }}{{ seat.number }}{% if seat.is_accessible %}, wheelchair accessible{% endif %}"
-                    >{% if seat.is_accessible %}♿{% else %}{{ seat.number }}{% endif %}</button>
+                        aria-label="Seat {{ seat.row }}{{ seat.number }}{% if seat.taken %}, unavailable{% else %}, ${{ seat.price }} NZD{% endif %}"
+                    >{{ seat.number }}</button>
                     {% endfor %}
                     {% if row.grouper == 'B' or row.grouper == 'G' %}<span class="seat-spacer-half"></span>{% endif %}
                 </div>
@@ -75,7 +76,7 @@
     </div>
 
     <div class="ita-form">
-        <p class="ita-instructions">Select your seats above, then enter your details to check out at ${{ ticket_price }} NZD per seat.</p>
+        <p class="ita-instructions">Select your seats above, then enter your details to check out. Rows A and B are ${{ premium_price }} NZD per seat; all other rows are ${{ ticket_price }} NZD.</p>
         <form method="post" action="{% url 'event_tickets_checkout' event.id %}" id="ticketForm">
             {% csrf_token %}
             <div class="ita-row">
@@ -99,20 +100,21 @@
 {% if tickets_on_sale %}
 <script>
     (function () {
-        const price = {{ ticket_price }};
-        const selected = new Set();
+        const selected = new Map();  // seat id -> price
         const countEl = document.getElementById('ticketCount');
         const totalEl = document.getElementById('ticketTotal');
         const submitBtn = document.getElementById('ticketSubmit');
         const inputsEl = document.getElementById('seatInputs');
 
         function refresh() {
+            let total = 0;
+            selected.forEach(function (seatPrice) { total += seatPrice; });
             countEl.textContent = selected.size + (selected.size === 1 ? ' seat selected' : ' seats selected');
-            totalEl.textContent = '$' + (selected.size * price) + ' NZD';
+            totalEl.textContent = '$' + total + ' NZD';
             submitBtn.disabled = selected.size === 0;
             submitBtn.textContent = selected.size === 0 ? 'Select seats to continue' : 'Continue to payment';
             inputsEl.innerHTML = '';
-            selected.forEach(function (seatId) {
+            selected.forEach(function (seatPrice, seatId) {
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'seat_ids';
@@ -128,7 +130,7 @@
                     selected.delete(seatId);
                     btn.classList.remove('seat-selected');
                 } else {
-                    selected.add(seatId);
+                    selected.set(seatId, Number(btn.dataset.price));
                     btn.classList.add('seat-selected');
                 }
                 refresh();

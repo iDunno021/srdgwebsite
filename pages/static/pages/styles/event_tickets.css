@@ -72,12 +72,6 @@
     color: #fff !important;
 }
 
-.seat-accessible {
-    background: #4a8fd6;
-    color: #fff;
-    font-size: 12px;
-}
-
 .seat-taken {
     background: #555;
     color: #999;

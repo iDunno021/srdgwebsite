@@ -1,4 +1,5 @@
 import json
+from collections import defaultdict
 from datetime import timedelta
 from django.core.cache import cache
 from django.shortcuts import render, redirect, get_object_or_404
@@ -381,8 +382,14 @@ def donate_success(request):
 
 
 TICKET_PRICE_NZD = 15
+PREMIUM_ROWS = ('A', 'B')
+PREMIUM_PRICE_NZD = 17
 HOLD_MINUTES = 30
-TICKETS_ON_SALE = False  # flip to True when ticket sales open
+TICKETS_ON_SALE = True  # flip to True when ticket sales open
+
+
+def seat_price(seat):
+    return PREMIUM_PRICE_NZD if seat.row in PREMIUM_ROWS else TICKET_PRICE_NZD
 
 
 def event_tickets(request, event_id):
@@ -391,11 +398,14 @@ def event_tickets(request, event_id):
     seats = list(event.seats.select_related('ticket').all())
     for seat in seats:
         ticket = getattr(seat, 'ticket', None)
-        seat.taken = bool(ticket and (ticket.status == Ticket.PAID or (ticket.hold_expires_at and ticket.hold_expires_at > now)))
+        # ponytail: is_accessible doubles as "held back from sale" — no separate flag/migration
+        seat.taken = seat.is_accessible or bool(ticket and (ticket.status == Ticket.PAID or (ticket.hold_expires_at and ticket.hold_expires_at > now)))
+        seat.price = seat_price(seat)
     return render(request, 'pages/event_tickets.html', {
         'event': event,
         'seats': seats,
         'ticket_price': TICKET_PRICE_NZD,
+        'premium_price': PREMIUM_PRICE_NZD,
         'tickets_on_sale': TICKETS_ON_SALE,
     })
 
@@ -421,6 +431,10 @@ def event_tickets_checkout(request, event_id):
             messages.error(request, 'One of the selected seats no longer exists.')
             return redirect('event_tickets', event_id=event_id)
 
+        if any(seat.is_accessible for seat in seats):
+            messages.error(request, 'One of the selected seats is not available for purchase.')
+            return redirect('event_tickets', event_id=event_id)
+
         for seat in seats:
             existing = Ticket.objects.filter(seat=seat).first()
             if existing and (existing.status == Ticket.PAID or (existing.hold_expires_at and existing.hold_expires_at > now)):
@@ -434,6 +448,10 @@ def event_tickets_checkout(request, event_id):
             for seat in seats
         ])
 
+    seats_by_price = defaultdict(list)
+    for seat in seats:
+        seats_by_price[seat_price(seat)].append(seat)
+
     stripe.api_key = settings.STRIPE_SECRET_KEY
     session = stripe.checkout.Session.create(
         mode='payment',
@@ -441,11 +459,11 @@ def event_tickets_checkout(request, event_id):
         line_items=[{
             'price_data': {
                 'currency': 'nzd',
-                'product_data': {'name': f'{event.title} — {len(seats)} seat(s)'},
-                'unit_amount': TICKET_PRICE_NZD * 100,
+                'product_data': {'name': f'{event.title} — {", ".join(sorted(str(s) for s in group))}'},
+                'unit_amount': price * 100,
             },
-            'quantity': len(seats),
-        }],
+            'quantity': len(group),
+        } for price, group in sorted(seats_by_price.items())],
         payment_intent_data={'receipt_email': email},
         expires_at=int((now + timedelta(minutes=HOLD_MINUTES)).timestamp()),
         success_url=request.build_absolute_uri(f'/events/{event.id}/tickets/success/') + '?session_id={CHECKOUT_SESSION_ID}',
