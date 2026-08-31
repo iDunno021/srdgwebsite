@@ -491,6 +491,24 @@ def event_tickets_success(request, event_id):
     pending = list(Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PENDING).select_related('seat'))
     Ticket.objects.filter(id__in=[t.id for t in pending]).update(status=Ticket.PAID, hold_expires_at=None)
     tickets = pending or list(Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PAID).select_related('seat'))
+
+    if pending:  # only on first confirmation, so a refresh doesn't resend
+        try:
+            resend.api_key = settings.RESEND_API_KEY
+            resend.Emails.send({
+                "from": "noreply@srdg.co.nz",
+                "to": pending[0].email,
+                "subject": f"Your tickets for {event.title}",
+                "html": f"""
+                    <h2>Thank you for purchasing a ticket.</h2>
+                    <p>Your seats: <strong>{", ".join(str(t.seat) for t in pending)}</strong></p>
+                    <p>We will shortly email you a ticket within the next 5 business days.
+                    If you don't receive your ticket don't worry just show us this email/receipt at the door.</p>
+                    <p>Enjoy the show!</p>
+                """
+            })
+        except Exception as e:
+            print(f"Ticket email failed: {e}")
     return render(request, 'pages/event_tickets_success.html', {
         'event': event,
         'seats': [t.seat for t in tickets],
