@@ -202,10 +202,15 @@
     border-radius: 6px;
     outline: none;
     font-family: var(--font-sans);
-    color: var(--ink);
+    /* fixed dark ink: the field is always near-white, so --ink would vanish in dark mode */
+    color: #1c2a44;
     background: #fafafa;
     transition: border-color 0.15s;
     box-sizing: border-box;
+}
+
+.ita-form input::placeholder {
+    color: #8a8f99;
 }
 
 .ita-form input:focus {

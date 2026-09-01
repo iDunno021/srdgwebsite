@@ -1,4 +1,6 @@
 .ticket-map {
+    --seat: 26px;
+    --seat-gap: 6px;
     background: var(--navy);
     border-radius: 16px;
     padding: 32px 24px 24px;
@@ -42,16 +44,17 @@
 
 .seat-row-seats {
     display: flex;
-    gap: 6px;
+    gap: var(--seat-gap);
 }
 
 .seat-spacer-half {
-    width: 16px;
+    width: calc((var(--seat) + var(--seat-gap)) / 2);
 }
 
 .seat {
-    width: 26px;
-    height: 26px;
+    width: var(--seat);
+    height: var(--seat);
+    flex: none;
     border-radius: 6px 6px 8px 8px;
     border: none;
     background: #e8e8e8;
@@ -127,4 +130,56 @@
     background: var(--muted);
     cursor: not-allowed;
     opacity: 0.6;
+}
+
+/* shrink the seat grid so all 11 columns fit a phone without sideways scrolling */
+@media (max-width: 640px) {
+    .ticket-map {
+        --seat: 20px;
+        --seat-gap: 4px;
+        padding: 24px 12px 20px;
+    }
+
+    .seat {
+        font-size: 9px;
+        border-radius: 5px 5px 6px 6px;
+    }
+
+    .seat-row {
+        gap: 6px;
+    }
+
+    .seat-row-label {
+        width: 14px;
+        font-size: 11px;
+    }
+
+    .ticket-stage {
+        margin-bottom: 20px;
+        font-size: 13px;
+        padding: 11px 0;
+    }
+
+    .seat-legend {
+        gap: 12px;
+        font-size: 11px;
+        margin-top: 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .ticket-map {
+        --seat: 17px;
+        --seat-gap: 3px;
+        padding: 20px 8px 16px;
+    }
+
+    .seat {
+        font-size: 8px;
+    }
+
+    .seat-legend {
+        gap: 10px;
+        font-size: 10px;
+    }
 }
