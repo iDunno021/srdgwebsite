@@ -8,10 +8,10 @@
 {% endblock head %}
 
 {% block content %}
-<!-- <a href="/events/" class="debate-banner">
-    <span class="debate-banner-title">Youth Electoral Debate 2026</span>
-    <span class="debate-banner-btn">Register Now &nearr;</span>
-</a> -->
+<a href="{% url 'event_tickets' 7 %}" class="promo-banner">
+    <span class="promo-banner-title">Join us at the YAC Improv Night!</span>
+    <span class="promo-banner-btn">Get tickets &nearr;</span>
+</a>
 <div class="home-page">
     <div class="hero">
         <div class="hero-content">
@@ -37,10 +37,6 @@
                     <p class="stat-card-label">members and <br>counting</p>
                 </div>
             </div>
-            <a href="{% url 'event_tickets' 7 %}" class="promo-banner">
-                <span class="promo-banner-title">Sign up to YAC Improv Night today!</span>
-                <span class="promo-banner-btn">Get tickets &nearr;</span>
-            </a>
         </div>
     </div>
     <div class="stats-bar">
