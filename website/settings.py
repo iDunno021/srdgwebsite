@@ -31,6 +31,10 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'srdg.co.nz,www.srdg.co.nz').split(',') + ['localhost', '127.0.0.1']
 
+# Vercel gives each preview deploy a generated *.vercel.app host; production stays locked to the list above.
+if os.getenv('VERCEL_ENV') == 'preview':
+    ALLOWED_HOSTS.append('.vercel.app')
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if not DEBUG:
