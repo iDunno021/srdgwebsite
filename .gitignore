@@ -251,3 +251,4 @@ db.sqlite3
 
 # Virtual environments (any name)
 SRDG/
+.vscode/settings.json
