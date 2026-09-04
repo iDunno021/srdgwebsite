@@ -1,8 +1,11 @@
+import base64
 import json
 from collections import defaultdict
 from datetime import timedelta
 from django.core.cache import cache
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
 from django.contrib import messages
 from django.db import IntegrityError, transaction
@@ -10,6 +13,7 @@ from django.db.models import BooleanField, Case, Count, Q, Value, When
 from django.utils import timezone
 from .models import Member, Initiative, Event, Seminar, MemberRole, BlogPost, BlogImage, BlogAttachment, BlogReaction, ArtPiece, AboutPhoto, Seat, Ticket
 from .forms import MemberForm, BlogPostForm, EventRSVPForm
+from .tickets import send_ticket_email
 from .utils import get_client_ip
 from django.views import generic
 import resend
@@ -473,6 +477,53 @@ def event_tickets_checkout(request, event_id):
     return redirect(session.url)
 
 
+def confirm_paid_tickets(session_id):
+    """Mark a checkout session's tickets paid and email them out.
+
+    Called by both the Stripe webhook and the success page; the row lock means
+    whichever arrives first sends the email and the other one is a no-op.
+    """
+    with transaction.atomic():
+        pending = list(
+            Ticket.objects.select_for_update()
+            .filter(stripe_session_id=session_id, status=Ticket.PENDING)
+            .select_related('seat', 'seat__event')
+        )
+        if pending:
+            Ticket.objects.filter(id__in=[t.id for t in pending]).update(
+                status=Ticket.PAID, hold_expires_at=None
+            )
+
+    if pending:
+        try:
+            send_ticket_email(pending[0].email, pending[0].seat.event, [t.seat for t in pending])
+        except Exception as e:
+            print(f"Ticket email failed: {e}")
+        return pending
+    return list(
+        Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PAID).select_related('seat')
+    )
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    """Confirm tickets the moment Stripe reports payment, not when the buyer comes back."""
+    try:
+        event = stripe.Webhook.construct_event(
+            request.body,
+            request.META.get('HTTP_STRIPE_SIGNATURE', ''),
+            settings.STRIPE_WEBHOOK_SECRET,
+        )
+    except (ValueError, stripe.error.SignatureVerificationError):
+        return HttpResponse(status=400)
+
+    if event['type'] in ('checkout.session.completed', 'checkout.session.async_payment_succeeded'):
+        session = event['data']['object']
+        if session.get('payment_status') == 'paid':
+            confirm_paid_tickets(session['id'])
+    return HttpResponse(status=200)
+
+
 def event_tickets_success(request, event_id):
     session_id = request.GET.get('session_id')
     event = get_object_or_404(Event, id=event_id)
@@ -488,27 +539,7 @@ def event_tickets_success(request, event_id):
     if session.payment_status != 'paid':
         return redirect('event_tickets', event_id=event_id)
 
-    pending = list(Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PENDING).select_related('seat'))
-    Ticket.objects.filter(id__in=[t.id for t in pending]).update(status=Ticket.PAID, hold_expires_at=None)
-    tickets = pending or list(Ticket.objects.filter(stripe_session_id=session_id, status=Ticket.PAID).select_related('seat'))
-
-    if pending:  # only on first confirmation, so a refresh doesn't resend
-        try:
-            resend.api_key = settings.RESEND_API_KEY
-            resend.Emails.send({
-                "from": "noreply@srdg.co.nz",
-                "to": pending[0].email,
-                "subject": f"Your tickets for {event.title}",
-                "html": f"""
-                    <h2>Thank you for purchasing a ticket.</h2>
-                    <p>Your seats: <strong>{", ".join(str(t.seat) for t in pending)}</strong></p>
-                    <p>We will shortly email you a ticket within the next 5 business days.
-                    If you don't receive your ticket don't worry just show us this email/receipt at the door.</p>
-                    <p>Enjoy the show!</p>
-                """
-            })
-        except Exception as e:
-            print(f"Ticket email failed: {e}")
+    tickets = confirm_paid_tickets(session_id)
     return render(request, 'pages/event_tickets_success.html', {
         'event': event,
         'seats': [t.seat for t in tickets],

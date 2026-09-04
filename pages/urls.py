@@ -20,6 +20,7 @@ urlpatterns = [
     path('events/<int:event_id>/tickets/checkout/', views.event_tickets_checkout, name='event_tickets_checkout'),
     path('events/<int:event_id>/tickets/success/', views.event_tickets_success, name='event_tickets_success'),
     path('events/<int:event_id>/tickets/cancel/', views.event_tickets_cancel, name='event_tickets_cancel'),
+    path('stripe/webhook/', views.stripe_webhook, name='stripe_webhook'),
     path('blog/', views.BlogView.as_view(), name='blog'),
     path('blog/<int:id>/', views.blog_detail, name='blog_detail'),
     path('blog/<int:id>/react/<str:reaction>/', views.blog_react, name='blog_react'),
